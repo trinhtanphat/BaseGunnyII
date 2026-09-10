@@ -87,6 +87,7 @@
     <Compile Include="Enumerate\eSubConsumerType.cs" />
     <Compile Include="Battle\FightServerConnector.cs" />
     <Compile Include="GameServerConfig.cs" />
+    <Compile Include="GameServerConfigurationCompatibility.cs" />
     <Compile Include="Games\GameMgr.cs" />
     <Compile Include="GameUtils\PlayerInventory.cs" />
     <Compile Include="GameUtils\Scene.cs" />
