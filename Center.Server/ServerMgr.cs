@@ -26,7 +26,6 @@ namespace Center.Server
                     ServerInfo[] list = db.GetServerList();
                     foreach (ServerInfo s in list)
                     {
-                        s.State = 1;
                         s.Online = 0;
                         _list.Add(s.ID, s);
                     }
@@ -47,31 +46,8 @@ namespace Center.Server
             {
                 using (ServiceBussiness db = new ServiceBussiness())
                 {
-                    lock (_syncStop)
-                    {
-                        ServerInfo[] list = db.GetServerList();
-                        foreach (ServerInfo s in list)
-                        {
-                            if (_list.ContainsKey(s.ID))
-                            {
-                                _list[s.ID].IP = s.IP;
-                                _list[s.ID].Name = s.Name;
-                                _list[s.ID].Port = s.Port;
-                                _list[s.ID].Room = s.Room;
-                                _list[s.ID].Total = s.Total;
-                                _list[s.ID].MustLevel = s.MustLevel;
-                                _list[s.ID].LowestLevel = s.LowestLevel;
-                                _list[s.ID].Online = s.Online;
-                                _list[s.ID].State = s.State;
-                            }
-                            else
-                            {
-                                s.State = 1;
-                                s.Online = 0;
-                                _list.Add(s.ID, s);
-                            }
-                        }
-                    }
+                    ServerInfo[] list = db.GetServerList();
+                    SynchronizeServerList(list);
                 }
                 log.Info("ReLoad server list from db.");
                 return true;
@@ -80,6 +56,37 @@ namespace Center.Server
             {
                 log.ErrorFormat("ReLoad server list from db failed:{0}", ex);
                 return false;
+            }
+        }
+
+        private static void SynchronizeServerList(ServerInfo[] list)
+        {
+            lock (_syncStop)
+            {
+                HashSet<int> databaseServerIds = new HashSet<int>(list.Select(s => s.ID));
+                foreach (int staleServerId in _list.Keys.Where(id => !databaseServerIds.Contains(id)).ToArray())
+                    _list.Remove(staleServerId);
+
+                foreach (ServerInfo s in list)
+                {
+                    if (_list.ContainsKey(s.ID))
+                    {
+                        _list[s.ID].IP = s.IP;
+                        _list[s.ID].Name = s.Name;
+                        _list[s.ID].Port = s.Port;
+                        _list[s.ID].Room = s.Room;
+                        _list[s.ID].Total = s.Total;
+                        _list[s.ID].MustLevel = s.MustLevel;
+                        _list[s.ID].LowestLevel = s.LowestLevel;
+                        _list[s.ID].Online = s.Online;
+                        _list[s.ID].State = s.State;
+                    }
+                    else
+                    {
+                        s.Online = 0;
+                        _list.Add(s.ID, s);
+                    }
+                }
             }
         }
 
