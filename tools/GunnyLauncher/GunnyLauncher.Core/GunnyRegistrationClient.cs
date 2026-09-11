@@ -20,7 +20,7 @@ public sealed class GunnyRegistrationClient
     public async Task<RegistrationCaptcha> GetCaptchaAsync(CancellationToken cancellationToken)
     {
         using var response = await _client.GetAsync(
-            new Uri(_baseUri, "auth/ValidateCode.aspx"),
+            new Uri(_baseUri, GunnyProtocolContract.CaptchaEndpoint),
             HttpCompletionOption.ResponseHeadersRead,
             cancellationToken);
         response.EnsureSuccessStatusCode();
@@ -50,7 +50,7 @@ public sealed class GunnyRegistrationClient
         });
 
         using var response = await _client.PostAsync(
-            new Uri(_baseUri, "auth/register.ashx"),
+            new Uri(_baseUri, GunnyProtocolContract.RegisterEndpoint),
             form,
             cancellationToken);
         response.EnsureSuccessStatusCode();

@@ -32,13 +32,13 @@ public sealed class GunnyLoginClient
             ["username"] = username,
             ["password"] = password
         });
-        using var loginResponse = await client.PostAsync(new Uri(_baseUri, "createLogin.ashx"), form, cancellationToken);
+        using var loginResponse = await client.PostAsync(new Uri(_baseUri, GunnyProtocolContract.LoginEndpoint), form, cancellationToken);
         loginResponse.EnsureSuccessStatusCode();
         var loginText = (await loginResponse.Content.ReadAsStringAsync(cancellationToken)).Trim();
         if (!string.Equals(loginText, "ok", StringComparison.OrdinalIgnoreCase))
             throw new InvalidOperationException("Username or password was rejected by the Gunny server.");
 
-        var loginGameUri = new Uri(_baseUri, "LoginGame.aspx");
+        var loginGameUri = new Uri(_baseUri, GunnyProtocolContract.LoginGameEndpoint);
         using var gameResponse = await client.GetAsync(loginGameUri, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         if ((int)gameResponse.StatusCode < 300 || (int)gameResponse.StatusCode > 399 || gameResponse.Headers.Location is null)
             throw new InvalidDataException("LoginGame did not return the expected game redirect.");

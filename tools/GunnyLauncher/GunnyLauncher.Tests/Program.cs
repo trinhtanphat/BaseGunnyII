@@ -7,6 +7,11 @@ static void Require(bool condition, string message)
 }
 
 var gameBase = new Uri("http://103.9.156.182/Gunny/");
+Require(GunnyProtocolContract.LoginEndpoint == "createLogin.ashx", "login endpoint contract mismatch");
+Require(GunnyProtocolContract.LoginGameEndpoint == "LoginGame.aspx", "login game endpoint contract mismatch");
+Require(GunnyProtocolContract.CaptchaEndpoint == "auth/ValidateCode.aspx", "captcha endpoint contract mismatch");
+Require(GunnyProtocolContract.RegisterEndpoint == "auth/register.ashx", "register endpoint contract mismatch");
+Require(GunnyProtocolContract.RegistrationFields.SequenceEqual(new[] { "username", "password", "repassword", "email", "sex", "code" }), "registration fields contract mismatch");
 var redirect = new Uri("http://103.9.156.182/Gunny/Default.aspx?user=test%20user&key=abc-123&editby=Trminhpc");
 var launch = GameLaunchInfo.ParseRedirect(redirect);
 Require(launch.User == "test user", "decoded user mismatch");
