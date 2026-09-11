@@ -69,6 +69,11 @@ Require(!startInfo.UseShellExecute, "Ruffle must not launch through shell");
 Require(startInfo.ArgumentList.Count == ruffleArgs.Count, "Ruffle argument count mismatch");
 Require(startInfo.ArgumentList[^1] == ruffleArgs[^1], "SWF must remain final process argument");
 
+var metadataHandler = new SequenceHandler();
+var metadataService = new GunnyLauncherService(gameBase, runtimeRoot, metadataHandler);
+var launchOnly = await metadataService.AuthenticateAsync("test user", "secret pass", CancellationToken.None);
+Require(launchOnly.Key == "server-guid", "metadata auth key mismatch");
+
 var serviceHandler = new SequenceHandler();
 var service = new GunnyLauncherService(gameBase, runtimeRoot, serviceHandler);
 var serviceInfo = await service.BuildStartInfoAsync("test user", "secret pass", CancellationToken.None);

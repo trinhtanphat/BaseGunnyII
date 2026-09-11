@@ -17,10 +17,19 @@ public sealed class GunnyLauncherService
         _handler = handler;
     }
 
-    public async Task<ProcessStartInfo> BuildStartInfoAsync(string username, string password, CancellationToken cancellationToken)
+    public Task<GameLaunchInfo> AuthenticateAsync(
+        string username,
+        string password,
+        CancellationToken cancellationToken) =>
+        new GunnyLoginClient(_gameBase, _handler)
+            .AuthenticateAsync(username, password, cancellationToken);
+
+    public async Task<ProcessStartInfo> BuildStartInfoAsync(
+        string username,
+        string password,
+        CancellationToken cancellationToken)
     {
-        var login = new GunnyLoginClient(_gameBase, _handler);
-        var launch = await login.AuthenticateAsync(username, password, cancellationToken);
+        var launch = await AuthenticateAsync(username, password, cancellationToken);
         var arguments = RuffleLaunchCommand.BuildArguments(launch, _gameBase);
         return RuffleProcessCommand.BuildStartInfo(_runtimeRoot, arguments);
     }
