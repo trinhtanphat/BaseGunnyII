@@ -23,17 +23,20 @@ public sealed class WebSocketTcpBridge
         using var tcp = new TcpClient();
         using var lifetime = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         lifetime.CancelAfter(_options.MaxConnectionLifetime);
-        await tcp.ConnectAsync(destination.Host, destination.Port, lifetime.Token);
+        using var idle = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
+        RefreshIdle(idle);
+        await tcp.ConnectAsync(destination.Host, destination.Port, idle.Token);
         await using var stream = tcp.GetStream();
 
-        var upstream = PumpWebSocketToTcpAsync(socket, stream, tcp, lifetime.Token);
-        var downstream = PumpTcpToWebSocketAsync(stream, socket, lifetime.Token);
+        var upstream = PumpWebSocketToTcpAsync(socket, stream, tcp, idle, idle.Token);
+        var downstream = PumpTcpToWebSocketAsync(stream, socket, idle, idle.Token);
         await Task.WhenAll(upstream, downstream);
     }
     private async Task PumpWebSocketToTcpAsync(
         WebSocket socket,
         NetworkStream stream,
         TcpClient tcp,
+        CancellationTokenSource idle,
         CancellationToken token)
     {
         var buffer = new byte[_options.MaxFrameBytes];
@@ -49,6 +52,7 @@ public sealed class WebSocketTcpBridge
                 throw new InvalidDataException("Only binary WebSocket frames are accepted.");
             if (!result.EndOfMessage)
                 throw new InvalidDataException("Fragmented WebSocket messages are not accepted yet.");
+            RefreshIdle(idle);
             await stream.WriteAsync(buffer.AsMemory(0, result.Count), token);
             await stream.FlushAsync(token);
         }
@@ -56,6 +60,7 @@ public sealed class WebSocketTcpBridge
     private async Task PumpTcpToWebSocketAsync(
         NetworkStream stream,
         WebSocket socket,
+        CancellationTokenSource idle,
         CancellationToken token)
     {
         var buffer = new byte[_options.MaxFrameBytes];
@@ -63,6 +68,7 @@ public sealed class WebSocketTcpBridge
         {
             var count = await stream.ReadAsync(buffer, token);
             if (count == 0) break;
+            RefreshIdle(idle);
             await socket.SendAsync(
                 buffer.AsMemory(0, count),
                 WebSocketMessageType.Binary,
@@ -73,4 +79,6 @@ public sealed class WebSocketTcpBridge
         if (socket.State is WebSocketState.Open or WebSocketState.CloseReceived)
             await socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "TCP closed", token);
     }
+
+    private void RefreshIdle(CancellationTokenSource idle) => idle.CancelAfter(_options.IdleTimeout);
 }

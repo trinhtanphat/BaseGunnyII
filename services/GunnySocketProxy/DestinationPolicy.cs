@@ -28,7 +28,9 @@ public sealed class DestinationPolicy
         if (options.MaxFrameBytes <= 0) throw new ArgumentOutOfRangeException(nameof(options.MaxFrameBytes));
         if (options.IdleTimeout <= TimeSpan.Zero) throw new ArgumentOutOfRangeException(nameof(options.IdleTimeout));
         if (options.MaxConnectionLifetime <= TimeSpan.Zero) throw new ArgumentOutOfRangeException(nameof(options.MaxConnectionLifetime));
-        if (options.MaxConnectionsPerClient <= 0) throw new ArgumentOutOfRangeException(nameof(options.MaxConnectionsPerClient));        foreach (var pair in options.Routes)
+        if (options.MaxConnectionsPerClient <= 0) throw new ArgumentOutOfRangeException(nameof(options.MaxConnectionsPerClient));
+        if (options.MaxConnectionAttemptsPerMinute <= 0) throw new ArgumentOutOfRangeException(nameof(options.MaxConnectionAttemptsPerMinute));
+        foreach (var pair in options.Routes)
         {
             if (string.IsNullOrWhiteSpace(pair.Key)) throw new ArgumentException("Route name is required.", nameof(options));
             if (string.IsNullOrWhiteSpace(pair.Value.Host)) throw new ArgumentException("Destination host is required.", nameof(options));
