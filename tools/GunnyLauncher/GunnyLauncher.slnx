@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="GunnyLauncher.App/GunnyLauncher.App.csproj" />
+  <Project Path="GunnyLauncher.Core/GunnyLauncher.Core.csproj" />
+  <Project Path="GunnyLauncher.Tests/GunnyLauncher.Tests.csproj" />
+</Solution>
