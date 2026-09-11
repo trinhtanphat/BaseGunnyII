@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "gameBase": "http://103.9.156.182/Gunny/",
+  "login": {
+    "method": "POST",
+    "endpoint": "createLogin.ashx",
+    "redirectMethod": "GET",
+    "redirectEndpoint": "LoginGame.aspx"
+  },
+  "registration": {
+    "captchaMethod": "GET",
+    "captchaEndpoint": "auth/ValidateCode.aspx",
+    "registerMethod": "POST",
+    "registerEndpoint": "auth/register.ashx",
+    "fields": [
+      "username",
+      "password",
+      "repassword",
+      "email",
+      "sex",
+      "code"
+    ]
+  },
+  "sample": {
+    "redirect": "http://103.9.156.182/Gunny/Default.aspx?user=fixture\u0026key=fixture-key\u0026editby=Trminhpc",
+    "user": "fixture",
+    "key": "fixture-key",
+    "editBy": "Trminhpc",
+    "swf": "http://103.9.156.182/Gunny/flash/Loading.swf?user=fixture\u0026key=fixture-key\u0026config=http%3A%2F%2F103.9.156.182%2FGunny%2Fconfig.xml"
+  },
+  "android": {
+    "packageName": "rs.ruffle"
+  },
+  "gameSocket": {
+    "host": "103.9.156.182",
+    "port": 9200
+  }
+}
