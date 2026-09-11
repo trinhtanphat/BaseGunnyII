@@ -51,7 +51,8 @@ Require(registrationPost.Contains("password=test123", StringComparison.Ordinal),
 Require(registrationPost.Contains("repassword=test123", StringComparison.Ordinal), "registration confirmation missing");
 Require(registrationPost.Contains("email=u%40example.com", StringComparison.Ordinal), "registration email missing");
 Require(registrationPost.Contains("sex=1", StringComparison.Ordinal), "registration sex missing");
-Require(registrationPost.Contains("validateCode=A1B2", StringComparison.Ordinal), "registration captcha missing");
+Require(registrationPost.Contains("code=A1B2", StringComparison.Ordinal), "registration captcha missing");
+Require(!registrationPost.Contains("validateCode=", StringComparison.Ordinal), "legacy register endpoint must receive code, not validateCode");
 Console.WriteLine("GUNNY_REGISTER_SMOKE=PASS");
 
 var ruffleArgs = RuffleLaunchCommand.BuildArguments(launch, gameBase);

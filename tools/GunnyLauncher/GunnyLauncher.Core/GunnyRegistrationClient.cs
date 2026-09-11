@@ -46,7 +46,7 @@ public sealed class GunnyRegistrationClient
             ["repassword"] = confirmation,
             ["email"] = email,
             ["sex"] = sex,
-            ["validateCode"] = captchaCode
+            ["code"] = captchaCode
         });
 
         using var response = await _client.PostAsync(
