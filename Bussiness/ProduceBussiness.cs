@@ -857,7 +857,6 @@ namespace Bussiness
                     info.CommonAddWound = (int)reader["CommonAddWound"];
                     info.CommonMultiBall = (int)reader["CommonMultiBall"];
                     info.Special = (int)reader["Special"];
-                    info.SpecialII = (int)reader["SpecialII"];
 
                  
                     infos.Add(info);
