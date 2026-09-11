@@ -34,6 +34,7 @@ Require(handler.Requests[1].Uri.AbsolutePath.EndsWith("/Gunny/LoginGame.aspx", S
 var ruffleArgs = RuffleLaunchCommand.BuildArguments(launch, new Uri("http://103.9.156.182/Gunny/"));
 var argLine = string.Join("|", ruffleArgs);
 Require(argLine.Contains("--socket-allow|103.9.156.182:9200", StringComparison.Ordinal), "socket allowlist missing");
+Require(argLine.Contains("--graphics|dx12", StringComparison.Ordinal), "DX12 graphics override missing");
 Require(argLine.Contains("--tcp-connections|deny", StringComparison.Ordinal), "default TCP deny missing");
 Require(argLine.Contains("--base|http://103.9.156.182/Gunny/flash/", StringComparison.OrdinalIgnoreCase), "Ruffle base missing");
 Require(argLine.Contains("-Peditby=Trminhpc", StringComparison.Ordinal), "editby flashvar missing");
