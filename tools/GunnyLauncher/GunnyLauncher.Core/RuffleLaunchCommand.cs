@@ -13,6 +13,7 @@ public static class RuffleLaunchCommand
 
         return new[]
         {
+            "--graphics", "dx12",
             "--width", "1000",
             "--height", "600",
             "--base", flashBase.AbsoluteUri,
