@@ -1,0 +1,40 @@
+name: Gunny Edge Gateway CI
+
+on:
+  pull_request:
+    paths:
+      - "services/GunnyEdgeProxy/**"
+      - ".github/workflows/edge-gateway.yml"
+  push:
+    branches:
+      - master
+    paths:
+      - "services/GunnyEdgeProxy/**"
+      - ".github/workflows/edge-gateway.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-bundle:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/GunnyEdgeProxy
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned Wrangler
+        run: npm install --no-audit --no-fund --package-lock=false
+      - name: Unit tests
+        run: npm test
+      - name: Bundle dry-run
+        run: npm run dry-run
+      - name: Ensure dry-run emitted worker bundle
+        shell: bash
+        run: |
+          test -s .wrangler-dryrun/worker.js
+          echo "GUNNY_EDGE_BUNDLE=PASS"
