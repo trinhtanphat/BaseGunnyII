@@ -1,0 +1,11 @@
+{
+  "name": "gunny-mobile-ios-web",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "prepare:ruffle": "node prepare-ruffle-assets.mjs"
+  },
+  "dependencies": {
+    "@ruffle-rs/ruffle": "0.6.0"
+  }
+}
