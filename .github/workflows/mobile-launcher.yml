@@ -1,0 +1,96 @@
+name: Mobile Launcher CI
+
+on:
+  push:
+    branches:
+      - feat/mobile-launcher-v1
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  desktop-and-contract:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - name: Shared login and registration smoke
+        run: dotnet run --project tools/GunnyLauncher/GunnyLauncher.Tests/GunnyLauncher.Tests.csproj -c Release
+      - name: Windows launcher UI smoke
+        run: dotnet run --project tools/GunnyLauncher/GunnyLauncher.App.Tests/GunnyLauncher.App.Tests.csproj -c Release
+      - name: Desktop Release build
+        run: dotnet build tools/GunnyLauncher/GunnyLauncher.slnx -c Release
+      - name: Socket proxy smoke
+        run: dotnet run --project services/GunnySocketProxy.Tests/GunnySocketProxy.Tests.csproj -c Release
+      - name: Export canonical contract and check drift
+        shell: pwsh
+        run: |
+          dotnet run --project tools/GunnyLauncher/GunnyLauncher.ContractExport/GunnyLauncher.ContractExport.csproj -c Release -- mobile/contracts/gunny-launch-contract.json
+          git diff --exit-code -- mobile/contracts/gunny-launch-contract.json
+
+  android:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install Android workload
+        run: dotnet workload install android
+      - name: Android contract smoke
+        run: dotnet run --project mobile/android/GunnyMobile.Android.Tests/GunnyMobile.Android.Tests.csproj -c Release
+      - name: Restore Android x64
+        shell: pwsh
+        run: dotnet restore mobile/android/GunnyMobile.Android/GunnyMobile.Android.csproj -r android-x64
+      - name: Build Android x64 Release
+        shell: pwsh
+        run: dotnet build mobile/android/GunnyMobile.Android/GunnyMobile.Android.csproj -c Release -r android-x64 --no-restore
+      - name: Upload signed APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: gunny-mobile-android-x64
+          path: mobile/android/GunnyMobile.Android/bin/Release/net10.0-android/android-x64/*-Signed.apk
+          if-no-files-found: error
+
+  ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: mobile/ios/web/package-lock.json
+      - name: Prepare pinned Ruffle Web runtime
+        working-directory: mobile/ios/web
+        run: |
+          npm ci
+          npm run prepare:ruffle
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate Xcode project
+        working-directory: mobile/ios
+        run: xcodegen generate
+      - name: Select simulator
+        id: simulator
+        shell: bash
+        run: |
+          udid=$(xcrun simctl list devices available --json | python3 -c 'import json,sys; d=json.load(sys.stdin)["devices"]; print(next(v["udid"] for r,vs in d.items() if "iOS" in r for v in vs if v.get("isAvailable")))')
+          echo "udid=$udid" >> "$GITHUB_OUTPUT"
+          echo "Using simulator $udid"
+      - name: iOS simulator tests
+        working-directory: mobile/ios
+        run: |
+          xcodebuild -project GunnyMobile.xcodeproj -scheme GunnyMobile -sdk iphonesimulator -destination "platform=iOS Simulator,id=${{ steps.simulator.outputs.udid }}" test CODE_SIGNING_ALLOWED=NO
