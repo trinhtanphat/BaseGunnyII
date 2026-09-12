@@ -55,15 +55,20 @@ struct LaunchInfo: Equatable, Sendable {
               var components = URLComponents(url: swf, resolvingAgainstBaseURL: false) else {
             throw ParseError.invalidRedirect
         }
-        components.queryItems = [
-            URLQueryItem(name: "user", value: user),
-            URLQueryItem(name: "key", value: key),
-            URLQueryItem(name: "config", value: config.absoluteString)
-        ]
+        components.percentEncodedQuery = [
+            "user=\(strictQueryEncode(user))",
+            "key=\(strictQueryEncode(key))",
+            "config=\(strictQueryEncode(config.absoluteString))"
+        ].joined(separator: "&")
         guard let url = components.url else {
             throw ParseError.invalidRedirect
         }
         return url
+    }
+
+    private func strictQueryEncode(_ value: String) -> String {
+        let unreserved = CharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~")
+        return value.addingPercentEncoding(withAllowedCharacters: unreserved) ?? ""
     }
 }
 
