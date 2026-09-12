@@ -1,0 +1,62 @@
+name: GunnyMobile
+options:
+  bundleIdPrefix: com.trinhtanphat
+  deploymentTarget:
+    iOS: "16.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+
+targets:
+  GunnyMobile:
+    type: application
+    platform: iOS
+    sources:
+      - path: GunnyMobile
+    resources:
+      - path: Generated/ruffle
+        type: folder
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.trinhtanphat.gunnymobile
+        PRODUCT_NAME: GunnyMobile
+        GUNNY_SOCKET_PROXY_URL: ""
+    info:
+      path: GunnyMobile/Info.plist
+      properties:
+        CFBundleDisplayName: Gunny Mobile
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        GunnySocketProxyURL: "$(GUNNY_SOCKET_PROXY_URL)"
+        NSAppTransportSecurity:
+          NSExceptionDomains:
+            "103.9.156.182":
+              NSExceptionAllowsInsecureHTTPLoads: true
+              NSIncludesSubdomains: false
+
+  GunnyMobileTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: GunnyMobileTests
+    resources:
+      - path: ../contracts/gunny-launch-contract.json
+    dependencies:
+      - target: GunnyMobile
+schemes:
+  GunnyMobile:
+    build:
+      targets:
+        GunnyMobile: all
+        GunnyMobileTests: [test]
+    test:
+      targets:
+        - GunnyMobileTests
+    run:
+      config: Debug
+    archive:
+      config: Release
