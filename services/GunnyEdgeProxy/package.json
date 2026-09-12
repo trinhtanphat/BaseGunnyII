@@ -1,0 +1,14 @@
+{
+  "name": "gunny-edge-proxy",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "dry-run": "wrangler deploy --dry-run --outdir .wrangler-dryrun",
+    "whoami": "wrangler whoami",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "4.131.1"
+  }
+}
