@@ -18,7 +18,7 @@ npm ci
 npm run prepare:ruffle
 ```
 
-The preparation script copies only the runtime JS/WASM files to `mobile/ios/Generated/ruffle` and writes a SHA-256 manifest. Generated assets and `node_modules` are intentionally ignored by Git.
+The preparation script copies only the runtime JS/WASM files to `mobile/ios/Generated/RuffleAssets.bundle` and writes a SHA-256 manifest. Generated assets and `node_modules` are intentionally ignored by Git.
 ## Project generation and tests
 
 Install XcodeGen on macOS, prepare Ruffle assets, then run:

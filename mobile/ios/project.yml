@@ -15,8 +15,7 @@ targets:
     sources:
       - path: GunnyMobile
     resources:
-      - path: Generated/ruffle
-        type: folder
+      - path: Generated/RuffleAssets.bundle
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.trinhtanphat.gunnymobile

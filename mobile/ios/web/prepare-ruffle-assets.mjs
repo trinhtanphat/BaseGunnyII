@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const source = join(here, "node_modules", "@ruffle-rs", "ruffle");
-const output = resolve(here, "..", "Generated", "ruffle");
+const output = resolve(here, "..", "Generated", "RuffleAssets.bundle");
 const pkg = JSON.parse(readFileSync(join(source, "package.json"), "utf8"));
 if (pkg.version !== "0.6.0") {
   throw new Error(`Expected @ruffle-rs/ruffle 0.6.0, got ${pkg.version}`);

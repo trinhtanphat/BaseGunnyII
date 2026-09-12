@@ -14,9 +14,10 @@ struct GameWebView: UIViewRepresentable {
         let configuration = WKWebViewConfiguration()
         configuration.websiteDataStore = .nonPersistent()
 
-        let resourceRoot = Bundle.main.resourceURL?
-            .appendingPathComponent("ruffle", isDirectory: true)
-            ?? Bundle.main.bundleURL
+        let resourceRoot = Bundle.main.url(
+            forResource: "RuffleAssets",
+            withExtension: "bundle"
+        ) ?? Bundle.main.bundleURL
         let handler = RuffleAssetSchemeHandler(root: resourceRoot)
         context.coordinator.assetHandler = handler
         configuration.setURLSchemeHandler(handler, forURLScheme: "gunny-ruffle")
