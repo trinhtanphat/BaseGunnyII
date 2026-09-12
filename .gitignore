@@ -1,4 +1,4 @@
-# Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
+﻿# Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
 [Bb]in/
 [Oo]bj/
 
@@ -113,3 +113,4 @@ mobile/ios/GunnyMobile.xcodeproj/
 services/GunnyEdgeProxy/node_modules/
 services/GunnyEdgeProxy/.wrangler/
 services/GunnyEdgeProxy/.wrangler-dryrun/
+.worktrees/
