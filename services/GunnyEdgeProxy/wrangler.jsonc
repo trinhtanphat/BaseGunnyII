@@ -1,0 +1,7 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "gunny-edge-proxy",
+  "main": "src/worker.mjs",
+  "compatibility_date": "2026-09-12",
+  "workers_dev": true
+}
