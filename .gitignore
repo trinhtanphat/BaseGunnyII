@@ -110,3 +110,6 @@ UpgradeLog*.XML
 mobile/ios/web/node_modules/
 mobile/ios/Generated/
 mobile/ios/GunnyMobile.xcodeproj/
+services/GunnyEdgeProxy/node_modules/
+services/GunnyEdgeProxy/.wrangler/
+services/GunnyEdgeProxy/.wrangler-dryrun/
