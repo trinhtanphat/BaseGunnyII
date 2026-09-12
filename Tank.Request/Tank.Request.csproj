@@ -102,6 +102,7 @@
     <Content Include="commitweeklyuserrecord.ashx" />
     <Content Include="DropItemForNewRegister.ashx" />
     <Content Include="SavePlayerAction.ashx" />
+    <Content Include="subactivelist.ashx" />
     <None Include="Service References\CenterService\CenterService.wsdl" />
     <None Include="Service References\CenterService\item.disco" />
     <None Include="Service References\CenterService\configuration91.svcinfo" />
@@ -291,6 +292,9 @@
     </Compile>
     <Compile Include="SavePlayerAction.ashx.cs">
       <DependentUpon>SavePlayerAction.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="subactivelist.ashx.cs">
+      <DependentUpon>subactivelist.ashx</DependentUpon>
     </Compile>
     <Compile Include="FarmGetUserFieldInfos.ashx.cs">
       <DependentUpon>FarmGetUserFieldInfos.ashx</DependentUpon>
