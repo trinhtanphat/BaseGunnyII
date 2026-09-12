@@ -39,22 +39,30 @@ public sealed class WebSocketTcpBridge
         CancellationTokenSource idle,
         CancellationToken token)
     {
-        var buffer = new byte[_options.MaxFrameBytes];
+        var buffer = new byte[Math.Min(_options.MaxFrameBytes, 64 * 1024)];
+        using var message = new MemoryStream(capacity: buffer.Length);
         while (!token.IsCancellationRequested)
         {
             var result = await socket.ReceiveAsync(buffer, token);
             if (result.MessageType == WebSocketMessageType.Close)
             {
+                if (message.Length != 0)
+                    throw new InvalidDataException("WebSocket closed during a fragmented binary message.");
                 try { tcp.Client.Shutdown(SocketShutdown.Send); } catch (SocketException) { }
                 return;
             }
             if (result.MessageType != WebSocketMessageType.Binary)
-                throw new InvalidDataException("Only binary WebSocket frames are accepted.");
-            if (!result.EndOfMessage)
-                throw new InvalidDataException("Fragmented WebSocket messages are not accepted yet.");
+                throw new InvalidDataException("Only binary WebSocket messages are accepted.");
+            if (message.Length + result.Count > _options.MaxFrameBytes)
+                throw new InvalidDataException("WebSocket binary message exceeds the configured limit.");
+
             RefreshIdle(idle);
-            await stream.WriteAsync(buffer.AsMemory(0, result.Count), token);
+            message.Write(buffer, 0, result.Count);
+            if (!result.EndOfMessage) continue;
+
+            await stream.WriteAsync(message.GetBuffer().AsMemory(0, checked((int)message.Length)), token);
             await stream.FlushAsync(token);
+            message.SetLength(0);
         }
     }
     private async Task PumpTcpToWebSocketAsync(

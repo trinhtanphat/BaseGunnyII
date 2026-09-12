@@ -84,6 +84,53 @@ Require(tcpReceived is not null && tcpReceived.SequenceEqual(expectedPayload), "
 Require(scriptedSocket.SentBytes.SequenceEqual(expectedPayload), "WebSocket echo payload mismatch");
 Console.WriteLine("GUNNY_SOCKET_BRIDGE_SMOKE=PASS");
 
+var fragmentListener = new TcpListener(IPAddress.Loopback, 0);
+fragmentListener.Start();
+var fragmentPort = ((IPEndPoint)fragmentListener.LocalEndpoint).Port;
+byte[]? fragmentedTcpReceived = null;
+var fragmentServerTask = Task.Run(async () =>
+{
+    using var tcp = await fragmentListener.AcceptTcpClientAsync();
+    await using var stream = tcp.GetStream();
+    var buffer = new byte[64];
+    var count = await stream.ReadAsync(buffer);
+    fragmentedTcpReceived = buffer[..count];
+    tcp.Client.Shutdown(SocketShutdown.Send);
+});
+var fragmentBridge = new WebSocketTcpBridge(ProxyOptions.CreateDefault("127.0.0.1", fragmentPort));
+using var fragmentedSocket = new FragmentedWebSocket(new byte[] { 0x47, 0x55, 0x4E }, new byte[] { 0x4E, 0x59 });
+using var fragmentCts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+await fragmentBridge.BridgeAsync(fragmentedSocket, new ProxyDestination("127.0.0.1", fragmentPort), fragmentCts.Token);
+await fragmentServerTask;
+fragmentListener.Stop();
+Require(fragmentedTcpReceived is not null && fragmentedTcpReceived.SequenceEqual(expectedPayload), "fragmented WebSocket message was not reassembled");
+Console.WriteLine("GUNNY_SOCKET_FRAGMENT_SMOKE=PASS");
+
+var oversizeListener = new TcpListener(IPAddress.Loopback, 0);
+oversizeListener.Start();
+var oversizePort = ((IPEndPoint)oversizeListener.LocalEndpoint).Port;
+var oversizeServerTask = Task.Run(async () =>
+{
+    using var tcp = await oversizeListener.AcceptTcpClientAsync();
+    await Task.Delay(100);
+});
+var oversizeOptions = WithFrameLimit(ProxyOptions.CreateDefault("127.0.0.1", oversizePort), 4);
+var oversizeBridge = new WebSocketTcpBridge(oversizeOptions);
+using var oversizeSocket = new FragmentedWebSocket(new byte[] { 1, 2, 3 }, new byte[] { 4, 5 });
+var oversizeRejected = false;
+try
+{
+    await oversizeBridge.BridgeAsync(oversizeSocket, new ProxyDestination("127.0.0.1", oversizePort), CancellationToken.None);
+}
+catch (InvalidDataException)
+{
+    oversizeRejected = true;
+}
+oversizeListener.Stop();
+await oversizeServerTask;
+Require(oversizeRejected, "fragmented message above MaxFrameBytes must be rejected");
+Console.WriteLine("GUNNY_SOCKET_FRAGMENT_LIMIT_SMOKE=PASS");
+
 var limiter = new ConnectionLimiter(maxConcurrent: 2, maxAttemptsPerMinute: 10);
 Require(limiter.TryAcquire("client-a", out var lease1), "first lease rejected");
 Require(limiter.TryAcquire("client-a", out var lease2), "second lease rejected");
@@ -157,6 +204,37 @@ sealed class ScriptedWebSocket : WebSocket
         return Task.CompletedTask;
     }
 }
+sealed class FragmentedWebSocket : WebSocket
+{
+    private readonly byte[][] _fragments;
+    private int _index;
+    private WebSocketState _state = WebSocketState.Open;
+    public FragmentedWebSocket(params byte[][] fragments) => _fragments = fragments;
+    public override WebSocketCloseStatus? CloseStatus => null;
+    public override string? CloseStatusDescription => null;
+    public override WebSocketState State => _state;
+    public override string? SubProtocol => null;
+    public override void Abort() => _state = WebSocketState.Aborted;
+    public override void Dispose() => _state = WebSocketState.Closed;
+    public override Task CloseAsync(WebSocketCloseStatus closeStatus, string? statusDescription, CancellationToken cancellationToken)
+    { _state = WebSocketState.Closed; return Task.CompletedTask; }
+    public override Task CloseOutputAsync(WebSocketCloseStatus closeStatus, string? statusDescription, CancellationToken cancellationToken)
+    { _state = WebSocketState.CloseSent; return Task.CompletedTask; }
+    public override Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer, CancellationToken cancellationToken)
+    {
+        if (_index < _fragments.Length)
+        {
+            var fragment = _fragments[_index++];
+            fragment.CopyTo(buffer.Array!, buffer.Offset);
+            return Task.FromResult(new WebSocketReceiveResult(fragment.Length, WebSocketMessageType.Binary, _index == _fragments.Length));
+        }
+        _state = WebSocketState.CloseReceived;
+        return Task.FromResult(new WebSocketReceiveResult(0, WebSocketMessageType.Close, true));
+    }
+    public override Task SendAsync(ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken)
+        => Task.CompletedTask;
+}
+
 sealed class SilentWebSocket : WebSocket
 {
     private WebSocketState _state = WebSocketState.Open;
