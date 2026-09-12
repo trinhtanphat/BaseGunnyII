@@ -42,8 +42,8 @@ targets:
     platform: iOS
     sources:
       - path: GunnyMobileTests
-    resources:
       - path: ../contracts/gunny-launch-contract.json
+        buildPhase: resources
     dependencies:
       - target: GunnyMobile
 schemes:
