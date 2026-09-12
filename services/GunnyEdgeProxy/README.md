@@ -17,19 +17,19 @@ The compatibility date is intentionally `2026-09-12`, which includes Cloudflare'
 ## Verify locally
 
 ```sh
-npm ci
+npm install --no-audit --no-fund --package-lock=false
 npm test
 npm run dry-run
 ```
 
-`npm run dry-run` must emit `.wrangler-dryrun/worker.js`. Local `wrangler dev` is optional; on the current Windows development machine Workerd startup has been intermittently very slow, so CI uses the deterministic unit/bundle gates on Ubuntu.
+Wrangler itself is pinned exactly to `4.131.1` in `package.json`. `npm run dry-run` must emit `.wrangler-dryrun/worker.js`. Local `wrangler dev` is optional; on the current Windows development machine Workerd startup has been intermittently very slow, so CI uses the unit/bundle gates on Ubuntu.
 
 ## Deploy
 
 Authenticate Wrangler with the intended Cloudflare account, then run:
 
 ```sh
-npm ci
+npm install --no-audit --no-fund --package-lock=false
 npm run whoami
 npm run deploy
 ```
