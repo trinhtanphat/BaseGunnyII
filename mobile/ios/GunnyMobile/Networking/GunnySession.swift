@@ -35,11 +35,15 @@ final class GunnySession: NSObject, URLSessionTaskDelegate, @unchecked Sendable 
         self.gameBase = normalized
         super.init()
 
-        let configuration = URLSessionConfiguration.default
-        configuration.httpCookieStorage = .shared
+        let configuration = Self.makeSessionConfiguration()
+        session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+    }
+
+    static func makeSessionConfiguration() -> URLSessionConfiguration {
+        let configuration = URLSessionConfiguration.ephemeral
         configuration.httpShouldSetCookies = true
         configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
-        session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+        return configuration
     }
 
     deinit {

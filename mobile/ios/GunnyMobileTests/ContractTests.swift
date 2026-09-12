@@ -38,6 +38,14 @@ final class ContractTests: XCTestCase {
         XCTAssertEqual(socket["port"] as? Int, 9200)
     }
 
+    func testSessionConfigurationDoesNotUseSharedCookieStorage() {
+        let configuration = GunnySession.makeSessionConfiguration()
+        XCTAssertTrue(configuration.httpShouldSetCookies)
+        if let storage = configuration.httpCookieStorage {
+            XCTAssertFalse(storage === HTTPCookieStorage.shared)
+        }
+    }
+
     func testRuffleBootstrapContainsOnlyApprovedSocketProxy() throws {
         let proxyURL = try XCTUnwrap(URL(string: "wss://proxy.example.test/socket?route=game"))
         let script = try GamePageBuilder.makeBootstrapScript(proxyURL: proxyURL)
