@@ -65,7 +65,7 @@ var argLine = string.Join("|", ruffleArgs);
 Require(argLine.Contains("--socket-allow|103.9.156.182:9200", StringComparison.Ordinal), "socket allowlist missing");
 Require(argLine.Contains("--graphics|gl", StringComparison.Ordinal), "OpenGL graphics override missing");
 Require(argLine.Contains("--no-avm2-optimizer", StringComparison.Ordinal), "AVM2 optimizer must be disabled for legacy Alchemy module");
-Require(argLine.Contains("--tcp-connections|deny", StringComparison.Ordinal), "default TCP deny missing");
+Require(argLine.Contains("--tcp-connections|allow", StringComparison.Ordinal), "game TCP connections must be enabled for the Road server");
 Require(argLine.Contains("--base|http://103.9.156.182/Gunny/flash/", StringComparison.OrdinalIgnoreCase), "Ruffle base missing");
 Require(argLine.Contains("-Peditby=Trminhpc", StringComparison.Ordinal), "editby flashvar missing");
 Require(ruffleArgs[^1].Contains("Loading.swf?", StringComparison.Ordinal), "SWF URL must be final argument");

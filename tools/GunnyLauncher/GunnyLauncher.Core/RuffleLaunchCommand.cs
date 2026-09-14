@@ -19,7 +19,7 @@ public static class RuffleLaunchCommand
             "--height", "600",
             "--base", flashBase.AbsoluteUri,
             "--socket-allow", $"{socketHost}:9200",
-            "--tcp-connections", "deny",
+            "--tcp-connections", "allow",
             "--storage", "disk",
             "--open-url-mode", "confirm",
             $"-Peditby={launch.EditBy}",

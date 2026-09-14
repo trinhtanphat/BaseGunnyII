@@ -8,7 +8,7 @@ Windows desktop launcher for the legacy Gunny web client using the Ruffle deskto
 - Authentication reuses the existing `createLogin.ashx` session flow.
 - `LoginGame.aspx` supplies the signed `user` / `key` redirect.
 - Ruffle loads `flash/Loading.swf` and the deployed `config.xml`.
-- TCP is denied by default; only the game endpoint `<server-host>:9200` is allowlisted.
+- Ruffle TCP connections are enabled so the legacy client can reach the Road server; the expected game endpoint remains `<server-host>:9200`.
 - Passwords are not written to disk by the launcher.
 
 ## Build and smoke
