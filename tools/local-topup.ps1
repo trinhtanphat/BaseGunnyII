@@ -6,7 +6,6 @@ param(
     [string]$RequestRoot = 'C:\Gunny\GunnyFileExe\request',
     [string]$SqlServer = '.\SQLEXPRESS',
     [string]$Database = 'Db_Tank',
-    [string]$CenterEndpoint = 'net.tcp://127.0.0.1:2009/',
     [string]$AuditPath = 'C:\Gunny\logs\local-topup-audit.log'
 )
 Set-StrictMode -Version Latest
@@ -110,7 +109,7 @@ try {
     $stateReader.Close()
 
     $status = if ($canUse -eq 1) { 'QUEUED_RELOGIN' } else { 'ALREADY_APPLIED' }
-    $auditLine = '{0}`t{1}`t{2}`t{3}`tcreated={4}`tstatus={5}`tbefore={6}`tafter={7}' -f (Get-Date).ToUniversalTime().ToString('o'), $ChargeId, $UserName, $Money, $created, $status, $beforeMoney, $afterMoney
+    $auditLine = "{0}`t{1}`t{2}`t{3}`tcreated={4}`tstatus={5}`tbefore={6}`tafter={7}" -f (Get-Date).ToUniversalTime().ToString('o'), $ChargeId, $UserName, $Money, $created, $status, $beforeMoney, $afterMoney
     Add-Content -LiteralPath $AuditPath -Value $auditLine -Encoding UTF8
     Write-Host "LOCAL_TOPUP=OK chargeId=$ChargeId user=$UserName amount=$Money status=$status created=$created before=$beforeMoney after=$afterMoney"
 }
