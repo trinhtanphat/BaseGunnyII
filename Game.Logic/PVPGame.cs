@@ -103,6 +103,12 @@ namespace Game.Logic
                 SendStartLoading(60);
                 AddAction(new WaitPlayerLoadingAction(this, 61 * 1000));
                 m_gameState = eGameState.Loading;
+                foreach (Player p in GetAllFightPlayers())
+                {
+                    IBotGamePlayer bot = p.PlayerDetail as IBotGamePlayer;
+                    if (bot != null && bot.IsBot)
+                        p.LoadingProcess = 100;
+                }
             }
         }
 
@@ -199,6 +205,9 @@ namespace Game.Logic
                     m_currentLiving.StartAttacking();
 
                     SendGameNextTurn(m_currentLiving, this, newBoxes);
+                    IBotGamePlayer bot = CurrentPlayer.PlayerDetail as IBotGamePlayer;
+                    if (bot != null && bot.IsBot)
+                        bot.TakeTurn(this, CurrentPlayer);
 
                     if (m_currentLiving.IsAttacking)
                     {
@@ -310,26 +319,37 @@ namespace Game.Logic
                 CurrentTurnTotalDamage = 0;
 
                 List<Player> players = GetAllFightPlayers();
+                bool hasBot = players.Any(delegate(Player p)
+                {
+                    IBotGamePlayer bot = p.PlayerDetail as IBotGamePlayer;
+                    return bot != null && bot.IsBot;
+                });
 
-                int winTeam = -1;
+                bool redAlive = false;
+                bool blueAlive = false;
                 foreach (Player p in players)
                 {
-                    if (p.IsLiving)
+                    if (!p.IsLiving || p.Blood <= 0)
                     {
-                        winTeam = p.Team;
-                        break;
+                        continue;
+                    }
+                    if (p.Team == 1)
+                    {
+                        redAlive = true;
+                    }
+                    else if (p.Team == 2)
+                    {
+                        blueAlive = true;
                     }
                 }
-
-                if (winTeam == -1 && CurrentPlayer != null)
-                    winTeam = CurrentPlayer.Team;
+                int winTeam = PvpWinnerResolver.Resolve(redAlive, blueAlive);
 
 
 
                 // int riches = 0;
                 int losebaseoffer = 0;
                 int winbaseoffer = 0;
-                int riches = CalculateGuildMatchResult(players, winTeam);
+                int riches = hasBot ? 0 : CalculateGuildMatchResult(players, winTeam);
                 if (RoomType == eRoomType.Match)
                 {
                     if (GameType == eGameType.Guild)
@@ -380,8 +400,14 @@ namespace Game.Logic
                         {
                             gp = (int)Math.Ceiling((winPlus + p.TotalHurt * 0.001 + p.TotalKill * 0.5 + (p.TotalHitTargetCount / totalShoot) * 2) * againstTeamLevel * (0.9 + (againstTeamCount - 1) * 0.3));
                         }
-                        gp = gp == 0 ? 1 : gp;                        
-                        p.CanTakeOut = p.Team == 1 ? canRedTakeOut : canBlueTakeOut;
+                        gp = gp == 0 ? 1 : gp;
+                        if (hasBot)
+                        {
+                            gp = 0;
+                            p.GainGP = 0;
+                            p.GainOffer = 0;
+                        }
+                        p.CanTakeOut = hasBot ? 0 : (p.Team == 1 ? canRedTakeOut : canBlueTakeOut);
                         riches += p.GainOffer;
 
              
@@ -417,10 +443,12 @@ namespace Game.Logic
                 pkg.WriteInt(riches);
                 SendToAll(pkg);                
                 StringBuilder sb = new StringBuilder();
-                foreach (Player p in players)
+                if (!hasBot)
                 {
-                    p.PlayerDetail.OnGameOver(this, p.Team == winTeam, p.GainGP);
-
+                    foreach (Player p in players)
+                    {
+                        p.PlayerDetail.OnGameOver(this, p.Team == winTeam, p.GainGP);
+                    }
                 }
 
                 string templateIdsStr = "";
@@ -458,6 +486,10 @@ namespace Game.Logic
 
         private int CalculateGuildMatchResult(List<Player> players, int winTeam)
         {
+            if (winTeam == 0)
+            {
+                return 0;
+            }
             if (RoomType == eRoomType.Match)
             {
                 StringBuilder winStr = new StringBuilder(LanguageMgr.GetTranslation("Game.Server.SceneGames.OnStopping.Msg5"));
@@ -512,7 +544,7 @@ namespace Game.Logic
             bool blue = true;
             foreach (Player p in m_redTeam)
             {
-                if (p.IsLiving)
+                if (p.IsLiving && p.Blood > 0)
                 {
                     red = false;
                     break;
@@ -521,7 +553,7 @@ namespace Game.Logic
 
             foreach (Player p in m_blueTeam)
             {
-                if (p.IsLiving)
+                if (p.IsLiving && p.Blood > 0)
                 {
                     blue = false;
                     break;
