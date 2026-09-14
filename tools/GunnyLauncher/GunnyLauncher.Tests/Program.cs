@@ -33,7 +33,7 @@ Require(handler.Requests[1].Method == HttpMethod.Get, "second request must be GE
 Require(handler.Requests[1].Uri.AbsolutePath.EndsWith("/Gunny/LoginGame.aspx", StringComparison.OrdinalIgnoreCase), "LoginGame endpoint mismatch");
 var ruffleArgs = RuffleLaunchCommand.BuildArguments(launch, new Uri("http://103.9.156.182/Gunny/"));
 var argLine = string.Join("|", ruffleArgs);
-Require(argLine.Contains("--graphics|dx12", StringComparison.Ordinal), "stable graphics backend missing");
+Require(!argLine.Contains("--graphics|", StringComparison.Ordinal), "launcher must allow Ruffle to auto-select the graphics backend");
 Require(argLine.Contains("--socket-allow|103.9.156.182:9200", StringComparison.Ordinal), "socket allowlist missing");
 Require(argLine.Contains("--tcp-connections|deny", StringComparison.Ordinal), "default TCP deny missing");
 Require(argLine.Contains("--base|http://103.9.156.182/Gunny/flash/", StringComparison.OrdinalIgnoreCase), "Ruffle base missing");
