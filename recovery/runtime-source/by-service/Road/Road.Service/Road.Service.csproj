@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Road.Service</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net40</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="log4net">
+      <HintPath>$(RuntimeBinaryRoot)\Road\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Game.Server">
+      <HintPath>$(RuntimeBinaryRoot)\Road\Game.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="Game.Base">
+      <HintPath>$(RuntimeBinaryRoot)\Road\Game.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Game.Logic">
+      <HintPath>$(RuntimeBinaryRoot)\Road\Game.Logic.dll</HintPath>
+    </Reference>
+    <Reference Include="Bussiness">
+      <HintPath>$(RuntimeBinaryRoot)\Road\Bussiness.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

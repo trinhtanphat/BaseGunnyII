@@ -1,0 +1,222 @@
+{
+    "schemaVersion":  1,
+    "baseCommit":  "88ee24ddff46629abde0fab198f0e4b53c866b26",
+    "branch":  "recovery/runtime-source-20260915",
+    "rawForensicRoot":  "C:\\Gunny\\_decompiled_20260914\\RuntimeByService",
+    "runtimeBinaryRootProperty":  "RuntimeBinaryRoot",
+    "configsImported":  false,
+    "assemblies":  [
+                       {
+                           "service":  "center",
+                           "assembly":  "Bussiness",
+                           "sha256":  "24fa15ff6045e87736624dddb7cacdd9bfbfbe0414d6ba6ab57a3a132528cf0f",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/center/Bussiness",
+                           "sourceFiles":  66,
+                           "duplicateAliases":  [
+
+                                                ]
+                       },
+                       {
+                           "service":  "center",
+                           "assembly":  "Center.Server",
+                           "sha256":  "f446ce3aef72e2b57fb626a11a125c16caf436fd186a89f65bc4840b245a30c2",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/center/Center.Server",
+                           "sourceFiles":  19,
+                           "duplicateAliases":  [
+
+                                                ]
+                       },
+                       {
+                           "service":  "center",
+                           "assembly":  "Center.Service",
+                           "sha256":  "5c24462c871d8a70dafcd9ac2a9b747e6e81457abfda7722ba1c75368b4491a9",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/center/Center.Service",
+                           "sourceFiles":  4,
+                           "duplicateAliases":  [
+
+                                                ]
+                       },
+                       {
+                           "service":  "center",
+                           "assembly":  "Game.Base",
+                           "sha256":  "98af5762474f3c328213db101e0e2cfce95be297662687a79f50fcfe0b84fa7c",
+                           "targetFramework":  "net35",
+                           "sourcePath":  "by-service/center/Game.Base",
+                           "sourceFiles":  42,
+                           "duplicateAliases":  [
+
+                                                ]
+                       },
+                       {
+                           "service":  "center",
+                           "assembly":  "SqlDataProvider",
+                           "sha256":  "0a1f788f4664ddfba3394b27104ec31ba3ab64840be8d4cbcec4ae0458cba71f",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/center/SqlDataProvider",
+                           "sourceFiles":  156,
+                           "duplicateAliases":  [
+                                                    "Fight/SqlDataProvider"
+                                                ]
+                       },
+                       {
+                           "service":  "Fight",
+                           "assembly":  "Bussiness",
+                           "sha256":  "d6f9342d241a6ea94753bbc4e05acb3361bac852bcaf9f23c150010aaedf29bc",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/Fight/Bussiness",
+                           "sourceFiles":  66,
+                           "duplicateAliases":  [
+                                                    "Road/Bussiness"
+                                                ]
+                       },
+                       {
+                           "service":  "Fight",
+                           "assembly":  "Fighting.Server",
+                           "sha256":  "bcda33f114d84465ec6be03bf73f5d62d6d3c4e09c9eae50fef91532140a78a9",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/Fight/Fighting.Server",
+                           "sourceFiles":  15,
+                           "duplicateAliases":  [
+
+                                                ]
+                       },
+                       {
+                           "service":  "Fight",
+                           "assembly":  "Fighting.Service",
+                           "sha256":  "dc4eb09bc5f0ec10ae018da823a4896b826b4ae58d498da89a83e0ad29c6ed9b",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/Fight/Fighting.Service",
+                           "sourceFiles":  4,
+                           "duplicateAliases":  [
+
+                                                ]
+                       },
+                       {
+                           "service":  "Fight",
+                           "assembly":  "Game.Base",
+                           "sha256":  "5851154b8fef454261006a00b92e1b89f4d1d254ef519ee57219b2784d265fb3",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/Fight/Game.Base",
+                           "sourceFiles":  42,
+                           "duplicateAliases":  [
+
+                                                ]
+                       },
+                       {
+                           "service":  "Fight",
+                           "assembly":  "Game.Logic",
+                           "sha256":  "c55aa6d9dca93b1d7183d7f9e46f618f38e66e7b69ea2de72bd4c75ada66d661",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/Fight/Game.Logic",
+                           "sourceFiles":  224,
+                           "duplicateAliases":  [
+
+                                                ]
+                       },
+                       {
+                           "service":  "Fight",
+                           "assembly":  "GameServerScripts",
+                           "sha256":  "e4d0871d43f7cf6e7689c65b3ce2b738b7e140b0ae2db4f3e7cd0c8544bd84f0",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/Fight/GameServerScripts",
+                           "sourceFiles":  11,
+                           "duplicateAliases":  [
+
+                                                ]
+                       },
+                       {
+                           "service":  "Fight",
+                           "assembly":  "SqlDataProvider",
+                           "sha256":  "0a1f788f4664ddfba3394b27104ec31ba3ab64840be8d4cbcec4ae0458cba71f",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/Fight/SqlDataProvider",
+                           "sourceFiles":  156,
+                           "duplicateAliases":  [
+                                                    "center/SqlDataProvider"
+                                                ]
+                       },
+                       {
+                           "service":  "Road",
+                           "assembly":  "Bussiness",
+                           "sha256":  "d6f9342d241a6ea94753bbc4e05acb3361bac852bcaf9f23c150010aaedf29bc",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/Road/Bussiness",
+                           "sourceFiles":  66,
+                           "duplicateAliases":  [
+                                                    "Fight/Bussiness"
+                                                ]
+                       },
+                       {
+                           "service":  "Road",
+                           "assembly":  "Game.Base",
+                           "sha256":  "7a8201c002726131b137aa9a35c29847b030614fa452e944cad2e72795cfef3c",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/Road/Game.Base",
+                           "sourceFiles":  42,
+                           "duplicateAliases":  [
+
+                                                ]
+                       },
+                       {
+                           "service":  "Road",
+                           "assembly":  "Game.Logic",
+                           "sha256":  "85cd47cd952e6376280efd81a2efffe7d46570a73859e849e147ddc9bcf0de6d",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/Road/Game.Logic",
+                           "sourceFiles":  224,
+                           "duplicateAliases":  [
+
+                                                ]
+                       },
+                       {
+                           "service":  "Road",
+                           "assembly":  "Game.Server",
+                           "sha256":  "b5773d6a3e7fb69f140c501c2c37f9b7fb30fb223734609875e1eeed0a81f78d",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/Road/Game.Server",
+                           "sourceFiles":  429,
+                           "duplicateAliases":  [
+
+                                                ]
+                       },
+                       {
+                           "service":  "Road",
+                           "assembly":  "GameServerScripts",
+                           "sha256":  "ae10f9def9a42d50b35c2079788f6a75df80ab0e35b35cc9801dee5b0029abec",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/Road/GameServerScripts",
+                           "sourceFiles":  601,
+                           "duplicateAliases":  [
+
+                                                ]
+                       },
+                       {
+                           "service":  "Road",
+                           "assembly":  "Road.Service",
+                           "sha256":  "aa3c8793c3d3f2551aa559b93d1fdf08600a0d8951dc09bb96d72b9105c8d22b",
+                           "targetFramework":  "net40",
+                           "sourcePath":  "by-service/Road/Road.Service",
+                           "sourceFiles":  11,
+                           "duplicateAliases":  [
+
+                                                ]
+                       },
+                       {
+                           "service":  "Road",
+                           "assembly":  "SqlDataProvider",
+                           "sha256":  "4e385131d3024ed55f3e5b8dda60b866fe15f57bed42b5da4c6a06cba14e0691",
+                           "targetFramework":  "net20",
+                           "sourcePath":  "by-service/Road/SqlDataProvider",
+                           "sourceFiles":  156,
+                           "duplicateAliases":  [
+
+                                                ]
+                       }
+                   ],
+    "redactedCredentialLikeLiterals":  9,
+    "redactionEvidence":  "evidence/redactions-20260915.json",
+    "redactionPolicy":  "Exact raw forensic source remains outside repository; credential-like room password literals are redacted in Git recovery lane and must not be auto-promoted."
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Fighting.Service</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net40</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>$(RuntimeBinaryRoot)\Fight\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="Fighting.Server">
+      <HintPath>$(RuntimeBinaryRoot)\Fight\Fighting.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="Game.Base">
+      <HintPath>$(RuntimeBinaryRoot)\Fight\Game.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Game.Logic">
+      <HintPath>$(RuntimeBinaryRoot)\Fight\Game.Logic.dll</HintPath>
+    </Reference>
+    <Reference Include="Game.Logic">
+      <HintPath>$(RuntimeBinaryRoot)\Fight\Game.Logic.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
