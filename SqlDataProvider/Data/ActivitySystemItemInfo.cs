@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class ActivitySystemItemInfo
 {
 	public int ID;
@@ -27,4 +27,6 @@ public class ActivitySystemItemInfo
 	public int LuckCompose;
 
 	public int Random;
+}
+
 }

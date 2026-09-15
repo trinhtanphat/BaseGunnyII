@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class FairBattleRewardInfo
 {
 	public int Prestige;
@@ -13,4 +13,6 @@ public class FairBattleRewardInfo
 	public int PrestigeForLose;
 
 	public string Title;
+}
+
 }

@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class ExerciseInfo
 {
 	public int Grage;
@@ -15,4 +15,6 @@ public class ExerciseInfo
 	public int ExerciseH;
 
 	public int ExerciseL;
+}
+
 }

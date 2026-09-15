@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class PetExpItemPriceInfo
 {
 	public int ID { get; set; }
@@ -9,4 +9,6 @@ public class PetExpItemPriceInfo
 	public int Money { get; set; }
 
 	public int ItemCount { get; set; }
+}
+
 }

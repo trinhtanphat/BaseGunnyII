@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class UserDrillInfo : DataObject
 {
 	private int _userID;
@@ -76,4 +76,6 @@ public class UserDrillInfo : DataObject
 			_isDirty = true;
 		}
 	}
+}
+
 }

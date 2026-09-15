@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class LoadUserBoxInfo : DataObject
 {
 	public int ID { get; set; }
@@ -11,4 +11,6 @@ public class LoadUserBoxInfo : DataObject
 	public int Condition { get; set; }
 
 	public int TemplateID { get; set; }
+}
+
 }

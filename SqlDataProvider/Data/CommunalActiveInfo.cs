@@ -1,7 +1,7 @@
 using System;
 
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class CommunalActiveInfo
 {
 	public int ActiveID { get; set; }
@@ -23,4 +23,6 @@ public class CommunalActiveInfo
 	public bool IsReset { get; set; }
 
 	public bool IsSendAward { get; set; }
+}
+
 }

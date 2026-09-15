@@ -1,7 +1,7 @@
 using System;
 
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class PyramidConfigInfo
 {
 	private int _userID;
@@ -115,4 +115,6 @@ public class PyramidConfigInfo
 			_revivePrice = value;
 		}
 	}
+}
+
 }

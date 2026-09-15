@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class UsersCardInfo : DataObject
 {
 	private int _cardID;
@@ -241,4 +241,6 @@ public class UsersCardInfo : DataObject
 			_isDirty = true;
 		}
 	}
+}
+
 }

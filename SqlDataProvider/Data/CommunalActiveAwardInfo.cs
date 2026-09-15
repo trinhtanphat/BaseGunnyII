@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class CommunalActiveAwardInfo
 {
 	public int ID { get; set; }
@@ -29,4 +29,6 @@ public class CommunalActiveAwardInfo
 	public bool IsTime { get; set; }
 
 	public int ValidDate { get; set; }
+}
+
 }

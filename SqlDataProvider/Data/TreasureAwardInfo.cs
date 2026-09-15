@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class TreasureAwardInfo
 {
 	public int ID { get; set; }
@@ -19,4 +19,6 @@ public class TreasureAwardInfo
 	public bool isBind { get; set; }
 
 	public int TypeAward { get; set; }
+}
+
 }

@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class PetSkillInfo
 {
 	public int ID { get; set; }
@@ -33,4 +33,6 @@ public class PetSkillInfo
 	public int Damage { get; set; }
 
 	public int DamageCrit { get; set; }
+}
+
 }

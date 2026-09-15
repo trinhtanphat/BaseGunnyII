@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class PetSkillTemplateInfo
 {
 	public int ID { get; set; }
@@ -17,4 +17,6 @@ public class PetSkillTemplateInfo
 	public int MinLevel { get; set; }
 
 	public string DeleteSkillIDs { get; set; }
+}
+
 }

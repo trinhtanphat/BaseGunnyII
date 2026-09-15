@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class PlayerPropertyInfo
 {
 	public int Attack { get; set; }
@@ -17,4 +17,6 @@ public class PlayerPropertyInfo
 	public int Guard { get; set; }
 
 	public int Armor { get; set; }
+}
+
 }

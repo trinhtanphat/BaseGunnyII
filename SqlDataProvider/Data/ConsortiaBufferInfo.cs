@@ -1,7 +1,7 @@
 using System;
 
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class ConsortiaBufferInfo
 {
 	public int ConsortiaID { get; set; }
@@ -17,4 +17,6 @@ public class ConsortiaBufferInfo
 	public int Type { get; set; }
 
 	public int Value { get; set; }
+}
+
 }

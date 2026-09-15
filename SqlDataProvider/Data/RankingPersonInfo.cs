@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class RankingPersonInfo
 {
 	public int UserID { get; set; }
@@ -13,4 +13,6 @@ public class RankingPersonInfo
 	public int Honor { get; set; }
 
 	public int ID { get; set; }
+}
+
 }

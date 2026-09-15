@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class NewChickenBoxItemInfo : DataObject
 {
 	private int _ID;
@@ -226,4 +226,6 @@ public class NewChickenBoxItemInfo : DataObject
 			_isDirty = true;
 		}
 	}
+}
+
 }

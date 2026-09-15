@@ -1,7 +1,7 @@
 using System;
 
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class UserLabyrinthInfo : DataObject
 {
 	private int _userID;
@@ -263,4 +263,6 @@ public class UserLabyrinthInfo : DataObject
 	{
 		return _lastDate.Date < DateTime.Now.Date;
 	}
+}
+
 }

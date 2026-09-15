@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class TotemInfo
 {
 	public int ID;
@@ -31,4 +31,6 @@ public class TotemInfo
 	public int Location;
 
 	public int Point;
+}
+
 }

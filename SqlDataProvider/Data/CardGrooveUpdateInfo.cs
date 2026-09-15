@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class CardGrooveUpdateInfo
 {
 	public int ID { get; set; }
@@ -21,4 +21,6 @@ public class CardGrooveUpdateInfo
 	public int Damage { get; set; }
 
 	public int Guard { get; set; }
+}
+
 }

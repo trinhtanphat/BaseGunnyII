@@ -1,9 +1,11 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public enum PetType
 {
 	Normal,
 	FORZEN,
 	TRANFORM,
 	CURE
+}
+
 }

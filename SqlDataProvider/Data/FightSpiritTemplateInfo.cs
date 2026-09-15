@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class FightSpiritTemplateInfo
 {
 	public int ID;
@@ -21,4 +21,6 @@ public class FightSpiritTemplateInfo
 	public int Lucky;
 
 	public int Blood;
+}
+
 }

@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class CommunalActiveExpInfo
 {
 	public int ActiveID { get; set; }
@@ -9,4 +9,6 @@ public class CommunalActiveExpInfo
 	public int Exp { get; set; }
 
 	public int AddExpPlus { get; set; }
+}
+
 }

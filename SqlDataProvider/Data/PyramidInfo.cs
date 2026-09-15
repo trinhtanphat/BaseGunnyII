@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class PyramidInfo : DataObject
 {
 	private int _ID;
@@ -166,4 +166,6 @@ public class PyramidInfo : DataObject
 			_isDirty = true;
 		}
 	}
+}
+
 }

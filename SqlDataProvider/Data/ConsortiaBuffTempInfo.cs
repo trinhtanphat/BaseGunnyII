@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class ConsortiaBuffTempInfo
 {
 	public int id { get; set; }
@@ -21,4 +21,6 @@ public class ConsortiaBuffTempInfo
 	public int pic { get; set; }
 
 	public int group { get; set; }
+}
+
 }

@@ -1,7 +1,7 @@
 using System;
 
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class UserChristmasInfo : DataObject
 {
 	private int _ID;
@@ -183,4 +183,6 @@ public class UserChristmasInfo : DataObject
 			_isDirty = true;
 		}
 	}
+}
+
 }

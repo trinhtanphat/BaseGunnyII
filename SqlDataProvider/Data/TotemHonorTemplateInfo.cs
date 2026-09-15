@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class TotemHonorTemplateInfo
 {
 	public int ID;
@@ -9,4 +9,6 @@ public class TotemHonorTemplateInfo
 	public int NeedMoney;
 
 	public int AddHonor;
+}
+
 }

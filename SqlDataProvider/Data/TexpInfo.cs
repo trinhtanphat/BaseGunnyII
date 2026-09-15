@@ -1,7 +1,7 @@
 using System;
 
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class TexpInfo : DataObject
 {
 	private int _userID;
@@ -145,4 +145,6 @@ public class TexpInfo : DataObject
 	{
 		return _texpTaskDate.Date < DateTime.Now.Date;
 	}
+}
+
 }

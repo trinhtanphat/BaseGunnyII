@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class CardTemplateInfo
 {
 	public int ID { get; set; }
@@ -33,4 +33,6 @@ public class CardTemplateInfo
 	public int GuardRate { get; set; }
 
 	public int AddGuard { get; set; }
+}
+
 }

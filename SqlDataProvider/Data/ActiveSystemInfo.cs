@@ -1,7 +1,7 @@
 using System;
 
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class ActiveSystemInfo : DataObject
 {
 	private int _ID;
@@ -333,4 +333,6 @@ public class ActiveSystemInfo : DataObject
 			_isDirty = true;
 		}
 	}
+}
+
 }

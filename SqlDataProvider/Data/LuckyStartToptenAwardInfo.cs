@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class LuckyStartToptenAwardInfo
 {
 	public int ID;
@@ -23,4 +23,6 @@ public class LuckyStartToptenAwardInfo
 	public int LuckCompose;
 
 	public bool IsBinds;
+}
+
 }

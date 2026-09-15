@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class ConsortiaBossConfigInfo
 {
 	public int Level;
@@ -15,4 +15,6 @@ public class ConsortiaBossConfigInfo
 	public int ProlongRich;
 
 	public int BossLevel;
+}
+
 }

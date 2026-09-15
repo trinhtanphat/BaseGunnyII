@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class StrengThenExpInfo
 {
 	public int ID { get; set; }
@@ -11,4 +11,6 @@ public class StrengThenExpInfo
 	public int NecklaceStrengthExp { get; set; }
 
 	public int NecklaceStrengthPlus { get; set; }
+}
+
 }

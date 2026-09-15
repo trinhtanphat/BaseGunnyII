@@ -1,7 +1,7 @@
 using System;
 
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class UserTreasureInfo : DataObject
 {
 	private int _ID;
@@ -158,4 +158,6 @@ public class UserTreasureInfo : DataObject
 	{
 		return _lastLoginDay.Date < DateTime.Now.Date;
 	}
+}
+
 }

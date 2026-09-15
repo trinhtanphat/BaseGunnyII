@@ -1,7 +1,7 @@
 using System;
 
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class DailyLogListInfo
 {
 	public int ID { get; set; }
@@ -13,4 +13,6 @@ public class DailyLogListInfo
 	public string DayLog { get; set; }
 
 	public DateTime LastDate { get; set; }
+}
+
 }

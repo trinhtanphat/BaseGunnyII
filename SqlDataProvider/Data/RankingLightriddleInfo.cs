@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class RankingLightriddleInfo
 {
 	public int PlayerId { get; set; }
@@ -11,4 +11,6 @@ public class RankingLightriddleInfo
 	public int Integer { get; set; }
 
 	public int Rank { get; set; }
+}
+
 }

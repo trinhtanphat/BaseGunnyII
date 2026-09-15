@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class UserGemStone : DataObject
 {
 	private int _ID;
@@ -76,4 +76,6 @@ public class UserGemStone : DataObject
 			_isDirty = true;
 		}
 	}
+}
+
 }

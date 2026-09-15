@@ -1,7 +1,7 @@
 using System;
 
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class TreasureDataInfo : DataObject
 {
 	private int _ID;
@@ -123,4 +123,6 @@ public class TreasureDataInfo : DataObject
 			_isDirty = true;
 		}
 	}
+}
+
 }

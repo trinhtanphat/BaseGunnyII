@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class LightriddleQuestInfo
 {
 	public int QuestionID { get; set; }
@@ -15,4 +15,6 @@ public class LightriddleQuestInfo
 	public string Option4 { get; set; }
 
 	public int OptionTrue { get; set; }
+}
+
 }

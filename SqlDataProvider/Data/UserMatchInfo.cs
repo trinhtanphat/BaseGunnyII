@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class UserMatchInfo : DataObject
 {
 	private int _ID;
@@ -226,4 +226,6 @@ public class UserMatchInfo : DataObject
 			_isDirty = true;
 		}
 	}
+}
+
 }

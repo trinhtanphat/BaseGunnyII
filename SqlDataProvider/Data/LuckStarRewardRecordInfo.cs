@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class LuckStarRewardRecordInfo
 {
 	public int PlayerID;
@@ -15,4 +15,6 @@ public class LuckStarRewardRecordInfo
 	public int isVip;
 
 	public int rank;
+}
+
 }

@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class PetSkillElementInfo
 {
 	public int ID { get; set; }
@@ -11,4 +11,6 @@ public class PetSkillElementInfo
 	public string Description { get; set; }
 
 	public int Pic { get; set; }
+}
+
 }

@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class ActiveConvertItemInfo
 {
 	public int ID { get; set; }
@@ -17,4 +17,6 @@ public class ActiveConvertItemInfo
 	public bool IsBind { get; set; }
 
 	public int ValidDate { get; set; }
+}
+
 }

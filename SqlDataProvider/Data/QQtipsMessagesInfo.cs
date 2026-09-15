@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class QQtipsMessagesInfo
 {
 	public int ID { get; set; }
@@ -19,4 +19,6 @@ public class QQtipsMessagesInfo
 	public int inItemID { get; set; }
 
 	public string url { get; set; }
+}
+
 }

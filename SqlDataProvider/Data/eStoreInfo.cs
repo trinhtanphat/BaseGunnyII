@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class eStoreInfo
 {
 	public int StoreID;
@@ -23,4 +23,6 @@ public class eStoreInfo
 	public bool IsBinds;
 
 	public int ValidDate;
+}
+
 }

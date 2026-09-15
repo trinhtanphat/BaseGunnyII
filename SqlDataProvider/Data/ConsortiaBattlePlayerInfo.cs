@@ -1,7 +1,7 @@
 using System;
 
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class ConsortiaBattlePlayerInfo
 {
 	public int PlayerID { get; set; }
@@ -33,4 +33,6 @@ public class ConsortiaBattlePlayerInfo
 	public bool isPowerFullUsed { get; set; }
 
 	public bool isDoubleScoreUsed { get; set; }
+}
+
 }

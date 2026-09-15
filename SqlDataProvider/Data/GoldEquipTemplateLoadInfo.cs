@@ -1,5 +1,5 @@
-namespace SqlDataProvider.Data;
-
+namespace SqlDataProvider.Data
+{
 public class GoldEquipTemplateLoadInfo
 {
 	public int ID { get; set; }
@@ -29,4 +29,6 @@ public class GoldEquipTemplateLoadInfo
 	public int BlessID { get; set; }
 
 	public string Pic { get; set; }
+}
+
 }
