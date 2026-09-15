@@ -201,6 +201,7 @@
     <Compile Include="PveInfoMgr.cs" />
     <Compile Include="IBotGamePlayer.cs" />
     <Compile Include="PvpWinnerResolver.cs" />
+    <Compile Include="PvpSpawnResolver.cs" />
     <Compile Include="PVPGame.cs">
     </Compile>
     <Compile Include="Spells\eSpellType.cs" />

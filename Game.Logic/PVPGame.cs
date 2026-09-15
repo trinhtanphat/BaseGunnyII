@@ -134,7 +134,17 @@ namespace Game.Logic
                 {
                     p.Reset();
 
-                    Point pos = GetPlayerPoint(mapPos, p.Team);
+                    List<Point> spawnCandidates = p.Team == 1 ? mapPos.PosX : mapPos.PosX1;
+                    Point pos = PvpSpawnResolver.TakeSafeSpawn(spawnCandidates,
+                        delegate(Point candidate)
+                        {
+                            return !m_map.FindYLineNotEmptyPoint(candidate.X, candidate.Y).IsEmpty;
+                        },
+                        delegate(int count) { return m_random.Next(count); });
+                    if (pos.IsEmpty)
+                    {
+                        pos = FindFallbackSpawn(p.Team);
+                    }
                     p.SetXY(pos);
                     m_map.AddPhysical(p);
                     p.StartMoving();
@@ -175,6 +185,23 @@ namespace Game.Logic
             }
         }
         
+        private Point FindFallbackSpawn(int team)
+        {
+            int width = m_map.Bound.Width;
+            int start = team == 1 ? 1 : width - 2;
+            int end = team == 1 ? width - 1 : 0;
+            int step = team == 1 ? 8 : -8;
+            for (int x = start; team == 1 ? x < end : x > end; x += step)
+            {
+                Point ground = m_map.FindYLineNotEmptyPoint(x, 0);
+                if (!ground.IsEmpty)
+                {
+                    return new Point(x, 0);
+                }
+            }
+            throw new InvalidOperationException("No safe PVP spawn exists for map " + m_map.Info.ID);
+        }
+
         public void NextTurn()
         {
             if (GameState == eGameState.Playing)
