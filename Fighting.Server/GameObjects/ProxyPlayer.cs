@@ -201,7 +201,10 @@ namespace Fighting.Server.GameObjects
             }
             else
             {
-                return (int)(baseoffer * OfferRate * Rate);
+                int value = (int)(baseoffer * OfferRate * Rate);
+                if (value > 0)
+                    m_client.SendPlayerAddOffer(m_character.ID, value);
+                return value;
             }
         }
 

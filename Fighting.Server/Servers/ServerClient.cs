@@ -508,6 +508,13 @@ namespace Fighting.Server
             SendTCP(pkg);
         }
 
+        public void SendPlayerAddOffer(int playerId, int value)
+        {
+            GSPacketIn pkg = new GSPacketIn((byte)eFightPackageType.PLAYER_ADD_OFFER, playerId);
+            pkg.Parameter1 = value;
+            SendTCP(pkg);
+        }
+
         public void SendPlayerRemoveGP(int playerId, int value)
         {
             GSPacketIn pkg = new GSPacketIn((byte)eFightPackageType.PLAYER_REMOVE_GP, playerId);
