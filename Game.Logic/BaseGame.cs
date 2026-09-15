@@ -1250,18 +1250,21 @@ namespace Game.Logic
         }
         internal void SendLivingMoveTo(Living living, int fromX, int fromY, int toX, int toY, string action,int speed)
         {
+            SendLivingMoveTo(living, fromX, fromY, toX, toY, action, speed, "");
+        }
+
+        internal void SendLivingMoveTo(Living living, int fromX, int fromY, int toX, int toY, string action, int speed, string sAction)
+        {
             GSPacketIn pkg = new GSPacketIn((byte)ePackageType.GAME_CMD, living.Id);
-
             pkg.Parameter1 = living.Id;
-
             pkg.WriteByte((byte)eTankCmdType.LIVING_MOVETO);
             pkg.WriteInt(fromX);
             pkg.WriteInt(fromY);
             pkg.WriteInt(toX);
             pkg.WriteInt(toY);
             pkg.WriteInt(speed);
-            pkg.WriteString(!string.IsNullOrEmpty(action) ? action : "");//怪物资源的动作
-            pkg.WriteString("");
+            pkg.WriteString(!string.IsNullOrEmpty(action) ? action : "");
+            pkg.WriteString(!string.IsNullOrEmpty(sAction) ? sAction : "");
             SendToAll(pkg);
         }
 

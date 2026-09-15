@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Game.Base.Packets;
 using Game.Logic.Phy.Maps;
+using Game.Logic.Phy.Maths;
 using Game.Logic.Phy.Actions;
 using SqlDataProvider.Data;
 using System.Drawing;
@@ -387,6 +388,64 @@ namespace Game.Logic.Phy.Object
             {
                 return false;
             }
+        }
+
+        public bool MoveTo(int x, int y, string action, int delay, string sAction, int speed)
+        {
+            return MoveTo(x, y, action, delay, sAction, speed, null);
+        }
+
+        public bool MoveTo(int x, int y, string action, int delay, string sAction, int speed, LivingCallBack callback)
+        {
+            return MoveTo(x, y, action, delay, sAction, speed, callback, 0);
+        }
+
+        public bool MoveTo(int x, int y, string action, int delay, string sAction, int speed, LivingCallBack callback, int delayCallback)
+        {
+            if (m_x == x && m_y == y) return false;
+            if (x < 0 || x > m_map.Bound.Width) return false;
+
+            List<Point> list = new List<Point>();
+            int x2 = m_x;
+            int y2 = m_y;
+            int num = x > x2 ? 1 : -1;
+
+            if (action == "fly")
+            {
+                Point item = new Point(x, y);
+                Point point = new Point(x2, y2);
+                Point point2 = new Point(x - point.X, y - point.Y);
+                while (point2.Length() > speed)
+                {
+                    point2.Normalize(speed);
+                    point = new Point(point.X + point2.X, point.Y + point2.Y);
+                    point2 = new Point(x - point.X, y - point.Y);
+                    if (point == Point.Empty)
+                    {
+                        list.Add(item);
+                        break;
+                    }
+                    list.Add(point);
+                }
+            }
+            else
+            {
+                while ((x - x2) * num > 0)
+                {
+                    Point point3 = m_map.FindNextWalkPoint(x2, y2, num, speed * STEP_X, speed * STEP_Y);
+                    if (point3 == Point.Empty) break;
+                    list.Add(point3);
+                    x2 = point3.X;
+                    y2 = point3.Y;
+                }
+            }
+
+            if (list.Count > 0)
+            {
+                m_game.AddAction(new LivingMoveToAction(this, list, action, delay, speed, sAction, callback, delayCallback));
+                return true;
+            }
+            return false;
         }
 
         public bool FallFrom(int x, int y, string action, int delay, int type, int speed)
