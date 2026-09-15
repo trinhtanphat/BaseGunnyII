@@ -130,6 +130,7 @@ namespace Game.Logic
                 GSPacketIn pkg = new GSPacketIn((byte)ePackageType.GAME_CMD);
                 pkg.WriteByte((byte)eTankCmdType.START_GAME);
                 pkg.WriteInt(list.Count);
+                HashSet<int> reservedSpawnX = new HashSet<int>();
                 foreach (Player p in list)
                 {
                     p.Reset();
@@ -140,10 +141,10 @@ namespace Game.Logic
                         {
                             return !m_map.FindYLineNotEmptyPoint(candidate.X, candidate.Y).IsEmpty;
                         },
-                        delegate(int count) { return m_random.Next(count); });
+                        delegate(int count) { return m_random.Next(count); }, reservedSpawnX);
                     if (pos.IsEmpty)
                     {
-                        pos = FindFallbackSpawn(p.Team);
+                        pos = FindFallbackSpawn(p.Team, reservedSpawnX);
                     }
                     p.SetXY(pos);
                     m_map.AddPhysical(p);
@@ -185,7 +186,7 @@ namespace Game.Logic
             }
         }
         
-        private Point FindFallbackSpawn(int team)
+        private Point FindFallbackSpawn(int team, HashSet<int> reservedSpawnX)
         {
             int width = m_map.Bound.Width;
             int start = team == 1 ? 1 : width - 2;
@@ -194,8 +195,9 @@ namespace Game.Logic
             for (int x = start; team == 1 ? x < end : x > end; x += step)
             {
                 Point ground = m_map.FindYLineNotEmptyPoint(x, 0);
-                if (!ground.IsEmpty)
+                if (!ground.IsEmpty && !reservedSpawnX.Contains(x))
                 {
+                    reservedSpawnX.Add(x);
                     return new Point(x, 0);
                 }
             }

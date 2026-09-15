@@ -8,6 +8,12 @@ namespace Game.Logic
     {
         public static Point TakeSafeSpawn(List<Point> candidates, Func<Point, bool> isSafe, Func<int, int> nextIndex)
         {
+            return TakeSafeSpawn(candidates, isSafe, nextIndex, null);
+        }
+
+        public static Point TakeSafeSpawn(List<Point> candidates, Func<Point, bool> isSafe,
+            Func<int, int> nextIndex, HashSet<int> reservedSpawnX)
+        {
             if (candidates == null) throw new ArgumentNullException("candidates");
             if (isSafe == null) throw new ArgumentNullException("isSafe");
             if (nextIndex == null) throw new ArgumentNullException("nextIndex");
@@ -17,7 +23,12 @@ namespace Game.Logic
                 if (index < 0 || index >= candidates.Count) throw new ArgumentOutOfRangeException("nextIndex");
                 Point point = candidates[index];
                 candidates.RemoveAt(index);
-                if (isSafe(point)) return point;
+                if (reservedSpawnX != null && reservedSpawnX.Contains(point.X)) continue;
+                if (isSafe(point))
+                {
+                    if (reservedSpawnX != null) reservedSpawnX.Add(point.X);
+                    return point;
+                }
             }
             return Point.Empty;
         }
