@@ -73,5 +73,7 @@ namespace SqlDataProvider.Data
 
         public int DropId { get; set; }
 
+        public int speed { get; set; }
+
     }
 }

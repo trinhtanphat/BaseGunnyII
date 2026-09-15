@@ -1724,6 +1724,7 @@ namespace Bussiness
                     info.FireX = (int)reader["FireX"];
                     info.FireY = (int)reader["FireY"];
                     info.DropId = (int)reader["DropId"];
+                    info.speed = (int)reader["speed"];
                     infos.Add(info);
                 }
             }
