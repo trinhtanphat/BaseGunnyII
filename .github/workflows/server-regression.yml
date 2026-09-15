@@ -1,0 +1,41 @@
+name: Server Regression CI
+
+on:
+  pull_request:
+    paths:
+      - 'Center.Server/**'
+      - 'Fighting.Server/**'
+      - 'Game.Logic/**'
+      - 'Game.Server/**'
+      - 'tests/**'
+      - '.github/workflows/server-regression.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-server-regressions:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run focused server regression smokes
+        shell: pwsh
+        run: |
+          $tests = @(
+            'tests/fight-room-packet-guard-smoke.ps1',
+            'tests/projectile-damage-ref-smoke.ps1',
+            'tests/projectile-damage-pve-smoke.ps1',
+            'tests/pvp-spawn-safety-smoke.ps1',
+            'tests/pvp-bot-fill-smoke.ps1',
+            'tests/pvp-winner-smoke.ps1',
+            'tests/pvp-bot-quest-progress-smoke.ps1',
+            'tests/pvp-gameover-wiring-smoke.ps1',
+            'tests/center-stale-session-relogin-smoke.ps1'
+          )
+          foreach ($test in $tests) {
+            Write-Host "=== $test ==="
+            & pwsh -NoProfile -File $test
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+          Write-Host 'SERVER_REGRESSION_CI=PASS'
