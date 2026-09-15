@@ -642,7 +642,7 @@ namespace Game.Logic
 
         public override void CheckState(int delay)
         {
-            AddAction(new CheckPVPGameStateAction(delay));
+            AddAction(new CheckPVPGameStateAction(delay, GameState));
         }
 
 

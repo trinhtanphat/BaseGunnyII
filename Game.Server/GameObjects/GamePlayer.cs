@@ -1348,6 +1348,7 @@ namespace Game.Server.GameObjects
             OnPropertiesChanged();
 
             QuestInventory.ClearConsortiaQuest();
+            OnGuildChanged();
             string sender = LanguageMgr.GetTranslation("Game.Server.GameUtils.CommonBag.Sender");
             string title = LanguageMgr.GetTranslation("Game.Server.GameUtils.Title");
             StoreBag.SendAllItemsToMail(sender, title, eMailType.StoreCanel);
