@@ -50,6 +50,7 @@ jobs:
             'tests/pvp-winner-smoke.ps1',
             'tests/pvp-bot-quest-progress-smoke.ps1',
             'tests/pvp-gameover-wiring-smoke.ps1',
+            'tests/pvp-immediate-team-death-smoke.ps1',
             'tests/center-stale-session-relogin-smoke.ps1'
           )
           foreach ($test in $tests) {
