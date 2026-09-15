@@ -392,6 +392,20 @@ namespace Game.Logic
             return list.ToArray();
         }
 
+        public int GetDiedBossCount()
+        {
+            int count = 0;
+            SimpleBoss[] bosses = FindAllBoss();
+            foreach (SimpleBoss boss in bosses)
+            {
+                if (!boss.IsLiving)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
         public SimpleNpc[] FindAllNpc()
         {
             List<SimpleNpc> list = new List<SimpleNpc>();
