@@ -206,6 +206,32 @@ namespace Game.Logic
 
         #region CreateNpc/CreateBoss/CreateBox/CreatePhysicalObj/ClearSimpNpc
 
+        public LivingConfig BaseLivingConfig()
+        {
+            LivingConfig config = new LivingConfig();
+            config.isBotom = 1;
+            config.IsTurn = true;
+            config.isShowBlood = true;
+            config.isShowSmallMapPoint = true;
+            config.ReduceBloodStart = 1;
+            return config;
+        }
+
+        public SimpleNpc CreateNpc(int npcId, int x, int y, int type, int direction)
+        {
+            NpcInfo npcInfo = NPCInfoMgr.GetNpcInfoById(npcId);
+            SimpleNpc npc = new SimpleNpc(PhysicalId++, this, npcInfo, type, direction);
+            npc.Config = BaseLivingConfig();
+            npc.Reset();
+            npc.SetXY(x, y);
+
+            AddLiving(npc);
+
+            npc.StartMoving();
+
+            return npc;
+        }
+
         public SimpleNpc CreateNpc(int npcId, int x, int y, int type)
         {
             NpcInfo npcInfo = NPCInfoMgr.GetNpcInfoById(npcId);

@@ -62,6 +62,7 @@ namespace Game.Logic.Phy.Object
         public int ShootMovieDelay;
 
         private EffectList m_effectList;
+        private LivingConfig m_config = new LivingConfig();
         public bool EffectTrigger;
 
         protected bool m_syncAtTime;
@@ -217,6 +218,12 @@ namespace Game.Logic.Phy.Object
         {
             get;
             set;
+        }
+
+        public LivingConfig Config
+        {
+            get { return m_config; }
+            set { m_config = value ?? new LivingConfig(); }
         }
 
         public EffectList EffectList

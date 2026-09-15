@@ -54,6 +54,39 @@ namespace Game.Logic.Phy.Object
 
         }
 
+        public SimpleNpc(int id, BaseGame game, NpcInfo npcInfo, int type, int direction)
+            : base(id, game, npcInfo.Camp, npcInfo.Name, npcInfo.ModelID, npcInfo.Blood, npcInfo.Immunity, direction)
+        {
+            if (type == 0)
+            {
+                Type = eLivingType.SimpleNpc;
+            }
+            else
+            {
+                Type = eLivingType.SimpleNpc1;
+            }
+            m_npcInfo = npcInfo;
+
+            m_ai = ScriptMgr.CreateInstance(npcInfo.Script) as ABrain;
+            if (m_ai == null)
+            {
+                log.ErrorFormat("Can't create abrain :{0}", npcInfo.Script);
+                m_ai = SimpleBrain.Simple;
+            }
+            m_ai.Game = m_game;
+            m_ai.Body = this;
+            try
+            {
+
+                m_ai.OnCreated();
+            }
+            catch (Exception ex)
+            {
+                log.ErrorFormat("SimpleNpc Created error:{1}", ex);
+            }
+
+        }
+
         public override void Reset()
         {
             Agility = m_npcInfo.Agility;

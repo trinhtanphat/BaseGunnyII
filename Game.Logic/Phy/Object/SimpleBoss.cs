@@ -169,6 +169,21 @@ namespace Game.Logic.Phy.Object
                 }
             }
         }
+        public void CreateChild(int id, int x, int y, int disToSecond, int maxCount, int direction)
+        {
+            if (CurrentLivingNpcNum < maxCount)
+            {
+                if (maxCount - CurrentLivingNpcNum >= 2)
+                {
+                    Child.Add(((PVEGame)Game).CreateNpc(id, x + disToSecond, y, 1, direction));
+                    Child.Add(((PVEGame)Game).CreateNpc(id, x, y, 1, direction));
+                }
+                else if (maxCount - CurrentLivingNpcNum == 1)
+                {
+                    Child.Add(((PVEGame)Game).CreateNpc(id, x, y, 1, direction));
+                }
+            }
+        }
         public void CreateChild(int id, Point[] brithPoint, int maxCount, int maxCountForOnce, int type)
         {
 
