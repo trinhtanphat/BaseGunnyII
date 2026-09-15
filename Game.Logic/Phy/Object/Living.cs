@@ -31,6 +31,7 @@ namespace Game.Logic.Phy.Object
         private string m_modelId;
         private Rectangle m_demageRect;
         private int m_state;
+        private int m_doAction;
         public int m_direction;
         private eLivingType m_type;
 
@@ -77,6 +78,7 @@ namespace Game.Logic.Phy.Object
             m_maxBlood = maxBlood;
             m_direction = direction;
             m_state = 0;
+            m_doAction = -1;
             MaxBeatDis = 100;
             m_effectList = new EffectList(this, immunity);
             m_syncAtTime = true;
@@ -879,6 +881,18 @@ namespace Game.Logic.Phy.Object
                     {
                         m_game.SendLivingUpdateAngryState(this);
                     }
+                }
+            }
+        }
+
+        public int DoAction
+        {
+            get { return m_doAction; }
+            set
+            {
+                if (m_doAction != value)
+                {
+                    m_doAction = value;
                 }
             }
         }
