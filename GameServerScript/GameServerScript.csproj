@@ -431,6 +431,10 @@
     <Compile Include="AI\NPC\FiveHardSecondBoss.cs" />
     <Compile Include="AI\NPC\FiveNormalSecondBoss.cs" />
     <Compile Include="AI\NPC\FiveTerrorSecondBoss.cs" />
+    <Compile Include="AI\NPC\ThirteenHardThirdBoss.cs" />
+    <Compile Include="AI\NPC\ThirteenNormalThirdBoss.cs" />
+    <Compile Include="AI\NPC\ThirteenSimpleThirdBoss.cs" />
+    <Compile Include="AI\NPC\ThirteenTerrorThirdBoss.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
