@@ -420,6 +420,13 @@
     <Compile Include="AI\NPC\ThirdNormalKingFour.cs" />
     <Compile Include="AI\NPC\ThirdSimpleKingFour.cs" />
     <Compile Include="AI\NPC\ThirdTerrorKingFour.cs" />
+    <Compile Include="AI\NPC\FiveHardFirstBoss.cs" />
+    <Compile Include="AI\NPC\FiveNormalFirstBoss.cs" />
+    <Compile Include="AI\NPC\FiveTerrorFirstBoss.cs" />
+    <Compile Include="AI\NPC\ThirdHardFagNpc.cs" />
+    <Compile Include="AI\NPC\ThirdNormalFagNpc.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleFagNpc.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorFagNpc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
