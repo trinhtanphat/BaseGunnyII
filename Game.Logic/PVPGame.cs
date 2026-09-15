@@ -443,12 +443,9 @@ namespace Game.Logic
                 pkg.WriteInt(riches);
                 SendToAll(pkg);                
                 StringBuilder sb = new StringBuilder();
-                if (!hasBot)
+                foreach (Player p in players)
                 {
-                    foreach (Player p in players)
-                    {
-                        p.PlayerDetail.OnGameOver(this, p.Team == winTeam, p.GainGP);
-                    }
+                    p.PlayerDetail.OnGameOver(this, p.Team == winTeam, p.GainGP);
                 }
 
                 string templateIdsStr = "";
