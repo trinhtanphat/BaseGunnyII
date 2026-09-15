@@ -8,10 +8,9 @@ if ($text -notmatch '(?s)if\s*\(\s*hasBot\s*\).*?gp\s*=\s*0\s*;.*?p\.GainGP\s*=\
 if ($text -notmatch 'p\.CanTakeOut\s*=\s*hasBot\s*\?\s*0\s*:') {
     throw 'NPC match card reward guard is missing.'
 }
-if ($text -notmatch 'int\s+displayGp\s*=\s*gp\s*;') {
-    throw 'Calculated GP is not preserved for result display before anti-farm zeroing.'
-}
-if ($text -notmatch 'pkg\.WriteInt\(\s*hasBot\s*\?\s*displayGp\s*:\s*p\.GainGP\s*\)') {
-    throw 'GAME_OVER packet does not expose display-only GP for NPC matches.'
+foreach ($field in @('TotalKill','TotalHurt','TotalShootCount','TotalCure')) {
+    if ($text -notmatch ('pkg\.WriteInt\(p\.' + $field + '\)')) {
+        throw ('GAME_OVER packet no longer exposes display stat: ' + $field)
+    }
 }
 Write-Output 'PVP_BOT_DISPLAY_REWARD_SMOKE=PASS'

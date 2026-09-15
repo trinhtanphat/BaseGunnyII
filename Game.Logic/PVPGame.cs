@@ -428,7 +428,6 @@ namespace Game.Logic
                             gp = (int)Math.Ceiling((winPlus + p.TotalHurt * 0.001 + p.TotalKill * 0.5 + (p.TotalHitTargetCount / totalShoot) * 2) * againstTeamLevel * (0.9 + (againstTeamCount - 1) * 0.3));
                         }
                         gp = gp == 0 ? 1 : gp;
-                        int displayGp = gp;
                         if (hasBot)
                         {
                             gp = 0;
@@ -457,7 +456,7 @@ namespace Game.Logic
                         pkg.WriteInt(11);//gpForPower = _loc_2.readInt();
                         pkg.WriteInt(11);//consortiaSkill = _loc_2.readInt();
                         pkg.WriteInt(11);//luckyExp = _loc_2.readInt();
-                        pkg.WriteInt(hasBot ? displayGp : p.GainGP);
+                        pkg.WriteInt(p.GainGP);
                         pkg.WriteInt(10);//offerFight = _loc_2.readInt();
                         pkg.WriteInt(10);//offerDoubleCard = _loc_2.readInt();
                         pkg.WriteInt(10);//offerVIP = _loc_2.readInt();
