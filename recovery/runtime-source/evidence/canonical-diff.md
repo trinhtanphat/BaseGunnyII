@@ -1,0 +1,673 @@
+# Canonical runtime source semantic diff
+
+Generated UTC: `2026-09-15T03:26:23.8217469+00:00`
+Canonical root: `C:\Gunny\_work\BaseGunnyII-runtime-recovery-20260915`
+Recovered root: `C:\Gunny\_work\BaseGunnyII-runtime-recovery-20260915\recovery\runtime-source\by-service`
+
+## Summary
+
+- Runtime types: **1551**
+- Runtime members: **10639**
+- Runtime C# files: **2334**
+- Auto-promotion type candidates: **558**
+- Duplicate file-content hash groups: **495**
+
+### Type classifications
+- `canonical-present`: 356
+- `runtime-only`: 558
+- `same-signature/body-different`: 578
+- `variant-conflict`: 59
+
+### Member classifications
+- `canonical-present`: 2122
+- `runtime-only`: 6119
+- `same-signature/body-different`: 2222
+- `variant-conflict`: 176
+
+### Files by service / assembly
+- `center/Bussiness`: 66 C# files
+- `center/Center.Server`: 19 C# files
+- `center/Center.Service`: 4 C# files
+- `center/Game.Base`: 42 C# files
+- `center/SqlDataProvider`: 156 C# files
+- `Fight/Bussiness`: 66 C# files
+- `Fight/Fighting.Server`: 15 C# files
+- `Fight/Fighting.Service`: 4 C# files
+- `Fight/Game.Base`: 42 C# files
+- `Fight/Game.Logic`: 224 C# files
+- `Fight/GameServerScripts`: 11 C# files
+- `Fight/SqlDataProvider`: 156 C# files
+- `Road/Bussiness`: 66 C# files
+- `Road/Game.Base`: 42 C# files
+- `Road/Game.Logic`: 224 C# files
+- `Road/Game.Server`: 429 C# files
+- `Road/GameServerScripts`: 601 C# files
+- `Road/Road.Service`: 11 C# files
+- `Road/SqlDataProvider`: 156 C# files
+
+## Auto-promotion type candidates
+
+- `Bussiness.Managers.GoldEquipMgr` — center/Bussiness, Fight/Bussiness, Road/Bussiness
+- `Bussiness.Managers.LightriddleQuestMgr` — center/Bussiness, Fight/Bussiness, Road/Bussiness
+- `Bussiness.Managers.QQTipsMgr` — center/Bussiness, Fight/Bussiness, Road/Bussiness
+- `Bussiness.Managers.TotemHonorMgr` — center/Bussiness, Fight/Bussiness, Road/Bussiness
+- `Bussiness.Managers.TotemMgr` — center/Bussiness, Fight/Bussiness, Road/Bussiness
+- `Center.Server.ConsortiaBossMgr` — center/Center.Server
+- `Center.Server.WorldMgr` — center/Center.Server
+- `Game.Logic.Actions.FightAchievementAction` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.Actions.LivingRotateTurnAction` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.Actions.PlayerSpeedMultAction` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.Effects.AddGuardEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.Effects.ContinueReduceBlood` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.Effects.DamageEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.Effects.GuardEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.Effects.RecoverBloodEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.ExerciseMgr` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.AbstractPetEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.BasePetEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetAddAttackEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetAddDefendEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetAddDefendEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetAddLuckEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetAlwayNoHoleEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetAttackAroundEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetEffectList` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetFatalEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetNoHoleEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetNoHoleEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetPlusAllTwoMpEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetPlusDameEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetPlusGuardEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetPlusOneMpEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetPlusThreeMpEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetPlusTwoMpEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetReduceAttackEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetReduceAttackEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetReduceDefendEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetRemovePlusDameEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetRemovePlusGuardEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetRemoveV3BatteryEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetStopMovingEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetEffects.PetStopMovingEquipEffect` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.PetMgr` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.Phy.Object.Ball` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Logic.RuneMgr` — Fight/Game.Logic, Road/Game.Logic
+- `Game.Server.Achievements.AchievementInventory` — Road/Game.Server
+- `Game.Server.Achievements.BaseAchievement` — Road/Game.Server
+- `Game.Server.Achievements.BaseCondition` — Road/Game.Server
+- `Game.Server.Buffer.ActivityDungeonBubbleBuffer` — Road/Game.Server
+- `Game.Server.Buffer.ActivityDungeonNetBuffer` — Road/Game.Server
+- `Game.Server.Buffer.AgiBuffer` — Road/Game.Server
+- `Game.Server.Buffer.AttackBuffer` — Road/Game.Server
+- `Game.Server.Buffer.ConsortionAddBloodGunCountBuffer` — Road/Game.Server
+- `Game.Server.Buffer.ConsortionAddCriticalBuffer` — Road/Game.Server
+- `Game.Server.Buffer.ConsortionAddDamageBuffer` — Road/Game.Server
+- `Game.Server.Buffer.ConsortionAddEffectTurnBuffer` — Road/Game.Server
+- `Game.Server.Buffer.ConsortionAddEnergyBuffer` — Road/Game.Server
+- `Game.Server.Buffer.ConsortionAddMaxBloodBuffer` — Road/Game.Server
+- `Game.Server.Buffer.ConsortionAddOfferRateBuffer` — Road/Game.Server
+- `Game.Server.Buffer.ConsortionAddPercentGoldOrGPBuffer` — Road/Game.Server
+- `Game.Server.Buffer.ConsortionAddPropertyBuffer` — Road/Game.Server
+- `Game.Server.Buffer.ConsortionAddSpellCountBuffer` — Road/Game.Server
+- `Game.Server.Buffer.ConsortionReduceDanderBuffer` — Road/Game.Server
+- `Game.Server.Buffer.ConsortionReduceEnergyUseBuffer` — Road/Game.Server
+- `Game.Server.Buffer.DameBuffer` — Road/Game.Server
+- `Game.Server.Buffer.DefendBuffer` — Road/Game.Server
+- `Game.Server.Buffer.GuardBuffer` — Road/Game.Server
+- `Game.Server.Buffer.HpBuffer` — Road/Game.Server
+- `Game.Server.Buffer.LuckBuffer` — Road/Game.Server
+- `Game.Server.Buffer.WorldBossAddDamageBuffer` — Road/Game.Server
+- `Game.Server.Buffer.WorldBossAncientBlessingsBuffer` — Road/Game.Server
+- `Game.Server.Buffer.WorldBossAttrack_MoneyBuffBuffer` — Road/Game.Server
+- `Game.Server.Buffer.WorldBossAttrackBuffer` — Road/Game.Server
+- `Game.Server.Buffer.WorldBossHP_MoneyBuffBuffer` — Road/Game.Server
+- `Game.Server.Buffer.WorldBossHPBuffer` — Road/Game.Server
+- `Game.Server.Buffer.WorldBossMetalSlugBuffer` — Road/Game.Server
+- `Game.Server.GameUtils.CardInventory` — Road/Game.Server
+- `Game.Server.GameUtils.PetAbstractInventory` — Road/Game.Server
+- `Game.Server.GameUtils.PetInventory` — Road/Game.Server
+- `Game.Server.GameUtils.PlayerActives` — Road/Game.Server
+- `Game.Server.GameUtils.PlayerBattle` — Road/Game.Server
+- `Game.Server.GameUtils.PlayerBeadInventory` — Road/Game.Server
+- `Game.Server.GameUtils.PlayerDice` — Road/Game.Server
+- `Game.Server.GameUtils.PlayerFarm` — Road/Game.Server
+- `Game.Server.GameUtils.PlayerFarmInventory` — Road/Game.Server
+- `Game.Server.GameUtils.PlayerProperty` — Road/Game.Server
+- `Game.Server.GameUtils.PlayerRank` — Road/Game.Server
+- `Game.Server.GameUtils.PlayerTreasure` — Road/Game.Server
+- `Game.Server.Managers.ActiveSystemMgr` — Road/Game.Server
+- `Game.Server.Managers.CardMgr` — Road/Game.Server
+- `Game.Server.Managers.CommunalActiveMgr` — Road/Game.Server
+- `Game.Server.Managers.ConsortiaBossMgr` — Road/Game.Server
+- `Game.Server.Managers.ConsortiaExtraMgr` — center/Bussiness, Fight/Bussiness, Road/Bussiness
+- `Game.Server.Managers.FairBattleRewardMgr` — center/Bussiness, Fight/Bussiness, Road/Bussiness
+- `Game.Server.Managers.RankMgr` — Road/Game.Server
+- `Game.Server.Packets.Client.ActiveSystemHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.ActivityPackageHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.BattleGroundHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.BeadHandle` — Road/Game.Server
+- `Game.Server.Packets.Client.BuyTransnationalGoodsHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.CampBattleHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.CardInfoHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.CardResetHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.CardSlotHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.ChickenBoxHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.ConsortiaBattleHander` — Road/Game.Server
+- `Game.Server.Packets.Client.DiceHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.DragonBoatHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.EverydayActivePointHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.FightFootballTimeTakeoutHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.FigSpiritUpGradeHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.GetLinkGoodsHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.GetTimeBoxHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.GoodsExchangeHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.HonorUpHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.ItemAdvanceHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.LabyrinthHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.LatentEnergyHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.NecklaceStrengthHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.OpenOneTotemHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.QuickBuyGoldBoxHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.ReworkRankHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.SearchGoodsHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.TexpHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.TreasureHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.UseConsortiaReworkNameHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.UseReworkNameHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.UserPresentGoodsHandler` — Road/Game.Server
+- `Game.Server.Packets.Client.WishBeadEquipHandler` — Road/Game.Server
+- `Game.Server.Quests.AdoptPetCondition` — Road/Game.Server
+- `Game.Server.Quests.CropPrimaryCondition` — Road/Game.Server
+- `Game.Server.Quests.NewGearCondition` — Road/Game.Server
+- `Game.Server.Quests.SeedFoodPetCondition` — Road/Game.Server
+- `Game.Server.Quests.UnknowQuestCondition` — Road/Game.Server
+- `Game.Server.Quests.UserToemGemstoneCondition` — Road/Game.Server
+- `Game.Server.Rooms.BaseCampBattleRoom` — Road/Game.Server
+- `Game.Server.Rooms.BaseChristmasRoom` — Road/Game.Server
+- `Game.Server.Rooms.BaseConsBatRoom` — Road/Game.Server
+- `Game.Server.Rooms.BaseSevenDoubleRoom` — Road/Game.Server
+- `Game.Server.Rooms.BaseWorldBossRoom` — Road/Game.Server
+- `Game.Server.Rooms.CreateBattleRoomAction` — Road/Game.Server
+- `Game.Server.Rooms.CreateCampBattleBossAction` — Road/Game.Server
+- `Game.Server.Rooms.CreateCampBattleRoomAction` — Road/Game.Server
+- `Game.Server.Rooms.CreateCatchBeastAction` — Road/Game.Server
+- `Game.Server.Rooms.CreateConsortiaBattleRoomAction` — Road/Game.Server
+- `Game.Server.Rooms.CreateConsortiaBossAction` — Road/Game.Server
+- `Game.Server.Rooms.CreateEncounterRoomAction` — Road/Game.Server
+- `Game.Server.Rooms.CreateFightFootballTimeRoomAction` — Road/Game.Server
+- `Game.Server.Rooms.CreateGroupBattleRoomAction` — Road/Game.Server
+- `GameServerScript.AI.Messions.AC1243` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.AC30001` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.AC30002` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.AC30004` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Activity7771000` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.BossGuild50001` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.BossGuild50002` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.BossGuild50003` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.BossGuild50004` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.BossGuild50005` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.BossGuild50006` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.BossGuild50007` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.BossGuild50008` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.BossGuild50009` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.BossGuild50010` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60001` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60002` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60003` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60004` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60005` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60006` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60007` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60008` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60009` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60010` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60011` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60012` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60013` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60014` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60015` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60016` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60017` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60018` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60019` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CampBattle60020` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CHM1271` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CHM1272` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CHM1273` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CHM1276` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CHM1277` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CHM1278` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ChristmasFirst` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ChristmasSecond` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ChristmasThird` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CNM1171` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CNM1172` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CNM1173` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CNM1175` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CNM1176` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CNM1177` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CNM1178` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CrosairBoss` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CSM1071` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CSM1072` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CSM1073` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CSM1075` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CSM1076` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CSM1077` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CSM1078` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CSM1083` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CSM3001` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CTM1371` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CTM1372` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CTM1373` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CTM1375` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CTM1376` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CTM1377` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.CTM1378` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DCH4201` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DCH4202` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DCH4203` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DCN4101` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DCN4102` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DCN4103` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DCT4301` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DCT4302` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DCT4303` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DLH5201` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DLH5202` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DLH5203` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DLH5204` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DLN5101` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DLN5102` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DLN5103` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DLN5104` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DLT5301` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DLT5302` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DLT5303` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.DLT5304` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ETH3201` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ETH3202` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ETH3203` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ETH3204` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ETN3101` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ETN3102` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ETN3103` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ETN3104` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ETT3301` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ETT3302` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ETT3303` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.ETT3304` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.GON6101` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.GON6102` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.GON6103` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.GON6104` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40001` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40002` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40003` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40004` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40005` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40006` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40007` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40008` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40009` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40010` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40011` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40012` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40013` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40014` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40015` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40016` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40017` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40018` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40019` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40020` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40021` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40022` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40023` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40024` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40025` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40026` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40027` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40028` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40029` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40030` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40031` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40032` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40033` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40034` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40035` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40036` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40037` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40038` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40039` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.Labyrinth40040` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.NPCEnemies` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.NTM1085` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.NTM1086` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.NTM1087` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.NTM1088` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.NTM1089` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.QX12016` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.QX70001` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.RRCH7201` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.RRCH7202` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.RRCH7203` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.RRCH7204` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.RRCN7101` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.RRCN7102` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.RRCN7103` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.RRCN7104` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.RRCS7001` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.RRCS7002` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.RRCS7003` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.RRCS7004` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.TVS12001` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.TVS12002` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.TVS12003` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.TVS12004` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAEpic13401` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAEpic13402` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAEpic13403` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAEpic13404` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAH13201` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAH13202` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAH13203` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAH13204` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAN13101` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAN13102` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAN13103` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAN13104` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAS13001` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAS13002` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAS13003` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAS13004` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAT13301` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAT13302` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAT13303` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.WAT13304` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.YearMonster` — Road/GameServerScripts
+- `GameServerScript.AI.Messions.YearMonster1347` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.Activity77SimpleNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ChristmasFirstNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ChristmasSecondNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ChristmasThirdNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ConsortiaScorpionBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.DCSM40004Boss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.DCSM40006Boss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.DCSM40008Boss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.DCSM40016Boss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.DCSM40024Boss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveHardFirstBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveHardFourBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveHardFourNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveHardFourNpc1` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveHardFourNpc2` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveHardSecondBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveHardSecondNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveHardThirdBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveHardThirdNpc1` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveHardThirdNpc2` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveNormalFirstBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveNormalFourBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveNormalFourNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveNormalFourNpc1` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveNormalFourNpc2` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveNormalSecondBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveNormalSecoundBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveNormalThirdBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveNormalThirdNpc1` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveNormalThirdNpc2` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveTerrorFirstBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveTerrorFourBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveTerrorFourNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveTerrorFourNpc1` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveTerrorFourNpc2` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveTerrorSecondBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveTerrorSecondNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveTerrorThirdBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveTerrorThirdNpc1` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FiveTerrorThirdNpc2` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourHardBlowArmsNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourHardCattleBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourHardFireNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourHardFrantCattleBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourHardGunNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourHardHawkNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourHardShortNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourHardWolfNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourNormalBlowArmsNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourNormalCattleBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourNormalCycLoneNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourNormalFireNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourNormalFrantCattleBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourNormalGunNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourNormalHawkNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourNormalShortNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourNormalWolfNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourTerrorBlowArmsNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourTerrorCattleBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourTerrorFireNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourTerrorFrantCattleBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourTerrorGunNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourTerrorHawkNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourTerrorShortNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.FourTerrorWolfNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.NewTrainingBoss22001` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.NewTrainingBoss25002` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.NewTrainingNpc21001` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.NewTrainingNpc23001` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.NewTrainingNpc23002` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.NewTrainingNpc25001` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.QXBoss70001` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.QXBoss70004` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhHardHouseAi` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhHardLongNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhHardMaleAi` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhHardNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhHardSecondBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhNormalHouseAi` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhNormalLongNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhNormalMaleAi` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhNormalNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhNormalSecondBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhSimpleHouseAi` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhSimpleLongNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhSimpleMaleAi` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhSimpleNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SeventhSimpleSecondBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleBossFor40052` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleBossFor40055` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleBossFor40059` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleBossFor40062` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleBossFor40065` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleBossFor40066` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleNpcAiForAnt` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleNpcFor40051` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleNpcFor40053` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleNpcFor40054` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleNpcFor40055` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleNpcFor40056` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleNpcFor40057` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleNpcFor40058` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleNpcFor40060` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleNpcFor40061` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleNpcFor40063` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SimpleNpcFor40064` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SixNormalFirstBall` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SixNormalFourBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SixNormalSecondBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SixNormalSecondNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SixNormalThirdBadNpcAi` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SixNormalThirdBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.SixNormalThirdNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdHardBloomNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdHardBloomNpcS` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdHardBlowNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdHardFagNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdHardKingFirst` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdHardKingFour` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdHardKingSecond` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdHardKingThird` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdHardLongNpcFirst` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdHardLongNpcSecond` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdHardShortNpcFirst` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdHardShortNpcSecond` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdHardShortNpcThird` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdNormalBloomNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdNormalBloomNpcS` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdNormalFagNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdNormalKingFirst` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdNormalKingFour` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdNormalKingSecond` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdNormalKingThird` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdNormalLongNpcFirst` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdNormalLongNpcSecond` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdNormalShortNpcFirst` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdNormalShortNpcSecond` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdNormalShortNpcThird` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdSimpleBloomNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdSimpleBloomNpcS` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdSimpleFagNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdSimpleKingFirst` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdSimpleKingFour` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdSimpleKingSecond` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdSimpleKingThird` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdSimpleLongNpcFirst` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdSimpleLongNpcSecond` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdSimpleShortNpcFirst` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdSimpleShortNpcSecond` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdSimpleShortNpcThird` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdTerrorBloomNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdTerrorBloomNpcS` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdTerrorBlowNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdTerrorBlowNpc1` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdTerrorFagNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdTerrorKingFirst` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdTerrorKingFour` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdTerrorKingSecond` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdTerrorKingThird` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdTerrorLongNpcFirst` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdTerrorLongNpcSecond` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdTerrorShortNpcFirst` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdTerrorShortNpcSecond` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirdTerrorShortNpcThird` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenHardAntBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenHardBrynBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenHardDevilBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenHardThirdBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenNormalAntBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenNormalBrynBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenNormalDevilBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenNormalThirdBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenSimpleAntBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenSimpleBrotherNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenSimpleBrynBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenSimpleDevilBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenSimpleThirdBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenTerrorAntBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenTerrorBrynBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenTerrorDevilBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ThirteenTerrorThirdBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.TwelveHardBigWolf` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.TwelveHardCrocodileBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.TwelveHardFlyThirdBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.TwelveHardSmallWolf` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.TwelveSimpleBigWolf` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.TwelveSimpleBombNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.TwelveSimpleCaptainBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.TwelveSimpleChickenNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.TwelveSimpleCrocodileBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.TwelveSimpleFlyCaptainBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.TwelveSimpleFlyThirdBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.TwelveSimpleGunBoss` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.TwelveSimpleSmallWolf` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.TwelveTankNpc` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.WorldBatKing` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.YearMonster` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60001` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60002` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60003` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60004` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60005` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60006` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60007` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60008` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60009` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60010` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60011` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60012` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60013` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60014` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60015` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60016` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60017` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60018` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60019` — Road/GameServerScripts
+- `GameServerScript.AI.NPC.ZYSimpleNpc60020` — Road/GameServerScripts
+- `SqlDataProvider.Data.UserFarmInfo` — center/SqlDataProvider, Fight/SqlDataProvider, Road/SqlDataProvider
+
+## Variant-conflict types
+
+- `Bussiness.Base64` — 2 distinct bodies
+- `Bussiness.CenterService.CenterServiceClient` — 2 distinct bodies
+- `Bussiness.CenterService.ICenterService` — 2 distinct bodies
+- `Bussiness.CenterService.ServerData` — 2 distinct bodies
+- `Bussiness.CheckCode` — 2 distinct bodies
+- `Bussiness.ConsortiaBussiness` — 2 distinct bodies
+- `Bussiness.GameProperties` — 2 distinct bodies
+- `Bussiness.Interface.BaseInterface` — 2 distinct bodies
+- `Bussiness.LanguageMgr` — 2 distinct bodies
+- `Bussiness.ManageBussiness` — 2 distinct bodies
+- `Bussiness.Managers.AchievementMgr` — 2 distinct bodies
+- `Bussiness.Managers.ActiveMgr` — 2 distinct bodies
+- `Bussiness.Managers.DropMgr` — 2 distinct bodies
+- `Bussiness.Managers.FightSpiritTemplateMgr` — 2 distinct bodies
+- `Bussiness.Managers.ItemBoxMgr` — 2 distinct bodies
+- `Bussiness.Managers.QuestMgr` — 2 distinct bodies
+- `Bussiness.Managers.ShopMgr` — 2 distinct bodies
+- `Bussiness.Managers.TreasureAwardMgr` — 2 distinct bodies
+- `Bussiness.Managers.WorldEventMgr` — 2 distinct bodies
+- `Bussiness.MapBussiness` — 2 distinct bodies
+- `Bussiness.MemberShipBussiness` — 2 distinct bodies
+- `Bussiness.PlayerBussiness` — 2 distinct bodies
+- `Bussiness.ProduceBussiness` — 2 distinct bodies
+- `Bussiness.ServiceBussiness` — 2 distinct bodies
+- `Bussiness.WebLogin.ChenckValidateRequest` — 2 distinct bodies
+- `Bussiness.WebLogin.ChenckValidateRequestBody` — 2 distinct bodies
+- `Bussiness.WebLogin.ChenckValidateResponse` — 2 distinct bodies
+- `Bussiness.WebLogin.ChenckValidateResponseBody` — 2 distinct bodies
+- `Bussiness.WebLogin.Get_UserSexRequest` — 2 distinct bodies
+- `Bussiness.WebLogin.Get_UserSexRequestBody` — 2 distinct bodies
+- `Bussiness.WebLogin.Get_UserSexResponse` — 2 distinct bodies
+- `Bussiness.WebLogin.Get_UserSexResponseBody` — 2 distinct bodies
+- `Bussiness.WebLogin.PassPortSoapClient` — 2 distinct bodies
+- `Bussiness.XmlExtends` — 2 distinct bodies
+- `Game.Base.CommandMgr` — 2 distinct bodies
+- `Game.Base.Commands.CommandMgrSetupCommand` — 2 distinct bodies
+- `Game.Base.Commands.ScriptManagerCommand` — 2 distinct bodies
+- `Game.Base.Config.XMLConfigFile` — 2 distinct bodies
+- `Game.Base.Events.GameEventMgr` — 2 distinct bodies
+- `Game.Base.PacketIn` — 2 distinct bodies
+- `Game.Base.Packets.GSPacketIn` — 2 distinct bodies
+- `Game.Base.Packets.StreamProcessor` — 2 distinct bodies
+- `Game.Base.WeakMulticastDelegate` — 2 distinct bodies
+- `Game.Server.Managers.ScriptMgr` — 2 distinct bodies
+- `Game.Service.actions.ConsoleStart` — 2 distinct bodies
+- `Game.Service.Program` — 2 distinct bodies
+- `GameServerScript.Commands.VersionCommandHandler` — 2 distinct bodies
+- `SqlDataProvider.BaseClass.Sql_DbObject` — 2 distinct bodies
+- `SqlDataProvider.Data.BallInfo` — 2 distinct bodies
+- `SqlDataProvider.Data.GiftInfo` — 2 distinct bodies
+- `SqlDataProvider.Data.ItemInfo` — 2 distinct bodies
+- `SqlDataProvider.Data.ItemTemplateInfo` — 2 distinct bodies
+- `SqlDataProvider.Data.LanternriddlesInfo` — 2 distinct bodies
+- `SqlDataProvider.Data.PetEquipDataInfo` — 2 distinct bodies
+- `SqlDataProvider.Data.PlayerInfo` — 2 distinct bodies
+- `SqlDataProvider.Data.RuneTemplateInfo` — 2 distinct bodies
+- `SqlDataProvider.Data.UserFieldInfo` — 2 distinct bodies
+- `SqlDataProvider.Data.UserRankInfo` — 2 distinct bodies
+- `SqlDataProvider.Data.UsersPetinfo` — 2 distinct bodies
+
+## Notes
+
+`AutoPromotionAllowed` is intentionally type-level only. Member-only deltas and variant conflicts require manual semantic review.

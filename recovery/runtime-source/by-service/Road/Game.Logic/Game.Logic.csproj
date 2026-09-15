@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Game.Logic</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net40</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>$(RuntimeBinaryRoot)\Road\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Game.Base">
+      <HintPath>$(RuntimeBinaryRoot)\Road\Game.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlDataProvider">
+      <HintPath>$(RuntimeBinaryRoot)\Road\SqlDataProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="Bussiness">
+      <HintPath>$(RuntimeBinaryRoot)\Road\Bussiness.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,24 @@
+using Bussiness.Managers;
+using Game.Base.Packets;
+using SqlDataProvider.Data;
+
+namespace Game.Server.Packets.Client;
+
+[PacketHandler(176, "添加任务")]
+public class QuestAddHandler : IPacketHandler
+{
+	public int HandlePacket(GameClient client, GSPacketIn packet)
+	{
+		int num = packet.ReadInt();
+		for (int i = 0; i < num; i++)
+		{
+			int id = packet.ReadInt();
+			QuestInfo singleQuest = QuestMgr.GetSingleQuest(id);
+			if (singleQuest != null && singleQuest.QuestID != 10)
+			{
+				client.Player.QuestInventory.AddQuest(singleQuest, out var _);
+			}
+		}
+		return 0;
+	}
+}

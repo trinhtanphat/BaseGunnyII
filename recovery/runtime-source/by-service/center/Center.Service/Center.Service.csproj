@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Center.Service</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net40</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>$(RuntimeBinaryRoot)\center\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Bussiness">
+      <HintPath>$(RuntimeBinaryRoot)\center\Bussiness.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="Center.Server">
+      <HintPath>$(RuntimeBinaryRoot)\center\Center.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="Game.Base">
+      <HintPath>$(RuntimeBinaryRoot)\center\Game.Base.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

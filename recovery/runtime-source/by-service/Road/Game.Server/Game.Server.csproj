@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Game.Server</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net40</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Game.Server.Config.logconfig.xml" />
+    <EmbeddedResource Include="Game.Server.Config.logconfig.xml" LogicalName="Game.Server.Config.logconfig.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Game.Base">
+      <HintPath>$(RuntimeBinaryRoot)\Road\Game.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Game.Logic">
+      <HintPath>$(RuntimeBinaryRoot)\Road\Game.Logic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="SqlDataProvider">
+      <HintPath>$(RuntimeBinaryRoot)\Road\SqlDataProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>$(RuntimeBinaryRoot)\Road\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Bussiness">
+      <HintPath>$(RuntimeBinaryRoot)\Road\Bussiness.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="SqlDataProvider">
+      <HintPath>$(RuntimeBinaryRoot)\Road\SqlDataProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Core" />
+    <Reference Include="Game.Base">
+      <HintPath>$(RuntimeBinaryRoot)\Road\Game.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+</Project>
