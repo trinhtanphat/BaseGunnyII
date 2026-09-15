@@ -1442,6 +1442,16 @@ namespace Game.Logic
             SendToAll(pkg);
         }
 
+        internal void SendGamePlayerProperty(Living living, string type, string state)
+        {
+            GSPacketIn pkg = new GSPacketIn((byte)ePackageType.GAME_CMD, living.Id);
+            pkg.Parameter1 = living.Id;
+            pkg.WriteByte(41);
+            pkg.WriteString(type);
+            pkg.WriteString(state);
+            SendToAll(pkg);
+        }
+
         //internal void SendGameUpdateSealState(Living player, int type)
         //{
         //    GSPacketIn pkg = new GSPacketIn((byte)ePackageType.GAME_CMD, player.Id);

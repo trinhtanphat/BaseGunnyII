@@ -98,6 +98,7 @@
     <Compile Include="Actions\LivingSealAction.cs" />
     <Compile Include="Actions\LivingShootAction.cs" />
     <Compile Include="Actions\PhysicalObjDoAction.cs" />
+    <Compile Include="Actions\PlayerSpeedMultAction.cs" />
     <Compile Include="Actions\PlaySoundAction.cs" />
     <Compile Include="Actions\WaitPlayerLoadingAction.cs" />
     <Compile Include="AI\ABrain.cs" />

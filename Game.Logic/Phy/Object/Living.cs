@@ -904,6 +904,14 @@ namespace Game.Logic.Phy.Object
             set { m_FindCount = value; }
         }
 
+        public void SpeedMultX(int value)
+        {
+            if (m_syncAtTime)
+            {
+                m_game.SendGamePlayerProperty(this, "speedX", value.ToString());
+            }
+        }
+
         public void Seal(Player player, int type, int delay)
         {
             m_game.AddAction(new LivingSealAction(this, player, type, delay));
