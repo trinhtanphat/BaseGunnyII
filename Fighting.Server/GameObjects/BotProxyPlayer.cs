@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using Game.Base.Packets;
 using Game.Logic;
 using Game.Logic.Phy.Object;
@@ -130,6 +131,23 @@ namespace Fighting.Server.GameObjects
             return target;
         }
 
+        private static bool IsTrajectoryViable(Player player, Player target,
+            int startX, int startY, int force, int angle)
+        {
+            BallInfo ball = BallMgr.FindBall(player.CurrentBall.ID);
+            if (ball == null || player.Game == null || player.Game.Map == null)
+                return false;
+
+            Rectangle targetBounds = Rectangle.Empty;
+            foreach (Rectangle rect in target.GetDirectBoudRect())
+                targetBounds = targetBounds.IsEmpty ? rect : Rectangle.Union(targetBounds, rect);
+            var map = player.Game.Map;
+            return BotAimTrajectory.IsViable(startX, startY, force, angle, ball.Mass,
+                map.airResistance * ball.DragIndex,
+                map.gravity * ball.Weight * ball.Mass, map.wind * ball.Wind,
+                targetBounds, ball.Radii, map.Bound.Width, map.Bound.Height,
+                delegate(Rectangle rect) { return map.IsRectangleEmpty(rect); });
+        }
         private static bool TryFindAccurateShot(Player player, Player target,
             out int aimX, out int aimY, out int force, out int angle)
         {
@@ -145,7 +163,8 @@ namespace Fighting.Server.GameObjects
                     int candidateAngle = 0;
                     player.GetShootForceAndAngle(ref candidateX, ref candidateY, player.CurrentBall.ID,
                         1, 5, 1, timeSeed, ref candidateForce, ref candidateAngle);
-                    if (candidateForce > 0)
+                    if (candidateForce > 0 && IsTrajectoryViable(player, target,
+                        candidateX, candidateY, candidateForce, candidateAngle))
                     {
                         aimX = candidateX;
                         aimY = candidateY;
