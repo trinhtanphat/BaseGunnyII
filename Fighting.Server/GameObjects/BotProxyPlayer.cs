@@ -110,7 +110,7 @@ namespace Fighting.Server.GameObjects
         public void SendTCP(GSPacketIn pkg) { }
         public void LogAddMoney(AddMoneyType masterType, AddMoneyType sonType, int userId, int money, int spareMoney) { }
 
-        public void TakeTurn(PVPGame game, Player player)
+        private static Player FindBestTarget(PVPGame game, Player player)
         {
             Player target = null;
             double minDistance = double.MaxValue;
@@ -118,31 +118,70 @@ namespace Fighting.Server.GameObjects
             {
                 if (!candidate.IsLiving || candidate.Blood <= 0 || candidate.Team == player.Team)
                     continue;
+
                 double distance = candidate.Distance(player.X, player.Y);
-                if (distance < minDistance)
+                if (target == null || distance < minDistance - 0.01 ||
+                    (Math.Abs(distance - minDistance) <= 0.01 && candidate.Blood < target.Blood))
                 {
                     minDistance = distance;
                     target = candidate;
                 }
             }
+            return target;
+        }
+
+        private static bool TryFindAccurateShot(Player player, Player target,
+            out int aimX, out int aimY, out int force, out int angle)
+        {
+            float[] timeSeeds = { 0.6f, 0.7f, 0.8f, 0.9f, 1.0f, 1.1f };
+            int[] yOffsets = { 0, -8, 8, -16, 16 };
+            foreach (int yOffset in yOffsets)
+            {
+                foreach (float timeSeed in timeSeeds)
+                {
+                    int candidateX = target.X;
+                    int candidateY = target.Y + yOffset;
+                    int candidateForce = 0;
+                    int candidateAngle = 0;
+                    player.GetShootForceAndAngle(ref candidateX, ref candidateY, player.CurrentBall.ID,
+                        1, 5, 1, timeSeed, ref candidateForce, ref candidateAngle);
+                    if (candidateForce > 0)
+                    {
+                        aimX = candidateX;
+                        aimY = candidateY;
+                        force = candidateForce;
+                        angle = candidateAngle;
+                        return true;
+                    }
+                }
+            }
+
+            aimX = 0;
+            aimY = 0;
+            force = 0;
+            angle = 0;
+            return false;
+        }
+
+        public void TakeTurn(PVPGame game, Player player)
+        {
+            Player target = FindBestTarget(game, player);
             if (target == null)
             {
                 player.Skip(0);
                 return;
             }
 
-            int aimX = target.X;
-            int aimY = target.Y;
-            int force = 0;
-            int angle = 0;
-            player.GetShootForceAndAngle(ref aimX, ref aimY, player.CurrentBall.ID,
-                1, 4, 1, 1.0f, ref force, ref angle);
-            if (force <= 0)
+            player.Direction = target.X >= player.X ? 1 : -1;
+            int aimX;
+            int aimY;
+            int force;
+            int angle;
+            if (!TryFindAccurateShot(player, target, out aimX, out aimY, out force, out angle))
             {
                 player.Skip(0);
                 return;
             }
-            player.Direction = target.X >= player.X ? 1 : -1;
             player.Shoot(aimX, aimY, force, angle);
         }
     }
