@@ -164,6 +164,11 @@
     <Compile Include="AI\Game\WorldAncientDragon.cs" />
     <Compile Include="AI\Game\WorldSoccer.cs" />
     <Compile Include="AI\Game\YearMonster.cs" />
+    <Compile Include="AI\Messions\CHM1274.cs" />
+    <Compile Include="AI\Messions\CHM1275.cs" />
+    <Compile Include="AI\Messions\CNM1174.cs" />
+    <Compile Include="AI\Messions\CSM1074.cs" />
+    <Compile Include="AI\Messions\CTM1374.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
