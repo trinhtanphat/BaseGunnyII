@@ -287,6 +287,11 @@ namespace Game.Logic
             return box;
         }
 
+        public void SendGameFocus(Physics p, int delay, int finishTime)
+        {
+            AddAction(new FocusAction(p, 1, delay, finishTime));
+        }
+
         public PhysicalObj CreatePhysicalObj(int x, int y, string name, string model, string defaultAction, int scale, int rotation)
         {
             PhysicalObj obj = new PhysicalObj(PhysicalId++, name, model, defaultAction, scale, rotation);
