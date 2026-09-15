@@ -132,7 +132,7 @@ namespace Fighting.Server.GameObjects
         }
 
         private static bool IsTrajectoryViable(Player player, Player target,
-            int startX, int startY, int force, int angle)
+            int force, int angle)
         {
             BallInfo ball = BallMgr.FindBall(player.CurrentBall.ID);
             if (ball == null || player.Game == null || player.Game.Map == null)
@@ -142,7 +142,8 @@ namespace Fighting.Server.GameObjects
             foreach (Rectangle rect in target.GetDirectBoudRect())
                 targetBounds = targetBounds.IsEmpty ? rect : Rectangle.Union(targetBounds, rect);
             var map = player.Game.Map;
-            return BotAimTrajectory.IsViable(startX, startY, force, angle, ball.Mass,
+            Point shootPoint = player.GetShootPoint();
+            return BotAimTrajectory.IsViable(shootPoint.X, shootPoint.Y, force, angle, ball.Mass,
                 map.airResistance * ball.DragIndex,
                 map.gravity * ball.Weight * ball.Mass, map.wind * ball.Wind,
                 targetBounds, ball.Radii, map.Bound.Width, map.Bound.Height,
@@ -164,7 +165,7 @@ namespace Fighting.Server.GameObjects
                     player.GetShootForceAndAngle(ref candidateX, ref candidateY, player.CurrentBall.ID,
                         1, 5, 1, timeSeed, ref candidateForce, ref candidateAngle);
                     if (candidateForce > 0 && IsTrajectoryViable(player, target,
-                        candidateX, candidateY, candidateForce, candidateAngle))
+                        candidateForce, candidateAngle))
                     {
                         aimX = candidateX;
                         aimY = candidateY;
