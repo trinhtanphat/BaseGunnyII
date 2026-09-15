@@ -58,10 +58,7 @@ namespace Center.Server
                     }
                     else
                     {
-                        if (player.State == ePlayerState.Play)
-                        {
-                            player.CurrentServer.SendKitoffUser(id);
-                        }
+                        player.CurrentServer.SendKitoffUser(id);
                         return false;
                     }
                 }
