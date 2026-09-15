@@ -257,8 +257,11 @@ namespace Fighting.Server.Games
             {
                 foreach (Player p in game.GetAllFightPlayers())
                 {
-                    (p.PlayerDetail as ProxyPlayer).Rate = 1;
-                    GSPacketIn pkg1 = SendBufferList(p, (p.PlayerDetail as ProxyPlayer).Buffers);
+                    ProxyPlayer proxy = p.PlayerDetail as ProxyPlayer;
+                    if (proxy == null)
+                        continue;
+                    proxy.Rate = 1;
+                    GSPacketIn pkg1 = SendBufferList(p, proxy.Buffers);
                     game.SendToAll(pkg1);
                 }
                 pkg.WriteString("Bắt cặp thành công, Bắt đẩu chiến đấu!");
