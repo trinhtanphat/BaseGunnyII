@@ -341,13 +341,6 @@ namespace Game.Logic.Phy.Object
         {
             bool result = false;
 
-            //玩家炸自己炸不死
-            if ((source == this || source.Team == this.Team) && damageAmount + criticalAmount >= m_blood)
-            {
-                damageAmount = m_blood - 1;
-                criticalAmount = 0;
-            }
-
             result = base.TakeDamage(source, ref damageAmount, ref criticalAmount, msg);
 
             if (IsLiving)
