@@ -14,11 +14,22 @@ namespace Game.Logic.Effects
     {
         private int m_count;
         private int m_blood;
+        private Living m_liv;
+        private bool m_sourceAware;
         public ContinueReduceBloodEffect(int count,int blood)
             : base(eEffectType.ContinueReduceBloodEffect)
         {
             m_count = count;
             m_blood = blood;
+        }
+
+        public ContinueReduceBloodEffect(int count, int blood, Living liv)
+            : base(eEffectType.ContinueReduceBloodEffect)
+        {
+            m_count = count;
+            m_blood = blood;
+            m_liv = liv;
+            m_sourceAware = true;
         }
 
         public override bool Start(Living living)
@@ -49,6 +60,26 @@ namespace Game.Logic.Effects
 
         void player_BeginFitting(Living living)
         {
+            if (m_sourceAware)
+            {
+                m_count--;
+                if (m_count < 0)
+                {
+                    Stop();
+                    return;
+                }
+                living.AddBlood(-m_blood, 1);
+                if (living.Blood <= 0)
+                {
+                    living.Die();
+                    if (m_liv is Player)
+                    {
+                        (m_liv as Player).PlayerDetail.OnKillingLiving(m_liv.Game, 2, living.Id, living.IsLiving, m_blood);
+                    }
+                }
+                return;
+            }
+
             m_count--;
             if (living is Player)
             {
