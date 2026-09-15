@@ -408,6 +408,10 @@
     <Compile Include="AI\NPC\ThirdNormalBloomNpcS.cs" />
     <Compile Include="AI\NPC\ThirdSimpleBloomNpcS.cs" />
     <Compile Include="AI\NPC\ThirdTerrorBloomNpcS.cs" />
+    <Compile Include="AI\NPC\ThirdHardKingSecond.cs" />
+    <Compile Include="AI\NPC\ThirdNormalKingSecond.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleKingSecond.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorKingSecond.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
