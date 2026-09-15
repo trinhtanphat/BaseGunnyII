@@ -122,6 +122,7 @@
     <Content Include="images\zingid.gif" />
     <Content Include="LoadingCount.aspx" />
     <Content Include="login.htm" />
+    <Content Include="LoginGame.apx" />
     <Content Include="LoginGame.aspx" />
     <Content Include="scripts\boi-ga-ra-balo.jpg" />
     <Content Include="scripts\Box_event_4.css" />

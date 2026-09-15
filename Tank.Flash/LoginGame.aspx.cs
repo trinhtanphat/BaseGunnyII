@@ -31,9 +31,10 @@ namespace Tank.Flash
       
         protected void Page_Load(object sender, EventArgs e)
         {
-            if ((Session["username"] == null) && string.IsNullOrEmpty(Session["username"].ToString()))
+            if ((Session["username"] == null) || string.IsNullOrEmpty(Session["username"].ToString()))
             {
-                Response.Redirect("~/Login.htm");
+                Response.Redirect("~/Login.htm", false);
+                return;
             }
             string result = "";
             try
