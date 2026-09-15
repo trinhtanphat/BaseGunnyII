@@ -415,7 +415,8 @@ namespace Game.Logic
 
                 foreach (Player p in players)
                 {
-                  
+                        IBotGamePlayer botPlayer = p.PlayerDetail as IBotGamePlayer;
+                        bool isBot = botPlayer != null && botPlayer.IsBot;
                         float againstTeamLevel = p.Team == 1 ? m_blueAvgLevel : m_redAvgLevel;
                         float againstTeamCount = p.Team == 1 ? m_blueTeam.Count : m_redTeam.Count;
                         float disLevel = Math.Abs(againstTeamLevel - p.PlayerDetail.PlayerCharacter.Grade);
@@ -428,13 +429,19 @@ namespace Game.Logic
                             gp = (int)Math.Ceiling((winPlus + p.TotalHurt * 0.001 + p.TotalKill * 0.5 + (p.TotalHitTargetCount / totalShoot) * 2) * againstTeamLevel * (0.9 + (againstTeamCount - 1) * 0.3));
                         }
                         gp = gp == 0 ? 1 : gp;
-                        if (hasBot)
+                        if (isBot)
                         {
-                            gp = 0;
                             p.GainGP = 0;
                             p.GainOffer = 0;
+                            p.CanTakeOut = 0;
                         }
-                        p.CanTakeOut = hasBot ? 0 : (p.Team == 1 ? canRedTakeOut : canBlueTakeOut);
+                        else
+                        {
+                            p.GainGP = p.PlayerDetail.AddGP(gp);
+                            int offerReward = p.Team == winTeam ? winbaseoffer : 0;
+                            p.GainOffer = p.PlayerDetail.AddOffer(offerReward);
+                            p.CanTakeOut = p.Team == 1 ? canRedTakeOut : canBlueTakeOut;
+                        }
                         riches += p.GainOffer;
 
              
@@ -472,7 +479,12 @@ namespace Game.Logic
                 StringBuilder sb = new StringBuilder();
                 foreach (Player p in players)
                 {
-                    p.PlayerDetail.OnGameOver(this, p.Team == winTeam, p.GainGP);
+                    IBotGamePlayer botPlayer = p.PlayerDetail as IBotGamePlayer;
+                    bool isBot = botPlayer != null && botPlayer.IsBot;
+                    if (!isBot)
+                    {
+                        p.PlayerDetail.OnGameOver(this, p.Team == winTeam, p.GainGP);
+                    }
                 }
 
                 string templateIdsStr = "";

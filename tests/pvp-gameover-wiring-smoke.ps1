@@ -3,10 +3,7 @@ $root = Split-Path $PSScriptRoot -Parent
 $pvp = Join-Path $root 'Game.Logic\PVPGame.cs'
 if (-not (Test-Path $pvp)) { throw "missing PVPGame.cs: $pvp" }
 $text = Get-Content $pvp -Raw
-
-if ($text -notmatch 'eTankCmdType\.GAME_OVER') {
-  throw 'PVP game-over packet is no longer emitted'
-}
+if ($text -notmatch 'eTankCmdType\.GAME_OVER') { throw 'PVP game-over packet is no longer emitted' }
 if ($text -notmatch 'if\s*\(\s*!p\.IsLiving\s*\|\|\s*p\.Blood\s*<=\s*0\s*\)') {
   throw 'PVP winner scan must ignore dead or zero-HP players'
 }
@@ -19,10 +16,10 @@ if ($text -notmatch 'WriteBoolean\(\s*p\.Team\s*==\s*winTeam\s*\)') {
 if ($text -notmatch 'PlayerDetail\.OnGameOver\(\s*this\s*,\s*p\.Team\s*==\s*winTeam\s*,\s*p\.GainGP\s*\)') {
   throw 'PlayerDetail.OnGameOver winner callback is not wired to winTeam'
 }
-if ($text -notmatch '(?s)if\s*\(\s*hasBot\s*\).*?p\.GainGP\s*=\s*0\s*;.*?p\.GainOffer\s*=\s*0\s*;') {
-  throw 'NPC matches must still suppress farmable GP/offer rewards'
+if ($text -notmatch '(?s)if\s*\(\s*isBot\s*\).*?p\.GainGP\s*=\s*0\s*;.*?p\.GainOffer\s*=\s*0\s*;.*?p\.CanTakeOut\s*=\s*0\s*;') {
+  throw 'Synthetic bot participants must not receive farmable GP/offer/card rewards'
 }
-if ($text -notmatch 'p\.CanTakeOut\s*=\s*hasBot\s*\?\s*0\s*:') {
-  throw 'NPC matches must not expose card take-out rewards'
+if ($text -notmatch '(?s)else\s*\{.*?p\.GainGP\s*=\s*p\.PlayerDetail\.AddGP\(gp\).*?p\.GainOffer\s*=\s*p\.PlayerDetail\.AddOffer\(.*?p\.CanTakeOut\s*=') {
+  throw 'Human participants must retain rewards and card take-out when a bot is present'
 }
 Write-Host 'PVP_GAMEOVER_WIRING_SMOKE=PASS'

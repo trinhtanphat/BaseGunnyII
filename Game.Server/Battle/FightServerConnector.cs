@@ -92,6 +92,9 @@ namespace Game.Server.Battle
                     case (int)eFightPackageType.PLAYER_ADD_GP:
                         HandlePlayerAddGP(pkg);
                         break;
+                    case (int)eFightPackageType.PLAYER_ADD_OFFER:
+                        HandlePlayerAddOffer(pkg);
+                        break;
                     case (int)eFightPackageType.PLAYER_ONKILLING_LIVING:
                         HandlePlayerOnKillingLiving(pkg);
                         break;
@@ -231,6 +234,15 @@ namespace Game.Server.Battle
             }
         }
 
+
+        private void HandlePlayerAddOffer(GSPacketIn pkg)
+        {
+            GamePlayer player = WorldMgr.GetPlayerById(pkg.ClientID);
+            if (player != null)
+            {
+                player.AddOffer(pkg.Parameter1);
+            }
+        }
 
         private void HandlePlayerRemoveOffer(GSPacketIn pkg)
         {

@@ -67,6 +67,8 @@ namespace Game.Logic.Protocol
 
         PLAYER_REMOVE_OFFER = 0x32,
 
+        PLAYER_ADD_OFFER = 0x33,
+
         /*************************************房间**********************************************
         **/
 
