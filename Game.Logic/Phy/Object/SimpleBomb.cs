@@ -359,7 +359,7 @@ namespace Game.Logic.Phy.Object
                 return 0;
             }
             int resolvedDamage = (int)damage;
-            return resolvedDamage > 0 ? resolvedDamage : 1;
+            return damage > 0 && resolvedDamage == 0 ? 1 : resolvedDamage;
         }
 
         protected int MakeCriticalDamage(Living target, int baseDamage)
