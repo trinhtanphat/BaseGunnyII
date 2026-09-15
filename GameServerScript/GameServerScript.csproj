@@ -427,6 +427,10 @@
     <Compile Include="AI\NPC\ThirdNormalFagNpc.cs" />
     <Compile Include="AI\NPC\ThirdSimpleFagNpc.cs" />
     <Compile Include="AI\NPC\ThirdTerrorFagNpc.cs" />
+    <Compile Include="AI\NPC\ConsortiaScorpionBoss.cs" />
+    <Compile Include="AI\NPC\FiveHardSecondBoss.cs" />
+    <Compile Include="AI\NPC\FiveNormalSecondBoss.cs" />
+    <Compile Include="AI\NPC\FiveTerrorSecondBoss.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
