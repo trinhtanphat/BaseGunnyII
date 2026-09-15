@@ -497,6 +497,13 @@ namespace Game.Logic.Phy.Object
             return false;
         }
 
+        public bool JumpToSpeed(int x, int y, string action, int delay, int type, int speed, LivingCallBack callback)
+        {
+            Point p = m_map.FindYLineNotEmptyPoint(x, y);
+            m_game.AddAction(new LivingJumpAction(this, p.X, p.Y, speed, action, delay, type, callback));
+            return true;
+        }
+
         public void ChangeDirection(int direction, int delay)
         {
             if (delay > 0)
