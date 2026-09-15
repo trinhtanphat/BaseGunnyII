@@ -395,6 +395,19 @@
     <Compile Include="AI\NPC\ZYSimpleNpc60018.cs" />
     <Compile Include="AI\NPC\ZYSimpleNpc60019.cs" />
     <Compile Include="AI\NPC\ZYSimpleNpc60020.cs" />
+    <Compile Include="AI\NPC\FourHardCattleBoss.cs" />
+    <Compile Include="AI\NPC\FourHardFrantCattleBoss.cs" />
+    <Compile Include="AI\NPC\FourHardWolfNpc.cs" />
+    <Compile Include="AI\NPC\FourNormalCattleBoss.cs" />
+    <Compile Include="AI\NPC\FourNormalFrantCattleBoss.cs" />
+    <Compile Include="AI\NPC\FourNormalWolfNpc.cs" />
+    <Compile Include="AI\NPC\FourTerrorCattleBoss.cs" />
+    <Compile Include="AI\NPC\FourTerrorFrantCattleBoss.cs" />
+    <Compile Include="AI\NPC\FourTerrorWolfNpc.cs" />
+    <Compile Include="AI\NPC\ThirdHardBloomNpcS.cs" />
+    <Compile Include="AI\NPC\ThirdNormalBloomNpcS.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleBloomNpcS.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorBloomNpcS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
