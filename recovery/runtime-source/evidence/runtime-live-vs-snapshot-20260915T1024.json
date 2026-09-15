@@ -1,0 +1,154 @@
+﻿[
+    {
+        "service":  "center",
+        "assembly":  "Bussiness",
+        "expected":  "24fa15ff6045e87736624dddb7cacdd9bfbfbe0414d6ba6ab57a3a132528cf0f",
+        "actual":  "24fa15ff6045e87736624dddb7cacdd9bfbfbe0414d6ba6ab57a3a132528cf0f",
+        "match":  true,
+        "mtime":  "2026-09-13T11:37:38"
+    },
+    {
+        "service":  "center",
+        "assembly":  "Center.Server",
+        "expected":  "f446ce3aef72e2b57fb626a11a125c16caf436fd186a89f65bc4840b245a30c2",
+        "actual":  "655749400a62fa92ed2d74b710dab0dab68051f1a8628cbd1507a2d7bbbea02a",
+        "match":  false,
+        "mtime":  "2026-09-15T09:49:46"
+    },
+    {
+        "service":  "center",
+        "assembly":  "Center.Service",
+        "expected":  "5c24462c871d8a70dafcd9ac2a9b747e6e81457abfda7722ba1c75368b4491a9",
+        "actual":  "5c24462c871d8a70dafcd9ac2a9b747e6e81457abfda7722ba1c75368b4491a9",
+        "match":  true,
+        "mtime":  "2026-09-13T11:37:39"
+    },
+    {
+        "service":  "center",
+        "assembly":  "Game.Base",
+        "expected":  "98af5762474f3c328213db101e0e2cfce95be297662687a79f50fcfe0b84fa7c",
+        "actual":  "98af5762474f3c328213db101e0e2cfce95be297662687a79f50fcfe0b84fa7c",
+        "match":  true,
+        "mtime":  "2026-09-13T11:37:39"
+    },
+    {
+        "service":  "center",
+        "assembly":  "SqlDataProvider",
+        "expected":  "0a1f788f4664ddfba3394b27104ec31ba3ab64840be8d4cbcec4ae0458cba71f",
+        "actual":  "0a1f788f4664ddfba3394b27104ec31ba3ab64840be8d4cbcec4ae0458cba71f",
+        "match":  true,
+        "mtime":  "2026-09-13T11:37:39"
+    },
+    {
+        "service":  "Fight",
+        "assembly":  "Bussiness",
+        "expected":  "d6f9342d241a6ea94753bbc4e05acb3361bac852bcaf9f23c150010aaedf29bc",
+        "actual":  "d6f9342d241a6ea94753bbc4e05acb3361bac852bcaf9f23c150010aaedf29bc",
+        "match":  true,
+        "mtime":  "2026-09-13T11:37:24"
+    },
+    {
+        "service":  "Fight",
+        "assembly":  "Fighting.Server",
+        "expected":  "bcda33f114d84465ec6be03bf73f5d62d6d3c4e09c9eae50fef91532140a78a9",
+        "actual":  "1004403be263804f19d0fe80b0a0eeed38ab9c67f3ab760f3fc1db297b4d57c4",
+        "match":  false,
+        "mtime":  "2026-09-15T06:44:13"
+    },
+    {
+        "service":  "Fight",
+        "assembly":  "Fighting.Service",
+        "expected":  "dc4eb09bc5f0ec10ae018da823a4896b826b4ae58d498da89a83e0ad29c6ed9b",
+        "actual":  "dc4eb09bc5f0ec10ae018da823a4896b826b4ae58d498da89a83e0ad29c6ed9b",
+        "match":  true,
+        "mtime":  "2026-09-13T11:37:24"
+    },
+    {
+        "service":  "Fight",
+        "assembly":  "Game.Base",
+        "expected":  "5851154b8fef454261006a00b92e1b89f4d1d254ef519ee57219b2784d265fb3",
+        "actual":  "5851154b8fef454261006a00b92e1b89f4d1d254ef519ee57219b2784d265fb3",
+        "match":  true,
+        "mtime":  "2026-09-13T11:37:24"
+    },
+    {
+        "service":  "Fight",
+        "assembly":  "Game.Logic",
+        "expected":  "c55aa6d9dca93b1d7183d7f9e46f618f38e66e7b69ea2de72bd4c75ada66d661",
+        "actual":  "4f339f21145abba8b59fb1fafc4b715e07109e70fe1b4cf8bdce15af2268dd84",
+        "match":  false,
+        "mtime":  "2026-09-15T10:01:58"
+    },
+    {
+        "service":  "Fight",
+        "assembly":  "GameServerScripts",
+        "expected":  "e4d0871d43f7cf6e7689c65b3ce2b738b7e140b0ae2db4f3e7cd0c8544bd84f0",
+        "actual":  "53138c0a3e1f03535d8896d78ae0ad0dd67d6b5ba736200b4d6ebb87d74e9a9e",
+        "match":  false,
+        "mtime":  "2026-09-15T10:07:40"
+    },
+    {
+        "service":  "Fight",
+        "assembly":  "SqlDataProvider",
+        "expected":  "0a1f788f4664ddfba3394b27104ec31ba3ab64840be8d4cbcec4ae0458cba71f",
+        "actual":  "0a1f788f4664ddfba3394b27104ec31ba3ab64840be8d4cbcec4ae0458cba71f",
+        "match":  true,
+        "mtime":  "2026-09-13T11:37:24"
+    },
+    {
+        "service":  "Road",
+        "assembly":  "Bussiness",
+        "expected":  "d6f9342d241a6ea94753bbc4e05acb3361bac852bcaf9f23c150010aaedf29bc",
+        "actual":  "d6f9342d241a6ea94753bbc4e05acb3361bac852bcaf9f23c150010aaedf29bc",
+        "match":  true,
+        "mtime":  "2026-09-13T11:37:29"
+    },
+    {
+        "service":  "Road",
+        "assembly":  "Game.Base",
+        "expected":  "7a8201c002726131b137aa9a35c29847b030614fa452e944cad2e72795cfef3c",
+        "actual":  "7a8201c002726131b137aa9a35c29847b030614fa452e944cad2e72795cfef3c",
+        "match":  true,
+        "mtime":  "2026-09-13T11:37:29"
+    },
+    {
+        "service":  "Road",
+        "assembly":  "Game.Logic",
+        "expected":  "85cd47cd952e6376280efd81a2efffe7d46570a73859e849e147ddc9bcf0de6d",
+        "actual":  "85cd47cd952e6376280efd81a2efffe7d46570a73859e849e147ddc9bcf0de6d",
+        "match":  true,
+        "mtime":  "2026-09-13T11:37:29"
+    },
+    {
+        "service":  "Road",
+        "assembly":  "Game.Server",
+        "expected":  "b5773d6a3e7fb69f140c501c2c37f9b7fb30fb223734609875e1eeed0a81f78d",
+        "actual":  "b5773d6a3e7fb69f140c501c2c37f9b7fb30fb223734609875e1eeed0a81f78d",
+        "match":  true,
+        "mtime":  "2026-09-13T11:37:29"
+    },
+    {
+        "service":  "Road",
+        "assembly":  "GameServerScripts",
+        "expected":  "ae10f9def9a42d50b35c2079788f6a75df80ab0e35b35cc9801dee5b0029abec",
+        "actual":  "90233ac17595c3d3cec7722c46a1e57667411c5352fc76879086921ecc3505c2",
+        "match":  false,
+        "mtime":  "2026-09-15T10:23:48"
+    },
+    {
+        "service":  "Road",
+        "assembly":  "Road.Service",
+        "expected":  "aa3c8793c3d3f2551aa559b93d1fdf08600a0d8951dc09bb96d72b9105c8d22b",
+        "actual":  "aa3c8793c3d3f2551aa559b93d1fdf08600a0d8951dc09bb96d72b9105c8d22b",
+        "match":  true,
+        "mtime":  "2026-09-13T11:37:29"
+    },
+    {
+        "service":  "Road",
+        "assembly":  "SqlDataProvider",
+        "expected":  "4e385131d3024ed55f3e5b8dda60b866fe15f57bed42b5da4c6a06cba14e0691",
+        "actual":  "4e385131d3024ed55f3e5b8dda60b866fe15f57bed42b5da4c6a06cba14e0691",
+        "match":  true,
+        "mtime":  "2026-09-13T11:37:29"
+    }
+]
