@@ -320,6 +320,35 @@
     <Compile Include="AI\NPC\TwelveSimpleGunBoss.cs" />
     <Compile Include="AI\NPC\TwelveSimpleSmallWolf.cs" />
     <Compile Include="AI\NPC\WorldBatKing.cs" />
+    <Compile Include="AI\NPC\Activity77SimpleNpc.cs" />
+    <Compile Include="AI\NPC\ChristmasFirstNpc.cs" />
+    <Compile Include="AI\NPC\ChristmasSecondNpc.cs" />
+    <Compile Include="AI\NPC\ChristmasThirdNpc.cs" />
+    <Compile Include="AI\NPC\NewTrainingBoss22001.cs" />
+    <Compile Include="AI\NPC\NewTrainingBoss25002.cs" />
+    <Compile Include="AI\NPC\NewTrainingNpc25001.cs" />
+    <Compile Include="AI\NPC\QXBoss70004.cs" />
+    <Compile Include="AI\NPC\SimpleNpcAiForAnt.cs" />
+    <Compile Include="AI\NPC\SimpleNpcFor40051.cs" />
+    <Compile Include="AI\NPC\SimpleNpcFor40053.cs" />
+    <Compile Include="AI\NPC\SimpleNpcFor40055.cs" />
+    <Compile Include="AI\NPC\SimpleNpcFor40056.cs" />
+    <Compile Include="AI\NPC\SimpleNpcFor40057.cs" />
+    <Compile Include="AI\NPC\SimpleNpcFor40058.cs" />
+    <Compile Include="AI\NPC\SimpleNpcFor40061.cs" />
+    <Compile Include="AI\NPC\SimpleNpcFor40063.cs" />
+    <Compile Include="AI\NPC\SixNormalFirstBall.cs" />
+    <Compile Include="AI\NPC\SixNormalFourBoss.cs" />
+    <Compile Include="AI\NPC\SixNormalSecondBoss.cs" />
+    <Compile Include="AI\NPC\SixNormalSecondNpc.cs" />
+    <Compile Include="AI\NPC\SixNormalThirdBadNpcAi.cs" />
+    <Compile Include="AI\NPC\SixNormalThirdBoss.cs" />
+    <Compile Include="AI\NPC\SixNormalThirdNpc.cs" />
+    <Compile Include="AI\NPC\TwelveSimpleBombNpc.cs" />
+    <Compile Include="AI\NPC\TwelveSimpleCaptainBoss.cs" />
+    <Compile Include="AI\NPC\TwelveSimpleChickenNpc.cs" />
+    <Compile Include="AI\NPC\TwelveSimpleFlyCaptainBoss.cs" />
+    <Compile Include="AI\NPC\TwelveTankNpc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
