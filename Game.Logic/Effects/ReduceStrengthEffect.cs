@@ -9,11 +9,20 @@ namespace Game.Logic.Effects
     public class ReduceStrengthEffect : AbstractEffect
     {
         private int m_count;
+        private int m_reduce;
 
         public ReduceStrengthEffect(int count)
             : base(eEffectType.ReduceStrengthEffect)
         {
             m_count = count;
+            m_reduce = 50;
+        }
+
+        public ReduceStrengthEffect(int count, int reduce)
+            : base(eEffectType.ReduceStrengthEffect)
+        {
+            m_count = count;
+            m_reduce = reduce;
         }
 
         public override bool Start(Living living)
@@ -47,7 +56,7 @@ namespace Game.Logic.Effects
             m_count--;
             if (living is Player)
             {
-                (living as Player).Energy -= 50;
+                (living as Player).Energy -= m_reduce;
             }
             if (m_count < 0)
             {
