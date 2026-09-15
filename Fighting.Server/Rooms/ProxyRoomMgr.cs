@@ -242,7 +242,7 @@ namespace Fighting.Server.Rooms
                     }
                 }
 
-                if (matchRoom == null && red.RoomType == eRoomType.Match && red.PlayerCount == 1 &&
+                if (matchRoom == null && red.PlayerCount == 1 &&
                     red.GameType != eGameType.Guild && tick >= red.BotFillEligibleTick)
                 {
                     matchRoom = CreateBotRoom(red);

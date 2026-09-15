@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 $bot = Join-Path $root 'Fighting.Server\GameObjects\BotProxyPlayer.cs'
 $botInterface = Join-Path $root 'Game.Logic\IBotGamePlayer.cs'
@@ -22,7 +22,8 @@ if ($roomText -notmatch 'BotFillEligibleTick.*5000L') { throw '5-second room dea
 if ($mgrText -notmatch 'PICK_UP_INTERVAL\s*=\s*1000') { throw '1-second polling missing' }
 if ($mgrText -notmatch 'BOT_FILL_WAIT_MS\s*=\s*5000') { throw '5-second fill constant missing' }
 if ($mgrText -match 'MatchWaitCycles') { throw 'old cycle-based timing still present' }
-if ($mgrText -notmatch 'RoomType\s*==\s*eRoomType\.Match') { throw 'match-only fill guard missing' }
+if ($mgrText -match 'red\.RoomType') { throw 'canonical bot fill must not depend on missing ProxyRoom.RoomType' }
+if ($mgrText -notmatch 'StartBattleGame\([^;]+eRoomType\.Match') { throw 'canonical matchmaking is not pinned to Match room type' }
 if ($mgrText -notmatch 'PlayerCount\s*==\s*1') { throw 'one-human fill guard missing' }
 if ($mgrText -notmatch 'GameType\s*!=\s*eGameType\.Guild') { throw 'guild exclusion missing' }
 if ($mgrText -notmatch 'tick\s*>=\s*red\.BotFillEligibleTick') { throw 'eligible timestamp gate missing' }
