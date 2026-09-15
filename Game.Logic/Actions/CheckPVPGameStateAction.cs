@@ -39,16 +39,13 @@ namespace Game.Logic.Actions
                             }
                             break;
                         case eGameState.Playing:
-                            if (pvp.CurrentPlayer == null || pvp.CurrentPlayer.IsAttacking == false)
+                            if (pvp.CanGameOver())
                             {
-                                if (pvp.CanGameOver())
-                                {
-                                    pvp.GameOver();
-                                }
-                                else
-                                {
-                                    pvp.NextTurn();
-                                }
+                                pvp.GameOver();
+                            }
+                            else if (pvp.CurrentPlayer == null || pvp.CurrentPlayer.IsAttacking == false)
+                            {
+                                pvp.NextTurn();
                             }
                             break;
                         case eGameState.GameOver:
