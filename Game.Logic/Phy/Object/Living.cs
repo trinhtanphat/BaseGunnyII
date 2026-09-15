@@ -475,6 +475,12 @@ namespace Game.Logic.Phy.Object
             return false;
         }
 
+        public bool FallFromTo(int x, int y, string action, int delay, int type, int speed, LivingCallBack callback)
+        {
+            m_game.AddAction(new LivingFallingAction(this, x, y, speed, action, delay, type, callback));
+            return true;
+        }
+
         public bool JumpTo(int x, int y, string action, int delay, int type)
         {
             return JumpTo(x, y, action, delay, type, 20, null);
