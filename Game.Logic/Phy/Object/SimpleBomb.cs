@@ -258,7 +258,7 @@ namespace Game.Logic.Phy.Object
                             if (damage != 0)
                             {
                                 critical = MakeCriticalDamage(p, damage);//暴击
-                                m_owner.OnTakedDamage(m_owner, ref damage, ref damage);
+                                m_owner.OnTakedDamage(m_owner, ref damage, ref critical);
                                 if (p.TakeDamage(m_owner, ref damage, ref critical, "爆炸"))
                                 {
                                     m_actions.Add(new BombAction(m_lifeTime, ActionType.KILL_PLAYER, p.Id, damage + critical, critical != 0 ? 2 : 1, p.Blood));
