@@ -1,0 +1,65 @@
+[
+    {
+        "File":  "recovery\\runtime-source\\by-service\\Road\\Game.Server\\Game\\Server\\Rooms\\CreateBattleRoomAction.cs",
+        "Identifier":  "m_password",
+        "OriginalLength":  10,
+        "Replacement":  "\u003credacted-runtime-room-password\u003e",
+        "Reason":  "credential-like runtime literal; exact raw remains outside repository"
+    },
+    {
+        "File":  "recovery\\runtime-source\\by-service\\Road\\Game.Server\\Game\\Server\\Rooms\\CreateCampBattleBossAction.cs",
+        "Identifier":  "m_password",
+        "OriginalLength":  10,
+        "Replacement":  "\u003credacted-runtime-room-password\u003e",
+        "Reason":  "credential-like runtime literal; exact raw remains outside repository"
+    },
+    {
+        "File":  "recovery\\runtime-source\\by-service\\Road\\Game.Server\\Game\\Server\\Rooms\\CreateCampBattleRoomAction.cs",
+        "Identifier":  "m_password",
+        "OriginalLength":  10,
+        "Replacement":  "\u003credacted-runtime-room-password\u003e",
+        "Reason":  "credential-like runtime literal; exact raw remains outside repository"
+    },
+    {
+        "File":  "recovery\\runtime-source\\by-service\\Road\\Game.Server\\Game\\Server\\Rooms\\CreateCatchBeastAction.cs",
+        "Identifier":  "m_password",
+        "OriginalLength":  20,
+        "Replacement":  "\u003credacted-runtime-room-password\u003e",
+        "Reason":  "credential-like runtime literal; exact raw remains outside repository"
+    },
+    {
+        "File":  "recovery\\runtime-source\\by-service\\Road\\Game.Server\\Game\\Server\\Rooms\\CreateConsortiaBattleRoomAction.cs",
+        "Identifier":  "m_password",
+        "OriginalLength":  10,
+        "Replacement":  "\u003credacted-runtime-room-password\u003e",
+        "Reason":  "credential-like runtime literal; exact raw remains outside repository"
+    },
+    {
+        "File":  "recovery\\runtime-source\\by-service\\Road\\Game.Server\\Game\\Server\\Rooms\\CreateConsortiaBossAction.cs",
+        "Identifier":  "m_password",
+        "OriginalLength":  10,
+        "Replacement":  "\u003credacted-runtime-room-password\u003e",
+        "Reason":  "credential-like runtime literal; exact raw remains outside repository"
+    },
+    {
+        "File":  "recovery\\runtime-source\\by-service\\Road\\Game.Server\\Game\\Server\\Rooms\\CreateEncounterRoomAction.cs",
+        "Identifier":  "m_password",
+        "OriginalLength":  10,
+        "Replacement":  "\u003credacted-runtime-room-password\u003e",
+        "Reason":  "credential-like runtime literal; exact raw remains outside repository"
+    },
+    {
+        "File":  "recovery\\runtime-source\\by-service\\Road\\Game.Server\\Game\\Server\\Rooms\\CreateFightFootballTimeRoomAction.cs",
+        "Identifier":  "m_password",
+        "OriginalLength":  10,
+        "Replacement":  "\u003credacted-runtime-room-password\u003e",
+        "Reason":  "credential-like runtime literal; exact raw remains outside repository"
+    },
+    {
+        "File":  "recovery\\runtime-source\\by-service\\Road\\Game.Server\\Game\\Server\\Rooms\\CreateGroupBattleRoomAction.cs",
+        "Identifier":  "m_password",
+        "OriginalLength":  10,
+        "Replacement":  "\u003credacted-runtime-room-password\u003e",
+        "Reason":  "credential-like runtime literal; exact raw remains outside repository"
+    }
+]

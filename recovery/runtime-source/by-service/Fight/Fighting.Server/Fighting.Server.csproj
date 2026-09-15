@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Fighting.Server</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net40</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Fighting.Server.Config.logconfig.xml" />
+    <EmbeddedResource Include="Fighting.Server.Config.logconfig.xml" LogicalName="Fighting.Server.Config.logconfig.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Game.Logic">
+      <HintPath>$(RuntimeBinaryRoot)\Fight\Game.Logic.dll</HintPath>
+    </Reference>
+    <Reference Include="Game.Base">
+      <HintPath>$(RuntimeBinaryRoot)\Fight\Game.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlDataProvider">
+      <HintPath>$(RuntimeBinaryRoot)\Fight\SqlDataProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>$(RuntimeBinaryRoot)\Fight\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Bussiness">
+      <HintPath>$(RuntimeBinaryRoot)\Fight\Bussiness.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,26 @@
+using Game.Server.GameObjects;
+
+namespace Game.Server.Rooms;
+
+public class ExitRoomAction : IAction
+{
+	private BaseRoom m_room;
+
+	private GamePlayer m_player;
+
+	public ExitRoomAction(BaseRoom room, GamePlayer player)
+	{
+		m_room = room;
+		m_player = player;
+	}
+
+	public void Execute()
+	{
+		m_room.RemovePlayerUnsafe(m_player);
+		if (m_room.IsEmpty)
+		{
+			m_room.Stop();
+		}
+		RoomMgr.WaitingRoom.SendUpdateRoom(m_room);
+	}
+}

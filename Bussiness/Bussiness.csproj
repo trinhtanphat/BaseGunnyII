@@ -71,6 +71,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuffType.cs" />
+    <Compile Include="ChatInputView.cs" />
+    <Compile Include="Statistics.cs" />
     <Compile Include="ActiveBussiness.cs" />
     <Compile Include="BaseBussiness.cs" />
     <Compile Include="CheckCode.cs" />

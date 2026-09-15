@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Bussiness</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net40</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="System.Runtime.Serialization"></Reference>
+    <Reference Include="System.ServiceModel"></Reference>
+    <Reference Include="log4net">
+      <HintPath>$(RuntimeBinaryRoot)\center\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlDataProvider">
+      <HintPath>$(RuntimeBinaryRoot)\center\SqlDataProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data"></Reference>
+    <Reference Include="Game.Base">
+      <HintPath>$(RuntimeBinaryRoot)\center\Game.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq"></Reference>
+    <Reference Include="System.Core"></Reference>
+    <Reference Include="System.Configuration"></Reference>
+    <Reference Include="System.Web"></Reference>
+    <Reference Include="System.Xml"></Reference>
+  </ItemGroup>
+</Project>

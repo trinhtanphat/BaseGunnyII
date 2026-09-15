@@ -88,6 +88,7 @@
     <Compile Include="Packets\FSM.cs" />
     <Compile Include="Packets\GSPacketIn.cs" />
     <Compile Include="Packets\StreamProcessor.cs" />
+    <Compile Include="eBuffer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueueMgr.cs" />
     <Compile Include="ResourceUtil.cs" />

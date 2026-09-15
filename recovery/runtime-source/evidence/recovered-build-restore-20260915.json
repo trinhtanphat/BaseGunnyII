@@ -1,0 +1,135 @@
+[
+    {
+        "project":  "center\\Bussiness\\Bussiness.csproj",
+        "exit":  0,
+        "warnings":  6,
+        "errors":  0,
+        "seconds":  5.8
+    },
+    {
+        "project":  "center\\Center.Server\\Center.Server.csproj",
+        "exit":  0,
+        "warnings":  0,
+        "errors":  0,
+        "seconds":  4.8
+    },
+    {
+        "project":  "center\\Center.Service\\Center.Service.csproj",
+        "exit":  0,
+        "warnings":  0,
+        "errors":  0,
+        "seconds":  4.6
+    },
+    {
+        "project":  "center\\Game.Base\\Game.Base.csproj",
+        "exit":  0,
+        "warnings":  0,
+        "errors":  0,
+        "seconds":  4.6
+    },
+    {
+        "project":  "center\\SqlDataProvider\\SqlDataProvider.csproj",
+        "exit":  0,
+        "warnings":  0,
+        "errors":  0,
+        "seconds":  5
+    },
+    {
+        "project":  "Fight\\Bussiness\\Bussiness.csproj",
+        "exit":  0,
+        "warnings":  0,
+        "errors":  0,
+        "seconds":  5.5
+    },
+    {
+        "project":  "Fight\\Fighting.Server\\Fighting.Server.csproj",
+        "exit":  0,
+        "warnings":  0,
+        "errors":  0,
+        "seconds":  4.3
+    },
+    {
+        "project":  "Fight\\Fighting.Service\\Fighting.Service.csproj",
+        "exit":  0,
+        "warnings":  0,
+        "errors":  0,
+        "seconds":  4.6
+    },
+    {
+        "project":  "Fight\\Game.Base\\Game.Base.csproj",
+        "exit":  0,
+        "warnings":  4,
+        "errors":  0,
+        "seconds":  4.7
+    },
+    {
+        "project":  "Fight\\Game.Logic\\Game.Logic.csproj",
+        "exit":  0,
+        "warnings":  2,
+        "errors":  0,
+        "seconds":  5.4
+    },
+    {
+        "project":  "Fight\\GameServerScripts\\GameServerScripts.csproj",
+        "exit":  0,
+        "warnings":  10,
+        "errors":  0,
+        "seconds":  4.5
+    },
+    {
+        "project":  "Fight\\SqlDataProvider\\SqlDataProvider.csproj",
+        "exit":  0,
+        "warnings":  0,
+        "errors":  0,
+        "seconds":  4.8
+    },
+    {
+        "project":  "Road\\Bussiness\\Bussiness.csproj",
+        "exit":  0,
+        "warnings":  0,
+        "errors":  0,
+        "seconds":  6.9
+    },
+    {
+        "project":  "Road\\Game.Base\\Game.Base.csproj",
+        "exit":  0,
+        "warnings":  4,
+        "errors":  0,
+        "seconds":  6.4
+    },
+    {
+        "project":  "Road\\Game.Logic\\Game.Logic.csproj",
+        "exit":  0,
+        "warnings":  2,
+        "errors":  0,
+        "seconds":  4.3
+    },
+    {
+        "project":  "Road\\Game.Server\\Game.Server.csproj",
+        "exit":  0,
+        "warnings":  28,
+        "errors":  0,
+        "seconds":  7.8
+    },
+    {
+        "project":  "Road\\GameServerScripts\\GameServerScripts.csproj",
+        "exit":  0,
+        "warnings":  470,
+        "errors":  0,
+        "seconds":  8
+    },
+    {
+        "project":  "Road\\Road.Service\\Road.Service.csproj",
+        "exit":  0,
+        "warnings":  0,
+        "errors":  0,
+        "seconds":  8
+    },
+    {
+        "project":  "Road\\SqlDataProvider\\SqlDataProvider.csproj",
+        "exit":  0,
+        "warnings":  0,
+        "errors":  0,
+        "seconds":  5.4
+    }
+]

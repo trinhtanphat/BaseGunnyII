@@ -23,6 +23,8 @@ namespace Fighting.Server
     {
         private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        private const int MaxRoomPlayers = 8;
+
         private RSACryptoServiceProvider m_rsa;
 
         private FightServer m_svr;
@@ -223,6 +225,12 @@ namespace Fighting.Server
             int guildId = pkg.ReadInt();
 
             int count = pkg.ReadInt();
+            if (count < 1 || count > MaxRoomPlayers)
+            {
+                RejectRoomCreate(roomId, "playerCount", count);
+                return;
+            }
+
             int totalLevel = 0;
             IGamePlayer[] players = new IGamePlayer[count];
             for (int i = 0; i < count; i++)
@@ -276,6 +284,11 @@ namespace Fighting.Server
                 List<BufferInfo> infos = new List<BufferInfo>();
 
                 int buffercout = pkg.ReadInt();
+                if (buffercout < 0 || buffercout > pkg.DataLeft / 24)
+                {
+                    RejectRoomCreate(roomId, "bufferCount", buffercout);
+                    return;
+                }
                 for (int j = 0; j < buffercout; j++)
                 {
                     BufferInfo buffinfo = new BufferInfo();
@@ -284,6 +297,7 @@ namespace Fighting.Server
                     buffinfo.BeginDate = pkg.ReadDateTime();
                     buffinfo.ValidDate = pkg.ReadInt();
                     buffinfo.Value = pkg.ReadInt();
+                    buffinfo.ValidCount = pkg.ReadInt();
                     if (info != null)
                         infos.Add(buffinfo);
                 }
@@ -292,6 +306,11 @@ namespace Fighting.Server
                 players[i].CanUseProp = canUserProp;
 
                 int ec = pkg.ReadInt();
+                if (ec < 0 || ec > pkg.DataLeft / 4)
+                {
+                    RejectRoomCreate(roomId, "equipEffectCount", ec);
+                    return;
+                }
                 for (int j = 0; j < ec; j++)
                 {
                     players[i].EquipEffect.Add(pkg.ReadInt());
@@ -323,6 +342,12 @@ namespace Fighting.Server
             {
                 log.ErrorFormat("Room already exists:{0}", roomId);
             }
+        }
+
+        private void RejectRoomCreate(int roomId, string field, int value)
+        {
+            log.ErrorFormat("Reject ROOM_CREATE from {0}: roomId={1}, {2}={3}", TcpEndpoint, roomId, field, value);
+            Disconnect();
         }
 
         public void HandleGameRoomCancel(GSPacketIn pkg)

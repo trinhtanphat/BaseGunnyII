@@ -61,6 +61,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\CallFunctionAction.cs" />
+    <Compile Include="Actions\LivingCreateChildAction.cs" />
+    <Compile Include="Cmd\GameTrusteeshipCommand.cs" />
+    <Compile Include="Cmd\GeneralCommand.cs" />
+    <Compile Include="Cmd\MoveStopCommand.cs" />
+    <Compile Include="Cmd\SelectObjectCommand.cs" />
+    <Compile Include="Cmd\TransmissionGateCommand.cs" />
+    <Compile Include="Cmd\UpdatePlayStep.cs" />
+    <Compile Include="FightBufferInfo.cs" />
+    <Compile Include="LivingConfig.cs" />
+    <Compile Include="PetEffectInfo.cs" />
+    <Compile Include="Phy\Actions\PetAction.cs" />
+    <Compile Include="Phy\Actions\PetActionType.cs" />
+    <Compile Include="WindMgr.cs" />
+    <Compile Include="eMap.cs" />
+    <Compile Include="ePackageTypeLogic.cs" />
+    <Compile Include="ePetEffectType.cs" />
+    <Compile Include="eWeaponType.cs" />
     <Compile Include="AbstractGame.cs" />
     <Compile Include="Actions\BaseAction.cs" />
     <Compile Include="Actions\CheckPVEGameStateAction.cs" />
