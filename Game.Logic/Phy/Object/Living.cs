@@ -921,6 +921,16 @@ namespace Game.Logic.Phy.Object
 
         }
 
+        public virtual int AddBlood(int value, int type)
+        {
+            m_blood += value;
+            if (m_blood > m_maxBlood)
+                m_blood = m_maxBlood;
+            if (m_syncAtTime)
+                m_game.SendGameUpdateHealth(this, type, value);
+            return value;
+        }
+
         public virtual bool TakeDamage(Living source, ref int damageAmount, ref int criticalAmount, string msg)
         {
             bool result = false;
