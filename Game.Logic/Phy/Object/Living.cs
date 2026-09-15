@@ -32,6 +32,7 @@ namespace Game.Logic.Phy.Object
         private Rectangle m_demageRect;
         private int m_state;
         private int m_doAction;
+        private int m_FindCount;
         public int m_direction;
         private eLivingType m_type;
 
@@ -895,6 +896,12 @@ namespace Game.Logic.Phy.Object
                     m_doAction = value;
                 }
             }
+        }
+
+        public int FindCount
+        {
+            get { return m_FindCount; }
+            set { m_FindCount = value; }
         }
 
         public void Seal(Player player, int type, int delay)
