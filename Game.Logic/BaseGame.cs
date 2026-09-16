@@ -1652,9 +1652,10 @@ namespace Game.Logic
                 pkg.WriteInt(p.Energy);
                 pkg.WriteInt(p.psychic);// _loc_28.psychic = _loc_25
                 pkg.WriteInt(p.Dander);
-                pkg.WriteInt(p.Energy);//_loc_26 = _pkg.readInt();//currentPet.MaxMP
-                pkg.WriteInt(p.Energy);//_loc_27 = _pkg.readInt();//currentPet.MP                    
+                pkg.WriteInt(p.PetMaxMP);
+                pkg.WriteInt(p.PetMP);
                 pkg.WriteInt(p.ShootCount);
+                pkg.WriteInt(p.flyCount);
 
             }
             pkg.WriteInt(game.TurnIndex);
