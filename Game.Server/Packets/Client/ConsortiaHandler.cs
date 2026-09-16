@@ -73,6 +73,7 @@ namespace Game.Server.Packets.Client
                                 if (db.AddConsortia(info, ref msg, ref dutyInfo))
                                 {
                                     client.Player.PlayerCharacter.ConsortiaID = info.ConsortiaID;
+                                    client.Player.PlayerCharacter.IsConsortia = true;
                                     client.Player.PlayerCharacter.ConsortiaName = info.ConsortiaName;
                                     client.Player.PlayerCharacter.DutyLevel = dutyInfo.Level;
                                     client.Player.PlayerCharacter.DutyName = dutyInfo.DutyName;
@@ -82,6 +83,7 @@ namespace Game.Server.Packets.Client
                                     msg = "ConsortiaCreateHandler.Success";
                                     result = true;
                                     id = info.ConsortiaID;
+                                    client.Player.OnGuildChanged();
                                     GameServer.Instance.LoginServer.SendConsortiaCreate(id, client.Player.PlayerCharacter.Offer, info.ConsortiaName);
                                 }
                                 else
