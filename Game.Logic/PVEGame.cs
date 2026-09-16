@@ -232,6 +232,28 @@ namespace Game.Logic
             return npc;
         }
 
+public SimpleNpc CreateNpc(int npcId, int x, int y, int type, int direction, LivingConfig config)
+	{
+		NpcInfo npcInfoById = NPCInfoMgr.GetNpcInfoById(npcId);
+		SimpleNpc simpleNpc = new SimpleNpc(PhysicalId++, this, npcInfoById, type, direction);
+		if (config != null)
+		{
+			simpleNpc.Config = config;
+		}
+		if (simpleNpc.Config.ReduceBloodStart > 1)
+		{
+			simpleNpc.Blood = npcInfoById.Blood / simpleNpc.Config.ReduceBloodStart;
+		}
+		else
+		{
+			simpleNpc.Reset();
+		}
+		simpleNpc.SetXY(x, y);
+		AddLiving(simpleNpc);
+		simpleNpc.StartMoving();
+		return simpleNpc;
+	}
+
         public SimpleNpc CreateNpc(int npcId, int x, int y, int type)
         {
             NpcInfo npcInfo = NPCInfoMgr.GetNpcInfoById(npcId);
