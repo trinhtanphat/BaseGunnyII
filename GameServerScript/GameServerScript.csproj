@@ -467,6 +467,7 @@
     <Compile Include="AI\Messions\CNM1171.cs" />
     <Compile Include="AI\Messions\CNM1172.cs" />
     <Compile Include="AI\Messions\CNM1173.cs" />
+    <Compile Include="AI\Messions\CNM1175.cs" />
     <Compile Include="AI\Messions\CNM1176.cs" />
     <Compile Include="AI\Messions\CNM1177.cs" />
     <Compile Include="AI\Messions\CNM1178.cs" />
@@ -474,6 +475,7 @@
     <Compile Include="AI\Messions\CSM1071.cs" />
     <Compile Include="AI\Messions\CSM1072.cs" />
     <Compile Include="AI\Messions\CSM1073.cs" />
+    <Compile Include="AI\Messions\CSM1075.cs" />
     <Compile Include="AI\Messions\CSM1076.cs" />
     <Compile Include="AI\Messions\CSM1077.cs" />
     <Compile Include="AI\Messions\CSM1078.cs" />
@@ -481,6 +483,7 @@
     <Compile Include="AI\Messions\CTM1371.cs" />
     <Compile Include="AI\Messions\CTM1372.cs" />
     <Compile Include="AI\Messions\CTM1373.cs" />
+    <Compile Include="AI\Messions\CTM1375.cs" />
     <Compile Include="AI\Messions\CTM1376.cs" />
     <Compile Include="AI\Messions\CTM1377.cs" />
     <Compile Include="AI\Messions\CTM1378.cs" />
@@ -490,10 +493,13 @@
     <Compile Include="AI\Messions\DCN4103.cs" />
     <Compile Include="AI\Messions\DCT4301.cs" />
     <Compile Include="AI\Messions\DCT4303.cs" />
+    <Compile Include="AI\Messions\DLH5201.cs" />
     <Compile Include="AI\Messions\DLH5202.cs" />
     <Compile Include="AI\Messions\DLH5203.cs" />
+    <Compile Include="AI\Messions\DLN5101.cs" />
     <Compile Include="AI\Messions\DLN5102.cs" />
     <Compile Include="AI\Messions\DLN5103.cs" />
+    <Compile Include="AI\Messions\DLT5301.cs" />
     <Compile Include="AI\Messions\DLT5302.cs" />
     <Compile Include="AI\Messions\DLT5303.cs" />
     <Compile Include="AI\Messions\ETH3201.cs" />

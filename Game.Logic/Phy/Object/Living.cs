@@ -33,6 +33,7 @@ namespace Game.Logic.Phy.Object
         private Rectangle m_demageRect;
         private int m_state;
         private int m_doAction;
+        private int m_FallCount;
         private int m_FindCount;
         public int m_direction;
         private eLivingType m_type;
@@ -859,6 +860,18 @@ namespace Game.Logic.Phy.Object
                 }
             }
         }
+        public void SetSeal(bool state)
+        {
+            if (m_isSeal != state)
+            {
+                m_isSeal = state;
+                if (m_syncAtTime)
+                {
+                    m_game.SendGamePlayerProperty(this, "silenceMany", state.ToString());
+                }
+            }
+        }
+
         /*
         public void SetSeal(bool state, int type)
         {
@@ -904,6 +917,12 @@ namespace Game.Logic.Phy.Object
                     m_doAction = value;
                 }
             }
+        }
+
+        public int FallCount
+        {
+            get { return m_FallCount; }
+            set { m_FallCount = value; }
         }
 
         public int FindCount

@@ -1,0 +1,21 @@
+# Phase 2 Living state mission unlock
+
+- Baseline HEAD: `b210c35` on `recovery/runtime-semantic-phase2-20260915`.
+- Labyrinth gate-state cluster was reviewed first and remains deferred.
+- `CreateGate` is not standalone: runtime behavior also uses `CanEnterGate`, `CanShowBigBox`, `ShowBigBox`, `GameOverMovie`, `EnterNextFloor`, and `CheckPVEGameStateAction` integration.
+- Full Labyrinth restoration additionally depends on player labyrinth persistence/packet APIs absent from canonical; no partial gate mutation was made.
+- TDD guard started RED for missing `Living.FallCount` and `Living.SetSeal(bool)` runtime contracts.
+- Exact runtime `FallCount` backing field/property was restored.
+- Exact runtime `SetSeal(bool)` state mutation and `silenceMany` property packet were restored.
+- Guard is GREEN for all five Living semantic checks.
+- Promoted missions: `CNM1175`, `CSM1075`, `CTM1375`, `DLH5201`, `DLN5101`, `DLT5301`.
+- All 6 promoted files are exact recovered source after C# 7.3 namespace normalization only.
+- `Game.Logic` Release/net35 build: exit 0.
+- Full `GameServerScript` Release/net35 rebuild with `PostBuildEvent` disabled: exit 0, 0 compiler errors.
+- Compile mappings: 6/6.
+- Sensitive hits: 0.
+- Artifact hits: 0.
+- `git diff --check`: PASS.
+- Inventory: runtime-only types `244 -> 238`; canonical-present `672 -> 678`; variant-conflict remains `59`.
+- Runtime-only members `2802 -> 2735`.
+- No production deployment or service restart was performed.
