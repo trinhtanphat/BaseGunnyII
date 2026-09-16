@@ -57,7 +57,7 @@ namespace Fighting.Service.action
         /// <param name="parameters"></param>
         public void OnAction(Hashtable parameters)
         {
-            Console.WriteLine("This server DDTankII, edit and build by Trminhpc!");
+            Console.WriteLine("GUNNY II fix by trinhtanphat!");
             Console.WriteLine("Starting FightingServer ... please wait a moment!");
 
             FightServerConfig config = new FightServerConfig();

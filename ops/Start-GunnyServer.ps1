@@ -56,7 +56,33 @@ function Remove-DuplicateGunnyProcesses([string]$Name,[string]$ExpectedPath,[int
         Wait-Process -Id $proc.ProcessId -Timeout 10 -ErrorAction SilentlyContinue
     }
 }
-$mutex = New-Object System.Threading.Mutex($false,'Global\GunnyServerStartOrder')
+function New-GunnyStartupMutex {
+    $name = 'Global\GunnyServerStartOrder'
+    $sharedRights = [System.Security.AccessControl.MutexRights]::Synchronize -bor [System.Security.AccessControl.MutexRights]::Modify
+    try {
+        return [System.Threading.Mutex]::OpenExisting($name,$sharedRights)
+    }
+    catch [System.Threading.WaitHandleCannotBeOpenedException] {
+        # No existing mutex: create it with an ACL shared by SYSTEM and interactive users.
+    }
+
+    $security = New-Object System.Security.AccessControl.MutexSecurity
+    $authenticatedUsers = New-Object System.Security.Principal.SecurityIdentifier([System.Security.Principal.WellKnownSidType]::AuthenticatedUserSid,$null)
+    $system = New-Object System.Security.Principal.SecurityIdentifier([System.Security.Principal.WellKnownSidType]::LocalSystemSid,$null)
+    $allow = [System.Security.AccessControl.AccessControlType]::Allow
+    $security.AddAccessRule((New-Object System.Security.AccessControl.MutexAccessRule($authenticatedUsers,$sharedRights,$allow)))
+    $security.AddAccessRule((New-Object System.Security.AccessControl.MutexAccessRule($system,[System.Security.AccessControl.MutexRights]::FullControl,$allow)))
+
+    $createdNew = $false
+    try {
+        return [System.Threading.Mutex]::new($false,$name,[ref]$createdNew,$security)
+    }
+    catch [System.UnauthorizedAccessException] {
+        # Another compatible creator may have won the race between OpenExisting and create.
+        return [System.Threading.Mutex]::OpenExisting($name,$sharedRights)
+    }
+}
+$mutex = New-GunnyStartupMutex
 $lockAcquired = $false
 try {
     try {

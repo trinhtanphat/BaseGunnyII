@@ -25,6 +25,7 @@ public class ConsoleStart : IAction
 
 	public void OnAction(Hashtable parameters)
 	{
+		Console.WriteLine("GUNNY II fix by trinhtanphat!");
 		Console.WriteLine("Starting FightingServer ... please wait a moment!");
 		FightServerConfig fightServerConfig = new FightServerConfig();
 		try

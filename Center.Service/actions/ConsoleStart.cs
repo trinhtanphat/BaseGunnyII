@@ -73,7 +73,7 @@ namespace Game.Service.actions
         /// <param name="parameters"></param>
         public void OnAction(Hashtable parameters)
         {
-            Console.WriteLine("This server DDTankII, edit and build by Trminhpc!");
+            Console.WriteLine("GUNNY II fix by trinhtanphat!");
             Console.WriteLine("Starting GameServer ... please wait a moment!");
             CenterServer.CreateInstance(new CenterServerConfig());
             StartServer();
