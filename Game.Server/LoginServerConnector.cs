@@ -581,6 +581,7 @@ namespace Game.Server
                     p.BeginChanges();
 
                     p.PlayerCharacter.ConsortiaID = consortiaID;
+                    p.PlayerCharacter.IsConsortia = true;
                     p.PlayerCharacter.ConsortiaName = consortiaName;
                     p.PlayerCharacter.DutyName = dutyName;
                     p.PlayerCharacter.DutyLevel = level;

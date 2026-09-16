@@ -60,7 +60,8 @@ namespace Game.Server.Quests
             using (ConsortiaBussiness db = new ConsortiaBussiness())
             {
                 ConsortiaInfo info = db.GetConsortiaSingle(player.PlayerCharacter.ConsortiaID);
-                if (info == null)
+                ConsortiaUserInfo membership = db.GetConsortiaUsersByUserID(player.PlayerCharacter.ID);
+                if (info == null || membership == null || membership.ConsortiaID != player.PlayerCharacter.ConsortiaID)
                 {
                     Value = required;
                     return false;
