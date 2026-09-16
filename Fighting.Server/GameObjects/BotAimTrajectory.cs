@@ -11,19 +11,10 @@ namespace Fighting.Server.GameObjects
 
         public static bool IsViable(float startX, float startY, int force, int angle,
             float mass, float airResistance, float gravity, float wind,
-            Rectangle targetBounds, int blastRadius, int mapWidth, int mapHeight,
-            Func<Rectangle, bool> isRectangleEmpty)
-        {
-            return IsViable(startX, startY, force, angle, mass, airResistance, gravity, wind,
-                new Rectangle[] { targetBounds }, blastRadius, mapWidth, mapHeight, isRectangleEmpty);
-        }
-
-        public static bool IsViable(float startX, float startY, int force, int angle,
-            float mass, float airResistance, float gravity, float wind,
             IList<Rectangle> targetBounds, int blastRadius, int mapWidth, int mapHeight,
-            Func<Rectangle, bool> isRectangleEmpty)
+            Func<Rectangle, bool> isRectangleEmpty, Func<int, int, double> targetDamageDistance)
         {
-            if (force <= 0 || mass <= 0 || isRectangleEmpty == null ||
+            if (force <= 0 || mass <= 0 || isRectangleEmpty == null || targetDamageDistance == null ||
                 targetBounds == null || targetBounds.Count == 0)
                 return false;
 
@@ -46,7 +37,7 @@ namespace Fighting.Server.GameObjects
                 int px = (int)x;
                 int py = (int)y;
                 int segment = TraceSegment(previousX, previousY, px, py, targetBounds, blastRadius,
-                    mapWidth, mapHeight, isRectangleEmpty);
+                    mapWidth, mapHeight, isRectangleEmpty, targetDamageDistance);
                 if (segment != 0)
                     return segment > 0;
                 previousX = px;
@@ -56,7 +47,8 @@ namespace Fighting.Server.GameObjects
         }
 
         private static int TraceSegment(int x1, int y1, int x2, int y2, IList<Rectangle> targetBounds,
-            int blastRadius, int mapWidth, int mapHeight, Func<Rectangle, bool> isRectangleEmpty)
+            int blastRadius, int mapWidth, int mapHeight, Func<Rectangle, bool> isRectangleEmpty,
+            Func<int, int, double> targetDamageDistance)
         {
             int dx = x2 - x1;
             int dy = y2 - y1;
@@ -83,7 +75,7 @@ namespace Fighting.Server.GameObjects
                 if (IntersectsAny(projectile, targetBounds))
                     return 1;
                 if (!isRectangleEmpty(projectile))
-                    return BoundDistance(px, py, targetBounds) < blastRadius ? 1 : -1;
+                    return targetDamageDistance(px, py) < blastRadius ? 1 : -1;
                 if (px < 0 || px >= mapWidth || py >= mapHeight)
                     return -1;
             }
@@ -100,30 +92,5 @@ namespace Fighting.Server.GameObjects
             return false;
         }
 
-        private static double BoundDistance(int x, int y, IList<Rectangle> targetBounds)
-        {
-            double minDistance = double.MaxValue;
-            foreach (Rectangle rect in targetBounds)
-            {
-                for (int sampleX = rect.X; sampleX <= rect.X + rect.Width; sampleX += 10)
-                {
-                    minDistance = Math.Min(minDistance, Distance(x, y, sampleX, rect.Y));
-                    minDistance = Math.Min(minDistance, Distance(x, y, sampleX, rect.Y + rect.Height));
-                }
-                for (int sampleY = rect.Y; sampleY <= rect.Y + rect.Height; sampleY += 10)
-                {
-                    minDistance = Math.Min(minDistance, Distance(x, y, rect.X, sampleY));
-                    minDistance = Math.Min(minDistance, Distance(x, y, rect.X + rect.Width, sampleY));
-                }
-            }
-            return minDistance;
-        }
-
-        private static double Distance(int x1, int y1, int x2, int y2)
-        {
-            double dx = x1 - x2;
-            double dy = y1 - y2;
-            return Math.Sqrt(dx * dx + dy * dy);
-        }
     }
 }

@@ -146,7 +146,11 @@ namespace Fighting.Server.GameObjects
                 map.airResistance * ball.DragIndex,
                 map.gravity * ball.Weight * ball.Mass, map.wind * ball.Wind,
                 targetBounds, ball.Radii, map.Bound.Width, map.Bound.Height,
-                delegate(Rectangle rect) { return map.IsRectangleEmpty(rect); });
+                delegate(Rectangle rect) { return map.IsRectangleEmpty(rect); },
+                delegate(int impactX, int impactY)
+                {
+                    return target.BoundDistance(new Point(impactX, impactY));
+                });
         }
         private static bool TryFindAccurateShot(Player player, Player target,
             out int aimX, out int aimY, out int force, out int angle)
