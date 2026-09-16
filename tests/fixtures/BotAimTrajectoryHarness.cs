@@ -26,8 +26,11 @@ class BotAimTrajectoryHarness
         Console.WriteLine("BLOCKED=" + blocked);
         Console.WriteLine("BLAST_HIT=" + blastHit);
         Console.WriteLine("EDGE_SPLASH_REJECTED=" + !edgeSplashCandidate);
+        bool velocityParity = !BotAimTrajectory.IsViable(0, 0, 50, 5, 1, 0, 0, 0,
+            new Rectangle(301, 28, 1, 1), 1, 1000, 600, clear);
         Console.WriteLine("TUNNELING_BLOCKED=" + tunnelingBlocked);
-        bool ok = clearHit && !blocked && blastHit && !edgeSplashCandidate && !tunnelingBlocked;
+        Console.WriteLine("VELOCITY_TRUNCATION_PARITY=" + velocityParity);
+        bool ok = clearHit && !blocked && blastHit && !edgeSplashCandidate && !tunnelingBlocked && velocityParity;
         Console.WriteLine("BOT_AIM_TRAJECTORY_BEHAVIOR_PASS=" + ok);
         return ok ? 0 : 9;
     }

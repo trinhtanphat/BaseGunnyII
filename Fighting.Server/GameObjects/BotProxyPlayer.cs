@@ -138,9 +138,12 @@ namespace Fighting.Server.GameObjects
             if (ball == null || player.Game == null || player.Game.Map == null)
                 return false;
 
-            Rectangle targetBounds = Rectangle.Empty;
-            foreach (Rectangle rect in target.GetDirectBoudRect())
-                targetBounds = targetBounds.IsEmpty ? rect : Rectangle.Union(targetBounds, rect);
+            Rectangle targetBounds = target.Bound;
+            targetBounds.Offset(target.X, target.Y);
+            Rectangle targetBounds1 = target.Bound1;
+            targetBounds1.Offset(target.X, target.Y);
+            if (targetBounds1.Width > 0 && targetBounds1.Height > 0)
+                targetBounds = Rectangle.Union(targetBounds, targetBounds1);
             var map = player.Game.Map;
             Point shootPoint = player.GetShootPoint();
             return BotAimTrajectory.IsViable(shootPoint.X, shootPoint.Y, force, angle, ball.Mass,
