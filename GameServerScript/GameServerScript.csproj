@@ -443,6 +443,10 @@
     <Compile Include="AI\NPC\ThirteenSimpleAntBoss.cs" />
     <Compile Include="AI\NPC\ThirteenTerrorAntBoss.cs" />
     <Compile Include="AI\NPC\YearMonster.cs" />
+    <Compile Include="AI\NPC\QXBoss70001.cs" />
+    <Compile Include="AI\NPC\SeventhHardSecondBoss.cs" />
+    <Compile Include="AI\NPC\SeventhNormalSecondBoss.cs" />
+    <Compile Include="AI\NPC\SeventhSimpleSecondBoss.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
