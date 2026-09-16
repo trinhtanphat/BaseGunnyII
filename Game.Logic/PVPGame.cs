@@ -358,10 +358,6 @@ namespace Game.Logic
             {
                 int templateID = -100;
                 int itemCount = 500;
-                int gold = 0;
-                int money = 0;
-                int giftToken = 0;
-                int medal = 0;
                 List<ItemInfo> infos = null;
                 if (DropInventory.CardDrop(RoomType, ref infos) && infos != null)
                 {
@@ -370,28 +366,17 @@ namespace Game.Logic
                         if (info == null)
                             continue;
 
-                        switch (info.TemplateID)
-                        {
-                            case -100: gold += info.Count; break;
-                            case -200: money += info.Count; break;
-                            case -300: giftToken += info.Count; break;
-                            case 11408: medal += info.Count; break;
-                        }
-                        if (info != null)
-                        {
-                            templateID = info.TemplateID;
-                            itemCount = info.Count;
-                        }
+                        templateID = info.TemplateID;
+                        itemCount = info.Count;
                     }
                 }
 
-                switch (templateID)
+                if (templateID == 0)
                 {
-                    case -100: itemCount = gold > 0 ? gold : 500; break;
-                    case -300: itemCount = giftToken; break;
-                    case -200: itemCount = money; break;
-                    case 0: templateID = -100; itemCount = 500; break;
+                    templateID = -100;
+                    itemCount = 500;
                 }
+
                 pkg.WriteByte((byte)cardIndex);
                 pkg.WriteInt(templateID);
                 pkg.WriteInt(itemCount);
