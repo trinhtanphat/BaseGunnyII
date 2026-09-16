@@ -11,6 +11,8 @@ namespace Game.Logic
         SimpleNpc,
         SimpleNpc1,
         SimpleBoss,
-        SimpleBoss1
+        SimpleBoss1,
+        ClearEnemy,
+        BossSpecialDie
     }
 }

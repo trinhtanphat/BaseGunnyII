@@ -262,6 +262,18 @@ namespace Game.Logic
             return npc;
         }
 
+        public SimpleBoss CreateBoss(int npcId, int x, int y, int direction, int type, string action)
+        {
+            NpcInfo npcInfo = NPCInfoMgr.GetNpcInfoById(npcId);
+            SimpleBoss boss = new SimpleBoss(PhysicalId++, this, npcInfo, direction, type, action);
+            boss.Config = BaseLivingConfig();
+            boss.Reset();
+            boss.SetXY(x, y);
+            AddLiving(boss);
+            boss.StartMoving();
+            return boss;
+        }
+
         public SimpleBoss CreateBoss(int npcId, int x, int y, int direction, int type)
         {
             NpcInfo npcInfo = NPCInfoMgr.GetNpcInfoById(npcId);

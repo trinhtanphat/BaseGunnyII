@@ -1216,7 +1216,7 @@ namespace Game.Logic
             pkg.WriteInt(living.Id);
             pkg.WriteString(living.Name);
             pkg.WriteString(living.ModelId);
-            pkg.WriteString("");//doAction
+            pkg.WriteString(living.ActionStr);//doAction
             pkg.WriteInt(living.X);
             pkg.WriteInt(living.Y);
             pkg.WriteInt(living.Blood);

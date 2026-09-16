@@ -27,6 +27,8 @@ namespace Game.Logic.Phy.Object
 
         private List<SimpleNpc> m_child = new List<SimpleNpc>();
 
+        private List<SimpleBoss> m_boss = new List<SimpleBoss>();
+
         private Dictionary<Player, int> m_mostHateful;
 
         public SimpleBoss(int id, BaseGame game, NpcInfo npcInfo, int direction, int type)
@@ -54,6 +56,42 @@ namespace Game.Logic.Phy.Object
             try
             {
 
+                m_ai.OnCreated();
+            }
+            catch (Exception ex)
+            {
+                log.ErrorFormat("SimpleBoss Created error:{1}", ex);
+            }
+        }
+
+        public SimpleBoss(int id, BaseGame game, NpcInfo npcInfo, int direction, int type, string actions)
+            : base(id, game, npcInfo.Camp, npcInfo.Name, npcInfo.ModelID, npcInfo.Blood, npcInfo.Immunity, direction)
+        {
+            switch (type)
+            {
+                case 0:
+                    Type = eLivingType.SimpleBoss;
+                    break;
+                case 1:
+                    Type = eLivingType.ClearEnemy;
+                    break;
+                default:
+                    Type = (eLivingType)type;
+                    break;
+            }
+            ActionStr = actions;
+            m_mostHateful = new Dictionary<Player, int>();
+            m_npcInfo = npcInfo;
+            m_ai = ScriptMgr.CreateInstance(npcInfo.Script) as ABrain;
+            if (m_ai == null)
+            {
+                log.ErrorFormat("Can't create abrain :{0}", npcInfo.Script);
+                m_ai = SimpleBrain.Simple;
+            }
+            m_ai.Game = m_game;
+            m_ai.Body = this;
+            try
+            {
                 m_ai.OnCreated();
             }
             catch (Exception ex)
@@ -116,6 +154,27 @@ namespace Game.Logic.Phy.Object
                 return Child.Count - count;
             }
         }
+        public List<SimpleBoss> Boss
+        {
+            get { return m_boss; }
+        }
+
+        public int CurrentLivingBossNum
+        {
+            get
+            {
+                int count = 0;
+                foreach (SimpleBoss boss in Boss)
+                {
+                    if (boss.IsLiving == false)
+                    {
+                        count++;
+                    }
+                }
+                return Boss.Count - count;
+            }
+        }
+
         public override bool TakeDamage(Living source, ref int damageAmount, ref int criticalAmount, string msg)
         {
             bool result = false;
@@ -195,6 +254,27 @@ namespace Game.Logic.Phy.Object
                 CreateChild(id, brithPoint[index].X, brithPoint[index].Y, 4, maxCount);
             }
           
+        }
+
+        public void CreateBoss(int id, int x, int y, int direction, int disToSecond, int maxCount, string action)
+        {
+            CreateBoss(id, x, y, direction, 1, disToSecond, maxCount, action);
+        }
+
+        public void CreateBoss(int id, int x, int y, int direction, int type, int disToSecond, int maxCount, string action)
+        {
+            if (CurrentLivingBossNum < maxCount)
+            {
+                if (maxCount - CurrentLivingNpcNum >= 2)
+                {
+                    Boss.Add(((PVEGame)Game).CreateBoss(id, x + disToSecond, y, direction, type, action));
+                    Boss.Add(((PVEGame)Game).CreateBoss(id, x, y, direction, type, action));
+                }
+                else if (maxCount - CurrentLivingBossNum == 1)
+                {
+                    Boss.Add(((PVEGame)Game).CreateBoss(id, x, y, direction, type, action));
+                }
+            }
         }
 
         public void RandomSay(string[] msg, int type, int delay, int finishTime)

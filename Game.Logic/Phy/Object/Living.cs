@@ -28,6 +28,7 @@ namespace Game.Logic.Phy.Object
         protected int m_blood;
         private int m_team;
         private string m_name;
+        private string m_action;
         private string m_modelId;
         private Rectangle m_demageRect;
         private int m_state;
@@ -75,6 +76,7 @@ namespace Game.Logic.Phy.Object
             m_game = game;
             m_team = team;
             m_name = name;
+            m_action = "";
             m_modelId = modelId;
             m_maxBlood = maxBlood;
             m_direction = direction;
@@ -99,6 +101,12 @@ namespace Game.Logic.Phy.Object
         public string ModelId
         {
             get { return m_modelId; }
+        }
+
+        public string ActionStr
+        {
+            get { return m_action; }
+            set { m_action = value; }
         }
 
         public int Team
