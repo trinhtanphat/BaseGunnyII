@@ -138,16 +138,19 @@ namespace Fighting.Server.GameObjects
             if (ball == null || player.Game == null || player.Game.Map == null)
                 return false;
 
-            Rectangle targetBounds = Rectangle.Empty;
-            foreach (Rectangle rect in target.GetDirectBoudRect())
-                targetBounds = targetBounds.IsEmpty ? rect : Rectangle.Union(targetBounds, rect);
+            List<Rectangle> targetBounds = target.GetDirectBoudRect();
+
             var map = player.Game.Map;
             Point shootPoint = player.GetShootPoint();
             return BotAimTrajectory.IsViable(shootPoint.X, shootPoint.Y, force, angle, ball.Mass,
                 map.airResistance * ball.DragIndex,
                 map.gravity * ball.Weight * ball.Mass, map.wind * ball.Wind,
                 targetBounds, ball.Radii, map.Bound.Width, map.Bound.Height,
-                delegate(Rectangle rect) { return map.IsRectangleEmpty(rect); });
+                delegate(Rectangle rect) { return map.IsRectangleEmpty(rect); },
+                delegate(int impactX, int impactY)
+                {
+                    return target.BoundDistance(new Point(impactX, impactY));
+                });
         }
         private static bool TryFindAccurateShot(Player player, Player target,
             out int aimX, out int aimY, out int force, out int angle)
