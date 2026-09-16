@@ -367,7 +367,16 @@ namespace Game.Logic
                 {
                     foreach (ItemInfo info in infos)
                     {
-                        ItemInfo.FindSpecialItemInfo(info, ref gold, ref money, ref giftToken, ref medal);
+                        if (info == null)
+                            continue;
+
+                        switch (info.TemplateID)
+                        {
+                            case -100: gold += info.Count; break;
+                            case -200: money += info.Count; break;
+                            case -300: giftToken += info.Count; break;
+                            case 11408: medal += info.Count; break;
+                        }
                         if (info != null)
                         {
                             templateID = info.TemplateID;
