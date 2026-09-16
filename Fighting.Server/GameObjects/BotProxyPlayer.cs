@@ -149,7 +149,7 @@ namespace Fighting.Server.GameObjects
                 delegate(Rectangle rect) { return map.IsRectangleEmpty(rect); },
                 delegate(int impactX, int impactY)
                 {
-                    return target.BoundDistance(new Point(impactX, impactY));
+                    return target.Distance(new Point(impactX, impactY));
                 });
         }
         private static bool TryFindAccurateShot(Player player, Player target,
