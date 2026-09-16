@@ -58,6 +58,7 @@ namespace Game.Logic.Phy.Object
 
         public int TurnNum;
         public int TotalHurt;
+        public int TotalDameLiving;
         public int TotalHitTargetCount;
         public int TotalShootCount;
         public int TotalKill;

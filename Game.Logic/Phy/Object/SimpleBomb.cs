@@ -268,6 +268,10 @@ namespace Game.Logic.Phy.Object
                                     m_actions.Add(new BombAction(m_lifeTime, ActionType.UNFORZEN, p.Id, 0, 0, 0));
                                 }
 
+                                if (m_owner is Player && p is SimpleBoss)
+                                {
+                                    m_owner.TotalDameLiving += critical + damage;
+                                }
                                 if (p is Player)
                                 {
                                     m_actions.Add(new BombAction(m_lifeTime, ActionType.DANDER, p.Id, ((Player)p).Dander, 0, 0));
