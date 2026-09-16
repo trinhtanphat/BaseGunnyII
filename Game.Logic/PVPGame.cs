@@ -333,7 +333,59 @@ namespace Game.Logic
             player.PlayerDetail.AddMedal(medal); //trminhpc
             //SendGamePlayerTakeCard(player, index, medal, gold, money, giftToken);
             SendGamePlayerTakeCard(player, index, templateID, count, false);
+            SendShowCards(player);
             return true;
+        }
+
+        private void SendShowCards(Player player)
+        {
+            if (player == null || player.PlayerDetail == null)
+                return;
+
+            GSPacketIn pkg = new GSPacketIn((byte)ePackageType.GAME_CMD);
+            pkg.WriteByte((byte)eTankCmdType.SHOW_CARDS);
+            List<int> cardIndexes = new List<int>();
+            for (int i = 0; i < Cards.Length; i++)
+            {
+                if (Cards[i] == 0)
+                    cardIndexes.Add(i);
+            }
+            pkg.WriteInt(cardIndexes.Count);
+
+            foreach (int cardIndex in cardIndexes)
+            {
+                int templateID = -100;
+                int itemCount = 500;
+                int gold = 0;
+                int money = 0;
+                int giftToken = 0;
+                int medal = 0;
+                List<ItemInfo> infos = null;
+                if (DropInventory.CardDrop(RoomType, ref infos) && infos != null)
+                {
+                    foreach (ItemInfo info in infos)
+                    {
+                        ItemInfo.FindSpecialItemInfo(info, ref gold, ref money, ref giftToken, ref medal);
+                        if (info != null)
+                        {
+                            templateID = info.TemplateID;
+                            itemCount = info.Count;
+                        }
+                    }
+                }
+
+                switch (templateID)
+                {
+                    case -100: itemCount = gold > 0 ? gold : 500; break;
+                    case -300: itemCount = giftToken; break;
+                    case -200: itemCount = money; break;
+                    case 0: templateID = -100; itemCount = 500; break;
+                }
+                pkg.WriteByte((byte)cardIndex);
+                pkg.WriteInt(templateID);
+                pkg.WriteInt(itemCount);
+            }
+            player.PlayerDetail.SendTCP(pkg);
         }
 
         public void GameOver()
