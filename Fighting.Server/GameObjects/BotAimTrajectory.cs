@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Fighting.Server.GameObjects
@@ -13,7 +14,17 @@ namespace Fighting.Server.GameObjects
             Rectangle targetBounds, int blastRadius, int mapWidth, int mapHeight,
             Func<Rectangle, bool> isRectangleEmpty)
         {
-            if (force <= 0 || mass <= 0 || isRectangleEmpty == null)
+            return IsViable(startX, startY, force, angle, mass, airResistance, gravity, wind,
+                new Rectangle[] { targetBounds }, blastRadius, mapWidth, mapHeight, isRectangleEmpty);
+        }
+
+        public static bool IsViable(float startX, float startY, int force, int angle,
+            float mass, float airResistance, float gravity, float wind,
+            IList<Rectangle> targetBounds, int blastRadius, int mapWidth, int mapHeight,
+            Func<Rectangle, bool> isRectangleEmpty)
+        {
+            if (force <= 0 || mass <= 0 || isRectangleEmpty == null ||
+                targetBounds == null || targetBounds.Count == 0)
                 return false;
 
             double radians = angle / 180.0 * Math.PI;
@@ -44,7 +55,7 @@ namespace Fighting.Server.GameObjects
             return false;
         }
 
-        private static int TraceSegment(int x1, int y1, int x2, int y2, Rectangle targetBounds,
+        private static int TraceSegment(int x1, int y1, int x2, int y2, IList<Rectangle> targetBounds,
             int blastRadius, int mapWidth, int mapHeight, Func<Rectangle, bool> isRectangleEmpty)
         {
             int dx = x2 - x1;
@@ -69,21 +80,49 @@ namespace Fighting.Server.GameObjects
                     px = y2 == y1 ? x1 : (py - y1) * (x2 - x1) / (y2 - y1) + x1;
                 }
                 Rectangle projectile = new Rectangle(px - 3, py - 3, 6, 6);
-                if (projectile.IntersectsWith(targetBounds))
+                if (IntersectsAny(projectile, targetBounds))
                     return 1;
                 if (!isRectangleEmpty(projectile))
-                    return DistanceToRectangleCenter(px, py, targetBounds) < blastRadius ? 1 : -1;
+                    return BoundDistance(px, py, targetBounds) < blastRadius ? 1 : -1;
                 if (px < 0 || px >= mapWidth || py >= mapHeight)
                     return -1;
             }
             return 0;
         }
-        private static double DistanceToRectangleCenter(int x, int y, Rectangle rect)
+
+        private static bool IntersectsAny(Rectangle projectile, IList<Rectangle> targetBounds)
         {
-            double centerX = rect.Left + rect.Width / 2.0;
-            double centerY = rect.Top + rect.Height / 2.0;
-            double dx = x - centerX;
-            double dy = y - centerY;
+            foreach (Rectangle rect in targetBounds)
+            {
+                if (projectile.IntersectsWith(rect))
+                    return true;
+            }
+            return false;
+        }
+
+        private static double BoundDistance(int x, int y, IList<Rectangle> targetBounds)
+        {
+            double minDistance = double.MaxValue;
+            foreach (Rectangle rect in targetBounds)
+            {
+                for (int sampleX = rect.X; sampleX <= rect.X + rect.Width; sampleX += 10)
+                {
+                    minDistance = Math.Min(minDistance, Distance(x, y, sampleX, rect.Y));
+                    minDistance = Math.Min(minDistance, Distance(x, y, sampleX, rect.Y + rect.Height));
+                }
+                for (int sampleY = rect.Y; sampleY <= rect.Y + rect.Height; sampleY += 10)
+                {
+                    minDistance = Math.Min(minDistance, Distance(x, y, rect.X, sampleY));
+                    minDistance = Math.Min(minDistance, Distance(x, y, rect.X + rect.Width, sampleY));
+                }
+            }
+            return minDistance;
+        }
+
+        private static double Distance(int x1, int y1, int x2, int y2)
+        {
+            double dx = x1 - x2;
+            double dy = y1 - y2;
             return Math.Sqrt(dx * dx + dy * dy);
         }
     }

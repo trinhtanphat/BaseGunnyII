@@ -138,9 +138,8 @@ namespace Fighting.Server.GameObjects
             if (ball == null || player.Game == null || player.Game.Map == null)
                 return false;
 
-            Rectangle targetBounds = Rectangle.Empty;
-            foreach (Rectangle rect in target.GetDirectBoudRect())
-                targetBounds = targetBounds.IsEmpty ? rect : Rectangle.Union(targetBounds, rect);
+            List<Rectangle> targetBounds = target.GetDirectBoudRect();
+
             var map = player.Game.Map;
             Point shootPoint = player.GetShootPoint();
             return BotAimTrajectory.IsViable(shootPoint.X, shootPoint.Y, force, angle, ball.Mass,
