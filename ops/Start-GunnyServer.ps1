@@ -1,7 +1,7 @@
 param(
     [switch]$PlanOnly,
     [switch]$Restart,
-    [int]$TimeoutSeconds = 30
+    [int]$TimeoutSeconds = 120
 )
 $ErrorActionPreference = 'Stop'
 $serverRoot = 'C:\Gunny\GunnyFileExe\SERVER'
