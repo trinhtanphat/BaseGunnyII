@@ -48,7 +48,7 @@ public class ConsoleStart : IAction
 	{
 		Console.ForegroundColor = ConsoleColor.Yellow;
 		Console.Title = "GUNNYII";
-		Console.WriteLine("GUNNY II fix by hoang7625!");
+		Console.WriteLine("GUNNY II fix by trinhtanphat!");
 		Console.WriteLine("Dang chay Road.Service... xin doi!");
 		GameServer.CreateInstance(new GameServerConfig());
 		GameServer.Instance.Start();

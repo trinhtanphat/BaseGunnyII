@@ -1202,6 +1202,25 @@ public class ItemInfo : DataObject
 		return _template.TemplateID == 112108 || _template.TemplateID == 112150;
 	}
 
+	public static void FindSpecialItemInfo(ItemInfo info, ref int gold, ref int money, ref int giftToken, ref int medal)
+	{
+		switch (info.TemplateID)
+		{
+		case -100:
+			gold += info.Count;
+			break;
+		case -200:
+			money += info.Count;
+			break;
+		case -300:
+			giftToken += info.Count;
+			break;
+		case 11408:
+			medal += info.Count;
+			break;
+		}
+	}
+
 	public static void OpenHole(ref ItemInfo item)
 	{
 		string[] array = item.Template.Hole.Split('|');
