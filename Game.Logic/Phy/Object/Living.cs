@@ -270,6 +270,13 @@ namespace Game.Logic.Phy.Object
             }
         }
 
+        public virtual void PickBall(Ball ball)
+        {
+            ball.Die();
+            string currentAction = ball.CurrentAction;
+            ball.PlayMovie(ball.ActionMapping[currentAction], 1000, 0);
+        }
+
         public override void PrepareNewTurn()
         {
             ShootMovieDelay = 0;

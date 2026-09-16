@@ -15,6 +15,7 @@ namespace Game.Logic.Phy.Object
         private BaseGame m_game;
         private bool m_canPenetrate;
         private string m_name;
+        private Dictionary<string, string> m_actionMapping;
 
         public PhysicalObj(int id, string name, string model,string defaultAction,int scale,int rotation) : base(id) 
         {
@@ -24,6 +25,12 @@ namespace Game.Logic.Phy.Object
             m_scale = scale;
             m_rotation = rotation;
             m_canPenetrate = false;
+            m_actionMapping = new Dictionary<string, string>();
+            if (model == "asset.game.six.ball")
+            {
+                if (!m_actionMapping.ContainsKey(defaultAction))
+                    m_actionMapping.Add(defaultAction, getActionMap(defaultAction));
+            }
         }
 
         public virtual int Type
@@ -35,6 +42,8 @@ namespace Game.Logic.Phy.Object
         {
             get { return m_model; }
         }
+
+        public Dictionary<string, string> ActionMapping => m_actionMapping;
 
         public string CurrentAction
         {
@@ -56,6 +65,18 @@ namespace Game.Logic.Phy.Object
         {
             get { return m_canPenetrate; }
             set { m_canPenetrate = value; }
+        }
+
+        private string getActionMap(string act)
+        {
+            switch (act)
+            {
+                case "s1": return "shield1"; case "s2": return "shield2"; case "s3": return "shield3";
+                case "s4": return "shield4"; case "s5": return "shield5"; case "s6": return "shield6";
+                case "s-1": return "shield-1"; case "s-2": return "shield-2"; case "s-3": return "shield-3";
+                case "s-4": return "shield-4"; case "s-5": return "shield-5"; case "s-6": return "shield-6";
+                case "double": return "shield-double"; default: return act;
+            }
         }
 
         public void SetGame(BaseGame game)

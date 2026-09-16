@@ -511,6 +511,7 @@
     <Compile Include="AI\Messions\ETT3301.cs" />
     <Compile Include="AI\Messions\ETT3303.cs" />
     <Compile Include="AI\Messions\ETT3304.cs" />
+    <Compile Include="AI\Messions\GON6101.cs" />
     <Compile Include="AI\Messions\GON6102.cs" />
     <Compile Include="AI\Messions\GON6103.cs" />
     <Compile Include="AI\Messions\GON6104.cs" />

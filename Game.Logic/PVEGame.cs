@@ -299,6 +299,15 @@ namespace Game.Logic
             return box;
         }
 
+public Ball CreateBall(int x, int y, string action)
+	{
+		Ball ball = new Ball(PhysicalId++, action);
+		ball.SetXY(x, y);
+		m_map.AddPhysical(ball);
+		AddBall(ball, sendToClient: true);
+		return ball;
+	}
+
         public void SendGameFocus(Physics p, int delay, int finishTime)
         {
             AddAction(new FocusAction(p, 1, delay, finishTime));

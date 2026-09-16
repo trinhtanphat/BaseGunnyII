@@ -203,6 +203,7 @@
     <Compile Include="Phy\Object\BombObject.cs" />
     <Compile Include="Phy\Object\BombType.cs" />
     <Compile Include="Phy\Object\Box.cs" />
+    <Compile Include="Phy\Object\Ball.cs" />
     <Compile Include="Phy\Object\CanShootInfo.cs" />
     <Compile Include="Phy\Object\layer.cs" />
     <Compile Include="Phy\Object\Living.cs" />

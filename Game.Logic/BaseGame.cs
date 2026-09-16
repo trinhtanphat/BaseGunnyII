@@ -78,6 +78,7 @@ namespace Game.Logic
             BossWarField = "";
 
             m_tempBox = new List<Box>();
+            m_tempBall = new List<Ball>();
             m_tempPoints = new List<Point>();
 
             if (roomType == eRoomType.Dungeon)
@@ -633,6 +634,17 @@ namespace Game.Logic
         }
 
 
+public void Shuffer<T>(T[] array)
+	{
+		for (int num = array.Length; num > 1; num--)
+		{
+			int num2 = Random.Next(num);
+			T val = array[num2];
+			array[num2] = array[num - 1];
+			array[num - 1] = val;
+		}
+	}
+
         #endregion
 
         #region Cards/TakeCard
@@ -867,8 +879,39 @@ namespace Game.Logic
 
         #region Box/Temp Point
 
+        private List<Ball> m_tempBall;
+
         private List<Box> m_tempBox;
         private List<Point> m_tempPoints;
+
+        public Ball AddBall(Point pos, bool sendToClient)
+        {
+            Ball ball = new Ball(PhysicalId++, "1");
+            ball.SetXY(pos);
+            AddPhysicalObj(ball, sendToClient);
+            return AddBall(ball, sendToClient);
+        }
+
+        public Ball AddBall(Ball ball, bool sendToClient)
+        {
+            m_tempBall.Add(ball);
+            AddPhysicalObj(ball, sendToClient);
+            return ball;
+        }
+
+public void ClearBall()
+	{
+		List<Ball> list = new List<Ball>();
+		foreach (Ball item in m_tempBall)
+		{
+			list.Add(item);
+		}
+		foreach (Ball item2 in list)
+		{
+			m_tempBall.Remove(item2);
+			RemovePhysicalObj(item2, sendToClient: true);
+		}
+	}
 
         public void AddTempPoint(int x, int y)
         {
