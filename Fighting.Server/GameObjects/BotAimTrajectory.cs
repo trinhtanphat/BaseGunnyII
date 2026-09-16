@@ -72,18 +72,18 @@ namespace Fighting.Server.GameObjects
                 if (projectile.IntersectsWith(targetBounds))
                     return 1;
                 if (!isRectangleEmpty(projectile))
-                    return DistanceToRectangle(px, py, targetBounds) <= blastRadius ? 1 : -1;
+                    return DistanceToRectangleCenter(px, py, targetBounds) < blastRadius ? 1 : -1;
                 if (px < 0 || px >= mapWidth || py >= mapHeight)
                     return -1;
             }
             return 0;
         }
-        private static double DistanceToRectangle(int x, int y, Rectangle rect)
+        private static double DistanceToRectangleCenter(int x, int y, Rectangle rect)
         {
-            int nearestX = x < rect.Left ? rect.Left : (x > rect.Right ? rect.Right : x);
-            int nearestY = y < rect.Top ? rect.Top : (y > rect.Bottom ? rect.Bottom : y);
-            int dx = x - nearestX;
-            int dy = y - nearestY;
+            double centerX = rect.Left + rect.Width / 2.0;
+            double centerY = rect.Top + rect.Height / 2.0;
+            double dx = x - centerX;
+            double dy = y - centerY;
             return Math.Sqrt(dx * dx + dy * dy);
         }
     }
