@@ -442,6 +442,7 @@
     <Compile Include="AI\NPC\ThirteenNormalAntBoss.cs" />
     <Compile Include="AI\NPC\ThirteenSimpleAntBoss.cs" />
     <Compile Include="AI\NPC\ThirteenTerrorAntBoss.cs" />
+    <Compile Include="AI\NPC\YearMonster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
