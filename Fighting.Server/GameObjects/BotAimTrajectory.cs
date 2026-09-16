@@ -19,8 +19,8 @@ namespace Fighting.Server.GameObjects
                 return false;
 
             double radians = angle / 180.0 * Math.PI;
-            float vx = (float)(force * Math.Cos(radians));
-            float vy = (float)(force * Math.Sin(radians));
+            float vx = (int)(force * Math.Cos(radians));
+            float vy = (int)(force * Math.Sin(radians));
             float x = startX;
             float y = startY;
             int previousX = (int)x;
