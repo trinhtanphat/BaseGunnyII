@@ -259,6 +259,24 @@ namespace Game.Logic
             SendRemoveLiving(id);
         }
 
+	public void ClearAllChild()
+	{
+		List<Living> list = new List<Living>();
+		foreach (Living living in m_livings)
+		{
+			if (living.IsLiving && living is SimpleNpc)
+			{
+				list.Add(living);
+			}
+		}
+		foreach (Living item in list)
+		{
+			m_livings.Remove(item);
+			item.Dispose();
+			RemoveLiving(item.Id);
+		}
+	}
+
         public List<Living> GetLivedLivings()
         {
             List<Living> temp = new List<Living>();

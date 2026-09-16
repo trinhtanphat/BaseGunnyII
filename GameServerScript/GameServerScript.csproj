@@ -535,6 +535,7 @@
     <Compile Include="AI\Messions\TVS12001.cs" />
     <Compile Include="AI\Messions\TVS12002.cs" />
     <Compile Include="AI\Messions\TVS12003.cs" />
+    <Compile Include="AI\Messions\TVS12004.cs" />
     <Compile Include="AI\Messions\WAEpic13401.cs" />
     <Compile Include="AI\Messions\WAEpic13402.cs" />
     <Compile Include="AI\Messions\WAEpic13403.cs" />
