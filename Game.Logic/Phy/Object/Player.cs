@@ -771,8 +771,12 @@ namespace Game.Logic.Phy.Object
         private static readonly int FLY_COOLDOWN = 2;
 
         private static readonly int CARRY_TEMPLATE_ID = 10016;
-
         private int m_flyCoolDown = 0;
+
+        public int flyCount
+        {
+            get { return m_flyCoolDown; }
+        }
 
         public void UseFlySkill()
         {
