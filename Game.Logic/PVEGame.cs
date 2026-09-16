@@ -31,6 +31,10 @@ namespace Game.Logic
 
         public bool IsWin;
 
+        public bool CanEnterGate;
+
+        public bool CanShowBigBox;
+
         public int TotalMissionCount;
         public int TotalCount;
         public int TotalTurn;
@@ -359,6 +363,11 @@ public Ball CreateBall(int x, int y, string action)
             AddPhysicalTip(obj, true);
             return obj;
         }
+        public void CreateGate(bool isEnter)
+        {
+            CanEnterGate = isEnter;
+        }
+
         public void ClearMissionData()
         {
             foreach (Living living in m_livings)
