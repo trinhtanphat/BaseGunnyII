@@ -195,5 +195,7 @@ namespace Game.Logic
         /// </summary>
         ContinueReduceDamageEffect = 36,
 
+        ContinueReduceBlood = 40,
+
     }
 }

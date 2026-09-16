@@ -152,6 +152,7 @@
     <Compile Include="Effects\AtomBombEquipEffect.cs" />
     <Compile Include="Effects\AvoidDamageEffect.cs" />
     <Compile Include="Effects\BasePlayerEffect.cs" />
+    <Compile Include="Effects\ContinueReduceBlood.cs" />
     <Compile Include="Effects\ContinueReduceBloodEffect.cs" />
     <Compile Include="Effects\ContinueReduceBloodEquipEffect.cs" />
     <Compile Include="Effects\ContinueReduceDamageEffect.cs" />
