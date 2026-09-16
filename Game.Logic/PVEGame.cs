@@ -31,6 +31,8 @@ namespace Game.Logic
 
         public bool IsWin;
 
+        public bool IsKillWorldBoss;
+
         public bool CanEnterGate;
 
         public bool CanShowBigBox;
