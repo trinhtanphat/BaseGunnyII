@@ -447,6 +447,11 @@
     <Compile Include="AI\NPC\SeventhHardSecondBoss.cs" />
     <Compile Include="AI\NPC\SeventhNormalSecondBoss.cs" />
     <Compile Include="AI\NPC\SeventhSimpleSecondBoss.cs" />
+    <Compile Include="AI\NPC\ThirteenHardBrynBoss.cs" />
+    <Compile Include="AI\NPC\ThirteenNormalBrynBoss.cs" />
+    <Compile Include="AI\NPC\ThirteenSimpleBrotherNpc.cs" />
+    <Compile Include="AI\NPC\ThirteenSimpleBrynBoss.cs" />
+    <Compile Include="AI\NPC\ThirteenTerrorBrynBoss.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
