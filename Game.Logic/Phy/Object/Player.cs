@@ -26,6 +26,7 @@ namespace Game.Logic.Phy.Object
         private int m_sp2BallId;
         private int m_AddWoundBallId;
         private int m_MultiBallId;        
+        private int m_changeSpecialball;
         
         private BallInfo m_currentBall;
         private int m_energy;
@@ -81,6 +82,7 @@ namespace Game.Logic.Phy.Object
             TotalAllExperience = 0;
             TotalAllScore = 0;
             TotalAllCure = 0;
+            ChangeSpecialBall = 0;
             m_weapon = m_player.MainWeapon;
             if (m_weapon != null)
             {
@@ -114,6 +116,7 @@ namespace Game.Logic.Phy.Object
             m_energy = (m_player.PlayerCharacter.Agility / 30 + 240);
             IsLiving = true;
             FinishTakeCard = false;
+            m_changeSpecialball = 0;
             m_weapon = m_player.MainWeapon;
             var ballConfig = BallConfigMgr.FindBall(m_weapon.TemplateID);
             m_mainBallId = ballConfig.Common;
@@ -374,6 +377,12 @@ namespace Game.Logic.Phy.Object
             get { return m_currentBall.ID == m_spBallId; }
         }
 
+        public int ChangeSpecialBall
+        {
+            get { return m_changeSpecialball; }
+            set { m_changeSpecialball = value; }
+        }
+
         public void UseSpecialSkill()
         {
             if (Dander >= 200)
@@ -436,6 +445,10 @@ namespace Game.Logic.Phy.Object
         {
             m_weapon = item;
             var ballConfig = BallConfigMgr.FindBall(m_weapon.TemplateID);
+            if (ChangeSpecialBall > 0)
+            {
+                ballConfig = BallConfigMgr.FindBall(70396);
+            }
             m_mainBallId = ballConfig.Common;
             m_spBallId = ballConfig.Special;
             m_sp2BallId = ballConfig.SpecialII;
