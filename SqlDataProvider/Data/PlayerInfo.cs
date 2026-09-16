@@ -172,6 +172,7 @@ namespace SqlDataProvider.Data
         public void ClearConsortia()
         {
             ConsortiaID = 0;
+            IsConsortia = false;
             ConsortiaName = "";
             RichesOffer = 0;
             ConsortiaRepute = 0;
