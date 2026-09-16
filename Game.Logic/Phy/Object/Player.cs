@@ -468,24 +468,8 @@ namespace Game.Logic.Phy.Object
         {
             if (m_map != null)
             {
-                Point p = m_map.FindYLineNotEmptyPoint(m_x, m_y); ;
-                if (p.IsEmpty)
-                {
-                    m_y = m_map.Ground.Height;
-                }
-                else
-                {
-                    m_x = p.X;
-                    m_y = p.Y;
-                }
                 base.StartMoving(delay, speed);
-                if (p.IsEmpty)
-                {
-                    m_syncAtTime = false;
-                    Die();
-                }
             }
-
         }
 
         public void StartGhostMoving()
