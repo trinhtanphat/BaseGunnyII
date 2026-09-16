@@ -87,10 +87,19 @@ public class TreasureHandler : IPacketHandler
 		case 3:
 		{
 			int num2 = packet.ReadInt();
+			if (num2 <= 0 || num2 > client.Player.Treasure.TreasureData.Count)
+			{
+				return 0;
+			}
 			int index = num2 - 1;
 			bool flag = true;
 			TreasureDataInfo treasureDataInfo = client.Player.Treasure.TreasureData[index];
-			if (treasureDataInfo == null)
+			if (treasureDataInfo == null || treasureDataInfo.pos > 0)
+			{
+				return 0;
+			}
+			ItemTemplateInfo rewardTemplate = ItemMgr.FindItemTemplate(treasureDataInfo.TemplateID);
+			if (rewardTemplate == null)
 			{
 				return 0;
 			}
@@ -119,7 +128,7 @@ public class TreasureHandler : IPacketHandler
 				treasureDataInfo.pos = num2;
 				client.Player.Treasure.AddTreasureDig(treasureDataInfo, index);
 				client.Player.Treasure.UpdateUserTreasure(currentTreasure2);
-				ItemInfo itemInfo = ItemInfo.CreateFromTemplate(ItemMgr.FindItemTemplate(treasureDataInfo.TemplateID), treasureDataInfo.Count, 105);
+				ItemInfo itemInfo = ItemInfo.CreateFromTemplate(rewardTemplate, treasureDataInfo.Count, 105);
 				itemInfo.IsBinds = true;
 				itemInfo.ValidDate = treasureDataInfo.ValidDate;
 				client.Player.AddTemplate(itemInfo, itemInfo.Template.BagType, treasureDataInfo.Count, eItemNotice.GoodsTipBroadcastTypeView, eItemNotice.GoodsTipTypeView);

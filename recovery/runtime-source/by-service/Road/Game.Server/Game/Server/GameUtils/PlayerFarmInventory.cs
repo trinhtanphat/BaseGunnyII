@@ -83,18 +83,14 @@ public abstract class PlayerFarmInventory
 		}
 		lock (m_lock)
 		{
-			m_fields[place] = item;
 			if (m_fields[place] != null)
 			{
-				place = -1;
+				return false;
 			}
-			else
-			{
-				m_fields[place] = item;
-				item.FieldID = place;
-			}
+			m_fields[place] = item;
+			item.FieldID = place;
 		}
-		return place != -1;
+		return true;
 	}
 
 	public virtual bool AddOtherFieldTo(UserFieldInfo item, int place)
@@ -105,18 +101,14 @@ public abstract class PlayerFarmInventory
 		}
 		lock (m_lock)
 		{
-			m_otherFields[place] = item;
 			if (m_otherFields[place] != null)
 			{
-				place = -1;
+				return false;
 			}
-			else
-			{
-				m_otherFields[place] = item;
-				item.FieldID = place;
-			}
+			m_otherFields[place] = item;
+			item.FieldID = place;
 		}
-		return place != -1;
+		return true;
 	}
 
 	public virtual bool RemoveField(UserFieldInfo item)
@@ -305,6 +297,10 @@ public abstract class PlayerFarmInventory
 	public virtual bool GrowField(int fieldId, int templateID)
 	{
 		ItemTemplateInfo itemTemplateInfo = ItemMgr.FindItemTemplate(templateID);
+		if (fieldId < 0 || fieldId >= m_fields.Length || m_fields[fieldId] == null || itemTemplateInfo == null || m_fields[fieldId].SeedID != 0)
+		{
+			return false;
+		}
 		lock (m_lock)
 		{
 			m_fields[fieldId].SeedID = itemTemplateInfo.TemplateID;
@@ -472,35 +468,14 @@ public abstract class PlayerFarmInventory
 
 	public virtual bool AccelerateTimeFields()
 	{
-		lock (m_lock)
-		{
-			for (int i = 0; i < m_capalility; i++)
-			{
-				if (m_fields[i] != null && m_fields[i].SeedID > 0)
-				{
-					DateTime plantTime = m_fields[i].PlantTime;
-					int fieldValidDate = m_fields[i].FieldValidDate;
-					m_fields[i].AccelerateTime = AccelerateTimeFields(plantTime, fieldValidDate);
-				}
-			}
-		}
+		// AccelerateTime stores bonus growth only. Wall-clock growth is derived from PlantTime
+		// by UserFieldInfo.isDig() and by the client, so folding elapsed minutes into this
+		// value would double-count growth every time the farm is entered.
 		return true;
 	}
 
 	public virtual bool AccelerateOtherTimeFields()
 	{
-		lock (m_lock)
-		{
-			for (int i = 0; i < m_capalility; i++)
-			{
-				if (m_otherFields[i] != null && m_otherFields[i].SeedID > 0)
-				{
-					DateTime plantTime = m_otherFields[i].PlantTime;
-					int fieldValidDate = m_otherFields[i].FieldValidDate;
-					m_otherFields[i].AccelerateTime = AccelerateTimeFields(plantTime, fieldValidDate);
-				}
-			}
-		}
 		return true;
 	}
 

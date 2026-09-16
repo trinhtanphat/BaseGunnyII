@@ -65,17 +65,16 @@ public class PlayerFarm : PlayerFarmInventory
 		using PlayerBussiness playerBussiness = new PlayerBussiness();
 		lock (m_lock)
 		{
-			if (m_farm == null || !m_farm.IsDirty)
+			if (m_farm != null && m_farm.IsDirty)
 			{
-				return;
-			}
-			if (m_farm.ID > 0)
-			{
-				playerBussiness.UpdateFarm(m_farm);
-			}
-			else
-			{
-				playerBussiness.AddFarm(m_farm);
+				if (m_farm.ID > 0)
+				{
+					playerBussiness.UpdateFarm(m_farm);
+				}
+				else
+				{
+					playerBussiness.AddFarm(m_farm);
+				}
 			}
 			for (int i = 0; i < m_fields.Length; i++)
 			{
@@ -186,18 +185,26 @@ public class PlayerFarm : PlayerFarmInventory
 
 	public virtual bool GainFriendFields(int userId, int fieldId)
 	{
-		GamePlayer playerById = WorldMgr.GetPlayerById(userId);
-		UserFieldInfo userFieldInfo = m_otherFields[fieldId];
-		if (userFieldInfo == null)
+		if (fieldId < 0 || fieldId >= OtherFields.Length || GetOtherFieldAt(fieldId) == null)
 		{
 			return false;
 		}
+		GamePlayer playerById = WorldMgr.GetPlayerById(userId);
+		UserFieldInfo userFieldInfo = GetOtherFieldAt(fieldId);
 		ItemTemplateInfo itemTemplateInfo = ItemMgr.FindItemTemplate(userFieldInfo.SeedID);
+		if (itemTemplateInfo == null)
+		{
+			return false;
+		}
 		ItemTemplateInfo goods = ItemMgr.FindItemTemplate(itemTemplateInfo.Property4);
+		if (goods == null)
+		{
+			return false;
+		}
 		ItemInfo item = ItemInfo.CreateFromTemplate(goods, 1, 102);
 		List<ItemInfo> list = new List<ItemInfo>();
-		AccelerateTimeFields();
-		if (GetOtherFieldAt(fieldId).isDig())
+		AccelerateOtherTimeFields();
+		if (!GetOtherFieldAt(fieldId).isDig())
 		{
 			return false;
 		}
@@ -326,11 +333,11 @@ public class PlayerFarm : PlayerFarmInventory
 	public virtual bool GainField(int fieldId)
 	{
 		AccelerateTimeFields();
-		if (GetFieldAt(fieldId).isDig())
+		if (fieldId < 0 || fieldId >= CurrentFields.Length || GetFieldAt(fieldId) == null)
 		{
 			return false;
 		}
-		if (fieldId < 0 || fieldId > GetFields().Count())
+		if (!GetFieldAt(fieldId).isDig())
 		{
 			return false;
 		}
