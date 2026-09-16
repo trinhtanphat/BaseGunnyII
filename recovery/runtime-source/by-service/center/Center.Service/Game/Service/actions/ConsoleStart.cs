@@ -29,6 +29,7 @@ public class ConsoleStart : IAction
 
 	public void OnAction(Hashtable parameters)
 	{
+		Console.WriteLine("GUNNY II fix by trinhtanphat!");
 		Console.WriteLine("Starting GameServer ... please wait a moment!");
 		CenterServer.CreateInstance(new CenterServerConfig());
 		StartServer();
