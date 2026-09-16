@@ -157,6 +157,8 @@
     <Compile Include="Effects\ContinueReduceBloodEquipEffect.cs" />
     <Compile Include="Effects\ContinueReduceDamageEffect.cs" />
     <Compile Include="Effects\ContinueReduceDamageEquipEffect.cs" />
+    <Compile Include="Effects\DamageEffect.cs" />
+    <Compile Include="Effects\GuardEffect.cs" />
     <Compile Include="Effects\EffectList.cs" />
     <Compile Include="Effects\HideEffect.cs" />
     <Compile Include="Effects\IceFronzeEffect.cs" />
