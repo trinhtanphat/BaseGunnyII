@@ -9,10 +9,12 @@ namespace Game.Logic.Actions
     {
         private long m_tick;
         private bool m_isFinished;
+        private eGameState m_scheduledState;
 
-        public CheckPVPGameStateAction(int delay)
+        public CheckPVPGameStateAction(int delay, eGameState scheduledState)
         {
             m_isFinished = false;
+            m_scheduledState = scheduledState;
             m_tick += TickHelper.GetTickCount() + delay;
         }
 
@@ -24,6 +26,12 @@ namespace Game.Logic.Actions
                 PVPGame pvp = game as PVPGame;
                 if (pvp != null)
                 {
+                    if (game.GameState != m_scheduledState)
+                    {
+                        m_isFinished = true;
+                        return;
+                    }
+
                     switch (game.GameState)
                     {
                         case eGameState.Inited:
@@ -39,20 +47,20 @@ namespace Game.Logic.Actions
                             }
                             break;
                         case eGameState.Playing:
-                            if (pvp.CurrentPlayer == null || pvp.CurrentPlayer.IsAttacking == false)
+                            if (pvp.CanGameOver())
                             {
-                                if (pvp.CanGameOver())
-                                {
-                                    pvp.GameOver();
-                                }
-                                else
-                                {
-                                    pvp.NextTurn();
-                                }
+                                pvp.GameOver();
+                            }
+                            else if (pvp.CurrentPlayer == null || pvp.CurrentPlayer.IsAttacking == false)
+                            {
+                                pvp.NextTurn();
                             }
                             break;
                         case eGameState.GameOver:
-                            pvp.Stop();
+                            if (m_scheduledState == eGameState.GameOver)
+                            {
+                                pvp.Stop();
+                            }
                             break;
                     }
                 }

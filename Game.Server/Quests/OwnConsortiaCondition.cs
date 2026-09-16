@@ -14,58 +14,87 @@ namespace Game.Server.Quests
     /// </summary>
     public class OwnConsortiaCondition:BaseCondition
     {
+        private GamePlayer m_player;
+
         public OwnConsortiaCondition(BaseQuest quest, QuestConditionInfo info, int value) : base(quest,info, value) { }
 
         public override void AddTrigger(GamePlayer player)
         {
+            m_player = player;
+            RefreshValue(player);
             player.GuildChanged += new GamePlayer.PlayerOwnConsortiaEventHandle(player_OwnConsortia);
         }
 
         void player_OwnConsortia()
-        { 
-            
+        {
+            if (m_player != null)
+            {
+                RefreshValue(m_player);
+            }
         }
+
         public override void RemoveTrigger(GamePlayer player)
         {
             player.GuildChanged -= new GamePlayer.PlayerOwnConsortiaEventHandle(player_OwnConsortia);
+            if (object.ReferenceEquals(m_player, player))
+            {
+                m_player = null;
+            }
+        }
+
+        public override void Reset(GamePlayer player)
+        {
+            base.Reset(player);
+            RefreshValue(player);
+        }
+
+        private bool RefreshValue(GamePlayer player)
+        {
+            int required = Math.Max(1, m_info.Para2);
+            if (player == null || !player.PlayerCharacter.IsConsortia || player.PlayerCharacter.ConsortiaID <= 0)
+            {
+                Value = required;
+                return false;
+            }
+
+            using (ConsortiaBussiness db = new ConsortiaBussiness())
+            {
+                ConsortiaInfo info = db.GetConsortiaSingle(player.PlayerCharacter.ConsortiaID);
+                if (info == null)
+                {
+                    Value = required;
+                    return false;
+                }
+
+                int current = 0;
+                switch (m_info.Para1)
+                {
+                    case 0:
+                        current = info.Count;
+                        break;
+                    case 1:
+                        current = player.PlayerCharacter.RichesOffer + player.PlayerCharacter.RichesRob;
+                        break;
+                    case 2:
+                        current = info.SmithLevel;
+                        break;
+                    case 3:
+                        current = info.ShopLevel;
+                        break;
+                    case 4:
+                        current = info.StoreLevel;
+                        break;
+                }
+
+                int remaining = m_info.Para2 - current;
+                Value = remaining > 0 ? remaining : 0;
+                return Value <= 0;
+            }
         }
 
         public override bool IsCompleted(GamePlayer player)
         {
-            bool result=false;
-            int tempComp=0;
-            using (ConsortiaBussiness db = new ConsortiaBussiness())
-            {
-                ConsortiaInfo info = db.GetConsortiaSingle(player.PlayerCharacter.ConsortiaID);
-                switch (m_info.Para1)
-                { 
-                    case 0:  //公会人数
-                        tempComp=info.Count;                        
-                        break;
-                    case 1:  //公会贡献度
-                        tempComp=player.PlayerCharacter.RichesOffer+player.PlayerCharacter.RichesRob;
-                        break;
-                    case 2:  //公会铁匠铺等级
-                        tempComp=info.SmithLevel;                        
-                        break;
-                    case 3:  //公会商城等级
-                        tempComp=info.ShopLevel;
-                        break;
-                    case 4:  //公会保管箱等级
-                        tempComp = info.StoreLevel;
-                        break;
-                    default:
-                        break;
-                }
-                if (tempComp >= m_info.Para2)
-                {
-                    Value = 0;
-                    result=true;
-                }
-                return result;
-            }            
-            
+            return RefreshValue(player);
         }
-
     }
 }
