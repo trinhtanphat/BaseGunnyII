@@ -591,6 +591,7 @@ namespace Game.Server
                         p.PlayerCharacter.ConsortiaLevel = consotia.Level;
 
                     p.CommitChanges();
+                    p.OnGuildChanged();
                 }
 
                 if (p.PlayerCharacter.ConsortiaID == consortiaID)
