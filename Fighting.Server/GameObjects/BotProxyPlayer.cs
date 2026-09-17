@@ -205,7 +205,8 @@ namespace Fighting.Server.GameObjects
                 player.Skip(0);
                 return;
             }
-            player.Shoot(aimX, aimY, force, angle);
+            Point shootPoint = player.GetShootPoint();
+            player.Shoot(shootPoint.X, shootPoint.Y, force, angle);
         }
     }
 }
