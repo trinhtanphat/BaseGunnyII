@@ -63,7 +63,7 @@ Console.WriteLine("GUNNY_REGISTER_SMOKE=PASS");
 var ruffleArgs = RuffleLaunchCommand.BuildArguments(launch, gameBase);
 var argLine = string.Join("|", ruffleArgs);
 Require(argLine.Contains("--socket-allow|103.9.156.182:9200", StringComparison.Ordinal), "socket allowlist missing");
-Require(argLine.Contains("--graphics|dx12", StringComparison.Ordinal), "DX12 graphics override required for Intel stability");
+Require(argLine.Contains("--graphics|gl", StringComparison.Ordinal), "OpenGL graphics override required to avoid the Intel DX12 wgpu OOM path");
 Require(argLine.Contains("--no-avm2-optimizer", StringComparison.Ordinal), "AVM2 optimizer must be disabled for legacy Alchemy module");
 Require(argLine.Contains("--tcp-connections|allow", StringComparison.Ordinal), "game TCP connections must be enabled for the Road server");
 Require(argLine.Contains("--base|http://103.9.156.182/Gunny/flash/", StringComparison.OrdinalIgnoreCase), "Ruffle base missing");
