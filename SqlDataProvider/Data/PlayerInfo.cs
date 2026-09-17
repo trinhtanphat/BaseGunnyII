@@ -252,6 +252,20 @@ namespace SqlDataProvider.Data
 
         public int AddWeekOffer { get; set; }
 
+        public int DameAddPlus;
+
+        public int GuardAddPlus;
+
+        public int AttackAddPlus;
+
+        public int AgiAddPlus;
+
+        public int DefendAddPlus;
+
+        public int LuckAddPlus;
+
+        public int HpAddPlus;
+
         public int Agility
         {
             get

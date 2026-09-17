@@ -76,6 +76,13 @@
     <Compile Include="Battle\BattleServer.cs" />
     <Compile Include="Battle\ProxyGame.cs" />
     <Compile Include="Buffer\AbstractBuffer.cs" />
+    <Compile Include="Buffer\AgiBuffer.cs" />
+    <Compile Include="Buffer\AttackBuffer.cs" />
+    <Compile Include="Buffer\DameBuffer.cs" />
+    <Compile Include="Buffer\DefendBuffer.cs" />
+    <Compile Include="Buffer\GuardBuffer.cs" />
+    <Compile Include="Buffer\HpBuffer.cs" />
+    <Compile Include="Buffer\LuckBuffer.cs" />
     <Compile Include="Buffer\BufferList.cs" />
     <Compile Include="Buffer\GPMultipleBuffer.cs" />
     <Compile Include="Buffer\KickProtectBuffer.cs" />

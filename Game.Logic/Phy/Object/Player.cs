@@ -96,13 +96,15 @@ namespace Game.Logic.Phy.Object
             m_loadingProcess = 0;
 
             InitBuffer(m_player.EquipEffect);
-            m_energy = (m_player.PlayerCharacter.Agility / 30 + 240);
+            m_energy = ((m_player.PlayerCharacter.Agility + m_player.PlayerCharacter.AgiAddPlus) / 30 + 240);
             m_maxBlood = (int)((950 + m_player.PlayerCharacter.Grade * 50 + LevelPlusBlood + m_player.PlayerCharacter.Defence / 10 + m_player.GetGoldBlood()) * m_player.GetBaseBlood());
+            m_maxBlood += m_player.PlayerCharacter.HpAddPlus;
         }
 
         public override void Reset()
         {
             m_maxBlood = (int)((950 + m_player.PlayerCharacter.Grade * 50 + LevelPlusBlood + m_player.PlayerCharacter.Defence / 10 + m_player.GetGoldBlood()) * m_player.GetBaseBlood());
+            m_maxBlood += m_player.PlayerCharacter.HpAddPlus;
             if (m_game.RoomType == eRoomType.Dungeon)
             {
                 m_game.Cards = new int[21];
@@ -113,7 +115,7 @@ namespace Game.Logic.Phy.Object
             }
 
             Dander = 0;
-            m_energy = (m_player.PlayerCharacter.Agility / 30 + 240);
+            m_energy = ((m_player.PlayerCharacter.Agility + m_player.PlayerCharacter.AgiAddPlus) / 30 + 240);
             IsLiving = true;
             FinishTakeCard = false;
             m_changeSpecialball = 0;
@@ -132,6 +134,12 @@ namespace Game.Logic.Phy.Object
             Defence = m_player.PlayerCharacter.Defence;
             Agility = m_player.PlayerCharacter.Agility;
             Lucky = m_player.PlayerCharacter.Luck;
+            BaseDamage += m_player.PlayerCharacter.DameAddPlus;
+            BaseGuard += m_player.PlayerCharacter.GuardAddPlus;
+            Attack += m_player.PlayerCharacter.AttackAddPlus;
+            Defence += m_player.PlayerCharacter.DefendAddPlus;
+            Agility += m_player.PlayerCharacter.AgiAddPlus;
+            Lucky += m_player.PlayerCharacter.LuckAddPlus;
 
             m_currentBall = BallMgr.FindBall(m_mainBallId);
             m_shootCount = 1;
@@ -643,7 +651,7 @@ namespace Game.Logic.Phy.Object
             {
                 TotalHitTargetCount++;
             }            
-            m_energy = m_player.PlayerCharacter.Agility / 30 + 240;
+            m_energy = (int)Agility / 30 + 240;
             m_shootCount = 1;
             m_ballCount = 1;
             m_flyCoolDown--;

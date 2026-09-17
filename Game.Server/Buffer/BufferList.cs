@@ -289,6 +289,27 @@ namespace Game.Server.Buffer
                 case 15:
                     buffer = new PropsBuffer(info);
                     break;
+                case 74:
+                    buffer = new DefendBuffer(info);
+                    break;
+                case 75:
+                    buffer = new AttackBuffer(info);
+                    break;
+                case 76:
+                    buffer = new GuardBuffer(info);
+                    break;
+                case 77:
+                    buffer = new AgiBuffer(info);
+                    break;
+                case 78:
+                    buffer = new DameBuffer(info);
+                    break;
+                case 79:
+                    buffer = new HpBuffer(info);
+                    break;
+                case 80:
+                    buffer = new LuckBuffer(info);
+                    break;
             }
             return buffer;
         }
