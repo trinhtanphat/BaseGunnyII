@@ -6,13 +6,13 @@ static void Require(bool condition, string message)
     if (!condition) throw new Exception(message);
 }
 
-var gameBase = new Uri("http://103.9.156.182/Gunny/");
+var gameBase = new Uri("http://103.9.156.181/Gunny/");
 Require(GunnyProtocolContract.LoginEndpoint == "createLogin.ashx", "login endpoint contract mismatch");
 Require(GunnyProtocolContract.LoginGameEndpoint == "LoginGame.aspx", "login game endpoint contract mismatch");
 Require(GunnyProtocolContract.CaptchaEndpoint == "auth/ValidateCode.aspx", "captcha endpoint contract mismatch");
 Require(GunnyProtocolContract.RegisterEndpoint == "auth/register.ashx", "register endpoint contract mismatch");
 Require(GunnyProtocolContract.RegistrationFields.SequenceEqual(new[] { "username", "password", "repassword", "email", "sex", "code" }), "registration fields contract mismatch");
-var redirect = new Uri("http://103.9.156.182/Gunny/Default.aspx?user=test%20user&key=abc-123&editby=Trminhpc");
+var redirect = new Uri("http://103.9.156.181/Gunny/Default.aspx?user=test%20user&key=abc-123&editby=Trminhpc");
 var launch = GameLaunchInfo.ParseRedirect(redirect);
 Require(launch.User == "test user", "decoded user mismatch");
 Require(launch.Key == "abc-123", "key mismatch");
@@ -22,7 +22,7 @@ var swf = launch.BuildSwfUri(gameBase);
 Require(swf.AbsoluteUri.Contains("/Gunny/flash/Loading.swf?", StringComparison.Ordinal), "SWF path mismatch");
 Require(swf.Query.Contains("user=test%20user", StringComparison.Ordinal), "user query missing");
 Require(swf.Query.Contains("key=abc-123", StringComparison.Ordinal), "key query missing");
-Require(swf.Query.Contains("config=http%3A%2F%2F103.9.156.182%2FGunny%2Fconfig.xml", StringComparison.OrdinalIgnoreCase), "config query missing");
+Require(swf.Query.Contains("config=http%3A%2F%2F103.9.156.181%2FGunny%2Fconfig.xml", StringComparison.OrdinalIgnoreCase), "config query missing");
 
 var handler = new SequenceHandler();
 var client = new GunnyLoginClient(gameBase, handler);
@@ -62,11 +62,11 @@ Console.WriteLine("GUNNY_REGISTER_SMOKE=PASS");
 
 var ruffleArgs = RuffleLaunchCommand.BuildArguments(launch, gameBase);
 var argLine = string.Join("|", ruffleArgs);
-Require(argLine.Contains("--socket-allow|103.9.156.182:9200", StringComparison.Ordinal), "socket allowlist missing");
+Require(argLine.Contains("--socket-allow|103.9.156.181:9200", StringComparison.Ordinal), "socket allowlist missing");
 Require(argLine.Contains("--graphics|gl", StringComparison.Ordinal), "OpenGL graphics override required to avoid the Intel DX12 wgpu OOM path");
 Require(argLine.Contains("--no-avm2-optimizer", StringComparison.Ordinal), "AVM2 optimizer must be disabled for legacy Alchemy module");
 Require(argLine.Contains("--tcp-connections|allow", StringComparison.Ordinal), "game TCP connections must be enabled for the Road server");
-Require(argLine.Contains("--base|http://103.9.156.182/Gunny/flash/", StringComparison.OrdinalIgnoreCase), "Ruffle base missing");
+Require(argLine.Contains("--base|http://103.9.156.181/Gunny/flash/", StringComparison.OrdinalIgnoreCase), "Ruffle base missing");
 Require(argLine.Contains("-Peditby=Trminhpc", StringComparison.Ordinal), "editby flashvar missing");
 Require(ruffleArgs[^1].Contains("Loading.swf?", StringComparison.Ordinal), "SWF URL must be final argument");
 
@@ -104,7 +104,7 @@ sealed class SequenceHandler : HttpMessageHandler
         if (Requests.Count == 2)
         {
             var response = new HttpResponseMessage(HttpStatusCode.Redirect);
-            response.Headers.Location = new Uri("http://103.9.156.182/Gunny/Default.aspx?user=test%20user&key=server-guid&editby=Trminhpc");
+            response.Headers.Location = new Uri("http://103.9.156.181/Gunny/Default.aspx?user=test%20user&key=server-guid&editby=Trminhpc");
             return response;
         }
         throw new InvalidOperationException("Unexpected HTTP request.");

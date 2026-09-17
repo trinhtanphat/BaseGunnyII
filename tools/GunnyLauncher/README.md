@@ -4,7 +4,7 @@ Windows desktop launcher for the legacy Gunny web client using the Ruffle deskto
 
 ## Runtime contract
 
-- Gunny base URL defaults to `http://103.9.156.182/Gunny/`.
+- Gunny base URL defaults to `http://103.9.156.181/Gunny/`.
 - Authentication reuses the existing `createLogin.ashx` session flow.
 - `LoginGame.aspx` supplies the signed `user` / `key` redirect.
 - Ruffle loads `flash/Loading.swf` and the deployed `config.xml`.
