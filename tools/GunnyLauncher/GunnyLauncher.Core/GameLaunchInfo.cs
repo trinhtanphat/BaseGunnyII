@@ -17,7 +17,8 @@ public sealed record GameLaunchInfo(string User, string Key, string EditBy)
     public Uri BuildSwfUri(Uri gunnyBaseUri)
     {
         ArgumentNullException.ThrowIfNull(gunnyBaseUri);
-        var swf = new Uri(gunnyBaseUri, "flash/Loading.swf");
+        var profile = GunnyServerProfile.Resolve(gunnyBaseUri);
+        var swf = new Uri(gunnyBaseUri, profile.LoadingPath);
         var config = new Uri(gunnyBaseUri, "config.xml");
         var query = "user=" + Uri.EscapeDataString(User)
             + "&key=" + Uri.EscapeDataString(Key)

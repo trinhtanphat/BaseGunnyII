@@ -7,7 +7,8 @@ public static class RuffleLaunchCommand
         ArgumentNullException.ThrowIfNull(launch);
         ArgumentNullException.ThrowIfNull(gameBase);
 
-        var flashBase = new Uri(gameBase, "flash/");
+        var profile = GunnyServerProfile.Resolve(gameBase);
+        var ruffleBase = new Uri(gameBase, profile.RuffleBasePath);
         var socketHost = gameBase.Host;
         var swf = launch.BuildSwfUri(gameBase);
 
@@ -17,8 +18,8 @@ public static class RuffleLaunchCommand
             "--no-avm2-optimizer",
             "--width", "1000",
             "--height", "600",
-            "--base", flashBase.AbsoluteUri,
-            "--socket-allow", $"{socketHost}:9200",
+            "--base", ruffleBase.AbsoluteUri,
+            "--socket-allow", $"{socketHost}:{profile.SocketPort}",
             "--tcp-connections", "allow",
             "--storage", "disk",
             "--open-url-mode", "confirm",
