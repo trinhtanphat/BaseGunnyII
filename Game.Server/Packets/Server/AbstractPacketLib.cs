@@ -1324,8 +1324,14 @@ namespace Game.Base.Packets
                             pkg.WriteInt(info.Data.RepeatFinish);      //该任务剩余接受次数。
                             pkg.WriteInt(info.Data.RandDobule);        //用户接受任务机会
                             pkg.WriteBoolean(info.Data.IsExist);         //是否为新任务
-                            pkg.WriteInt(3);                            // QuestLevel consumed by deployed client
-                            pkg.WriteInt(0);                            // extra progress pair count (Condition5-8 unsupported by this source line)
+                            pkg.WriteInt(info.Data.QuestLevel);           //任务等级
+                            int[] extraProgress = info.Data.setProgressConcoat();
+                            pkg.WriteInt(extraProgress.Length);
+                            for (int k = 0; k < extraProgress.Length; k++)
+                            {
+                                pkg.WriteInt(k + 4);
+                                pkg.WriteInt(extraProgress[k]);
+                            }
                     }
                     //输出所有的任务
                     for (int i = 0; i < states.Length; i++)

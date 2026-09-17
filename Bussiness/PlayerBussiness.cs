@@ -2078,11 +2078,16 @@ namespace Bussiness
                     info.Condition2 = (int)reader["Condition2"];
                     info.Condition3 = (int)reader["Condition3"];
                     info.Condition4 = (int)reader["Condition4"];
+                    info.Condition5 = (int)reader["Condition5"];
+                    info.Condition6 = (int)reader["Condition6"];
+                    info.Condition7 = (int)reader["Condition7"];
+                    info.Condition8 = (int)reader["Condition8"];
                     info.QuestID = (int)reader["QuestID"];
                     info.UserID = (int)reader["UserId"];
                     info.IsExist = (bool)reader["IsExist"];
                     info.RandDobule = (int)reader["RandDobule"];
                     info.RepeatFinish = (int)reader["RepeatFinish"];
+                    info.QuestLevel = (int)reader["QuestLevel"];
                     infos.Add(info);
                 }
             }
@@ -2108,7 +2113,7 @@ namespace Bussiness
             bool result = false;
             try
             {
-                SqlParameter[] para = new SqlParameter[11];
+                SqlParameter[] para = new SqlParameter[16];
                 para[0] = new SqlParameter("@UserID", info.UserID);
                 para[1] = new SqlParameter("@QuestID", info.QuestID);
                 para[2] = new SqlParameter("@CompletedDate", info.CompletedDate);
@@ -2117,9 +2122,14 @@ namespace Bussiness
                 para[5] = new SqlParameter("@Condition2", info.Condition2);
                 para[6] = new SqlParameter("@Condition3", info.Condition3);
                 para[7] = new SqlParameter("@Condition4", info.Condition4);
-                para[8] = new SqlParameter("@IsExist", info.IsExist);
-                para[9] = new SqlParameter("@RepeatFinish", info.RepeatFinish);
-                para[10] = new SqlParameter("@RandDobule", info.RandDobule);
+                para[8] = new SqlParameter("@Condition5", info.Condition5);
+                para[9] = new SqlParameter("@Condition6", info.Condition6);
+                para[10] = new SqlParameter("@Condition7", info.Condition7);
+                para[11] = new SqlParameter("@Condition8", info.Condition8);
+                para[12] = new SqlParameter("@IsExist", info.IsExist);
+                para[13] = new SqlParameter("@RepeatFinish", info.RepeatFinish);
+                para[14] = new SqlParameter("@RandDobule", info.RandDobule);
+                para[15] = new SqlParameter("@QuestLevel", info.QuestLevel);
                 result = db.RunProcedure("SP_QuestData_Add", para);  /*备注需要改回SP_QuestData_Add*/
                 info.IsDirty = false;  //置为拉圾数据
             }

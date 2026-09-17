@@ -44,6 +44,13 @@ namespace SqlDataProvider.Data
             }
         }
 
+        private int _questLevel;
+        public int QuestLevel
+        {
+            set { _questLevel = value; _isDirty = true; }
+            get { return _questLevel; }
+        }
+
         private int _condition1;
         /// <summary>
         /// 任务条件一
@@ -111,6 +118,15 @@ namespace SqlDataProvider.Data
                 return _condition4;
             }
         }
+
+        private int _condition5;
+        public int Condition5 { set { _condition5 = value; _isDirty = true; } get { return _condition5; } }
+        private int _condition6;
+        public int Condition6 { set { _condition6 = value; _isDirty = true; } get { return _condition6; } }
+        private int _condition7;
+        public int Condition7 { set { _condition7 = value; _isDirty = true; } get { return _condition7; } }
+        private int _condition8;
+        public int Condition8 { set { _condition8 = value; _isDirty = true; } get { return _condition8; } }
 
         private bool _isComplete;
         /// <summary>
@@ -209,6 +225,14 @@ namespace SqlDataProvider.Data
                     return Condition3;
                 case 3:
                     return Condition4;
+                case 4:
+                    return Condition5;
+                case 5:
+                    return Condition6;
+                case 6:
+                    return Condition7;
+                case 7:
+                    return Condition8;
                 default:
                     throw new Exception("Quest condition index out of range.");
             }
@@ -230,10 +254,27 @@ namespace SqlDataProvider.Data
                 case 3:
                     Condition4 = value;
                     break;
+                case 4:
+                    Condition5 = value;
+                    break;
+                case 5:
+                    Condition6 = value;
+                    break;
+                case 6:
+                    Condition7 = value;
+                    break;
+                case 7:
+                    Condition8 = value;
+                    break;
                 default:
                     throw new Exception("Quest condition index out of range.");
             }
-        }      
+        }
+
+        public int[] setProgressConcoat()
+        {
+            return new int[] { Condition5, Condition6, Condition7, Condition8 };
+        }
 
     }
 }
