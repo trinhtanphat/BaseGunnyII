@@ -2075,6 +2075,10 @@ public class PlayerInfo : DataObject
 		param1--;
 		int num = param1 / 8;
 		int num2 = param1 % 8;
+		if (_weaklessGuildProgress == null || num < 0 || num >= _weaklessGuildProgress.Length)
+		{
+			return false;
+		}
 		int num3 = _weaklessGuildProgress[num] & (1 << num2);
 		return num3 != 0;
 	}
