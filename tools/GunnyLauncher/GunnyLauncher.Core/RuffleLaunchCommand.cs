@@ -13,7 +13,7 @@ public static class RuffleLaunchCommand
 
         return new[]
         {
-            "--graphics", "gl",
+            "--graphics", "dx12",
             "--no-avm2-optimizer",
             "--width", "1000",
             "--height", "600",
