@@ -107,7 +107,15 @@ namespace Game.Logic
                 {
                     IBotGamePlayer bot = p.PlayerDetail as IBotGamePlayer;
                     if (bot != null && bot.IsBot)
+                    {
                         p.LoadingProcess = 100;
+                        GSPacketIn pkg = new GSPacketIn((short)ePackageType.GAME_CMD);
+                        pkg.WriteByte((byte)eTankCmdType.LOAD);
+                        pkg.WriteInt(p.LoadingProcess);
+                        pkg.WriteInt(4);//zoneID
+                        pkg.WriteInt(p.PlayerDetail.PlayerCharacter.ID);
+                        SendToAll(pkg);
+                    }
                 }
             }
         }
