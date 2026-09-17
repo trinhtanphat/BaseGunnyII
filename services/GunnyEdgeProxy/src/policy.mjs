@@ -1,7 +1,7 @@
 export const MAX_FRAME_BYTES = 262144;
 
 const DESTINATIONS = Object.freeze({
-  game: Object.freeze({ hostname: '103.9.156.182', port: 9200 }),
+  game: Object.freeze({ hostname: '103.9.156.181', port: 9200 }),
 });
 
 export function resolveDestination(route) {

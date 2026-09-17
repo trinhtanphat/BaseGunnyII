@@ -4,7 +4,7 @@
 
 **Goal:** Add a SwiftUI iOS launcher with Ruffle Web/WASM over the restricted socket gateway, plus cross-platform CI that proves the repository-hosted build/test gates before merge.
 
-**Architecture:** `GunnyLauncher.Core` exports golden protocol fixtures that native Swift code must match. SwiftUI performs legacy auth/register with one cookie-backed `URLSession`, renders Ruffle self-hosted `0.6.0` in `WKWebView`, and configures Ruffle `socketProxy` for game host `103.9.156.182`, port `9200`, through the dedicated gateway route. XcodeGen creates the Xcode project deterministically on macOS CI.
+**Architecture:** `GunnyLauncher.Core` exports golden protocol fixtures that native Swift code must match. SwiftUI performs legacy auth/register with one cookie-backed `URLSession`, renders Ruffle self-hosted `0.6.0` in `WKWebView`, and configures Ruffle `socketProxy` for game host `103.9.156.181`, port `9200`, through the dedicated gateway route. XcodeGen creates the Xcode project deterministically on macOS CI.
 
 **Tech Stack:** Swift 6/SwiftUI, WKWebView, XcodeGen, Node/npm for `@ruffle-rs/ruffle` 0.6.0 self-hosted assets, GitHub Actions, .NET 8.
 
@@ -32,7 +32,7 @@
 
 - [ ] **Step 1: Create exporter referencing `GunnyLauncher.Core`**
 
-The exporter builds a deterministic sample `GameLaunchInfo` from `http://103.9.156.182/Gunny/Default.aspx?user=fixture&key=fixture-key&editby=Trminhpc` and serializes canonical contract values with stable indentation/order.
+The exporter builds a deterministic sample `GameLaunchInfo` from `http://103.9.156.181/Gunny/Default.aspx?user=fixture&key=fixture-key&editby=Trminhpc` and serializes canonical contract values with stable indentation/order.
 
 - [ ] **Step 2: Generate fixture twice and verify byte stability**
 
@@ -108,7 +108,7 @@ git commit -m "feat(ios): add SwiftUI Gunny login and registration shell"
 Assert generated HTML contains the signed SWF URL and exactly:
 
 ```javascript
-socketProxy: [{ host: "103.9.156.182", port: 9200, proxyUrl: "wss://proxy.example.test/socket?route=game" }]
+socketProxy: [{ host: "103.9.156.181", port: 9200, proxyUrl: "wss://proxy.example.test/socket?route=game" }]
 ```
 
 The production gateway hostname is an app setting/build configuration value; tests use `wss://proxy.example.test/socket?route=game`.

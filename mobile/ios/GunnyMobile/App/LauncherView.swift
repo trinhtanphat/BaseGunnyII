@@ -14,7 +14,7 @@ struct LauncherView: View {
         var id: String { rawValue }
     }
 
-    @AppStorage("gunny.server") private var server = "http://103.9.156.182/Gunny/"
+    @AppStorage("gunny.server") private var server = "http://103.9.156.181/Gunny/"
     @AppStorage("gunny.username") private var username = ""
 
     @State private var mode: Mode = .login

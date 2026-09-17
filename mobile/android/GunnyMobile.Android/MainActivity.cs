@@ -31,7 +31,7 @@ public sealed class MainActivity : Activity
     {
         base.OnCreate(savedInstanceState);
         Title = "Gunny Mobile";
-        _server = new EditText(this) { Text = "http://103.9.156.182/Gunny/", Hint = "Máy chủ" };
+        _server = new EditText(this) { Text = "http://103.9.156.181/Gunny/", Hint = "Máy chủ" };
         _status = new TextView(this) { Text = "Sẵn sàng." };
         _loginUsername = new EditText(this) { Hint = "Tài khoản" };
         _loginPassword = PasswordBox("Mật khẩu");

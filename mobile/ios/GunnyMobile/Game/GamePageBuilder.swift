@@ -6,7 +6,7 @@ enum GamePageBuilder {
         case encodingFailed
     }
 
-    static let gameHost = "103.9.156.182"
+    static let gameHost = "103.9.156.181"
     static let gamePort = 9200
     static let publicPath = "gunny-ruffle://assets/"
 

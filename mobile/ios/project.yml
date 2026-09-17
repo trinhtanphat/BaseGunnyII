@@ -33,7 +33,7 @@ targets:
         GunnySocketProxyURL: "$(GUNNY_SOCKET_PROXY_URL)"
         NSAppTransportSecurity:
           NSExceptionDomains:
-            "103.9.156.182":
+            "103.9.156.181":
               NSExceptionAllowsInsecureHTTPLoads: true
               NSIncludesSubdomains: false
 

@@ -3,7 +3,7 @@ using GunnySocketProxy;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration.GetSection("GunnyProxy");
 
-var gameHost = configuration["GameHost"] ?? "103.9.156.182";
+var gameHost = configuration["GameHost"] ?? "103.9.156.181";
 var gamePort = ParseInt(configuration["GamePort"], 9200);
 var maxFrameBytes = ParseInt(configuration["MaxFrameBytes"], 262_144);
 var idleSeconds = ParseInt(configuration["IdleTimeoutSeconds"], 30);

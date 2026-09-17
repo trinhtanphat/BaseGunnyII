@@ -67,7 +67,7 @@ test('game websocket connects only to the fixed target and forwards binary bytes
   assert.equal(response.status, 101);
   assert.equal(response.webSocket, h.client);
   assert.equal(h.server.accepted, true);
-  assert.deepEqual(h.connections, [{ hostname: '103.9.156.182', port: 9200 }]);
+  assert.deepEqual(h.connections, [{ hostname: '103.9.156.181', port: 9200 }]);
 
   await h.server.emit('message', { data: new Uint8Array([7, 8, 9]) });
   assert.deepEqual([...h.tcpWrites[0]], [7, 8, 9]);

@@ -5,7 +5,7 @@ Cloudflare Worker that exposes the legacy Gunny TCP game socket to Ruffle as a s
 ## Fixed security boundary
 
 - Public endpoint: `GET /socket?route=game` with a WebSocket upgrade.
-- The only upstream destination is `103.9.156.182:9200`.
+- The only upstream destination is `103.9.156.181:9200`.
 - Callers cannot provide an arbitrary host or port.
 - Text WebSocket messages are rejected with close code `1003`.
 - Binary messages larger than 256 KiB are rejected with close code `1009`.

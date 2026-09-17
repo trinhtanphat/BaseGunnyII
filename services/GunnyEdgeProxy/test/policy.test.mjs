@@ -9,11 +9,11 @@ import {
 
 test('only route=game resolves to the fixed Gunny TCP destination', () => {
   assert.deepEqual(resolveDestination('game'), {
-    hostname: '103.9.156.182',
+    hostname: '103.9.156.181',
     port: 9200,
   });
   assert.equal(resolveDestination('admin'), null);
-  assert.equal(resolveDestination('103.9.156.182:22'), null);
+  assert.equal(resolveDestination('103.9.156.181:22'), null);
 });
 
 test('socket endpoint requires GET websocket upgrade and route=game', () => {

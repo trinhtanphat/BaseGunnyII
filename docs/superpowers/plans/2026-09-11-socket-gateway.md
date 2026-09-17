@@ -35,10 +35,10 @@
 - [ ] **Step 1: Write failing policy smoke**
 
 ```csharp
-var options = ProxyOptions.CreateDefault("103.9.156.182", 9200);
+var options = ProxyOptions.CreateDefault("103.9.156.181", 9200);
 var policy = new DestinationPolicy(options);
 Require(policy.TryResolve("game", out var approved) && approved.Port == 9200, "approved route missing");
-Require(!policy.TryResolve("103.9.156.182:22", out _), "arbitrary destination must be rejected");
+Require(!policy.TryResolve("103.9.156.181:22", out _), "arbitrary destination must be rejected");
 ```
 
 - [ ] **Step 2: Run test and confirm RED**
@@ -119,7 +119,7 @@ Use a `ConcurrentDictionary<string, ClientWindow>`, monotonic timestamps, and `t
 
 - [ ] **Step 3: Configure safe defaults**
 
-`appsettings.json` contains route `game`, host `103.9.156.182`, port `9200`, `MaxFrameBytes=262144`, idle timeout `30s`, connection lifetime `30m`, concurrent connections per client `2`, and connection attempts per minute `10`. No secret values are stored.
+`appsettings.json` contains route `game`, host `103.9.156.181`, port `9200`, `MaxFrameBytes=262144`, idle timeout `30s`, connection lifetime `30m`, concurrent connections per client `2`, and connection attempts per minute `10`. No secret values are stored.
 
 - [ ] **Step 4: Verify host and tests**
 
