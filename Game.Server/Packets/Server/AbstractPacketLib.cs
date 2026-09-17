@@ -1314,8 +1314,6 @@ namespace Game.Base.Packets
                     for (int i = 0; i < length; i++, j++)
                     {
                         var info = infos[j];
-                        if (info.Data.IsExist)
-                        {
                             pkg.WriteInt(info.Data.QuestID);           //任务编号
                             pkg.WriteBoolean(info.Data.IsComplete);    //是否完成
                             pkg.WriteInt(info.Data.Condition1);        //用户条件一
@@ -1326,8 +1324,6 @@ namespace Game.Base.Packets
                             pkg.WriteInt(info.Data.RepeatFinish);      //该任务剩余接受次数。
                             pkg.WriteInt(info.Data.RandDobule);        //用户接受任务机会
                             pkg.WriteBoolean(info.Data.IsExist);         //是否为新任务
-                            pkg.WriteInt(3);//_loc_6.QuestLevel = _loc_2.readInt();
-                        }
                     }
                     //输出所有的任务
                     for (int i = 0; i < states.Length; i++)

@@ -57,6 +57,8 @@ jobs:
             'tests/pvp-gameover-stale-state-action-smoke.ps1',
             'tests/pvp-turn-packet-contract-smoke.ps1',
             'tests/guild-quest-membership-smoke.ps1',
+            'tests/guild-quest-update-contract-smoke.ps1',
+            'tests/quest-update-packet-cardinality-smoke.ps1',
             'tests/center-stale-session-relogin-smoke.ps1'
           )
           foreach ($test in $tests) {
