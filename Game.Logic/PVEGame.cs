@@ -384,12 +384,12 @@ namespace Game.Logic
 
             if (player != null)
             {
-                player.PlayerDetail.RemoveGP(gp.PlayerCharacter.Grade * 12);
                 string msg = null;
                 string msg1 = null;
                 if (player.IsLiving && GameState == eGameState.Playing)
                 {
 
+                    player.PlayerDetail.RemoveGP(gp.PlayerCharacter.Grade * 12);
                     msg = LanguageMgr.GetTranslation("AbstractPacketLib.SendGamePlayerLeave.Msg4", gp.PlayerCharacter.Grade * 12);
                     msg1 = LanguageMgr.GetTranslation("AbstractPacketLib.SendGamePlayerLeave.Msg5", gp.PlayerCharacter.NickName, gp.PlayerCharacter.Grade * 12);
                     SendMessage(gp, msg, msg1, 3);

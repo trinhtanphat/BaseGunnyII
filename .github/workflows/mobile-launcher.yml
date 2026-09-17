@@ -45,6 +45,7 @@ jobs:
             'tests/fight-room-packet-guard-smoke.ps1',
             'tests/projectile-damage-ref-smoke.ps1',
             'tests/projectile-damage-pve-smoke.ps1',
+            'tests/pve-loading-gp-penalty-smoke.ps1',
             'tests/pvp-spawn-safety-smoke.ps1',
             'tests/pvp-distinct-spawn-smoke.ps1',
             'tests/pvp-bot-fill-smoke.ps1',
