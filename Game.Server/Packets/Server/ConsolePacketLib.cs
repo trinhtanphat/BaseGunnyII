@@ -37,6 +37,11 @@ namespace Game.Server.Packets.Server
         {
             throw new NotImplementedException();
         }       
+        public void SendExpBlessedData(int PlayerId)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
         public GSPacketIn SendRefreshPet()
         {

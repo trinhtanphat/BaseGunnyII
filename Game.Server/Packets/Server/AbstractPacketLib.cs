@@ -950,6 +950,14 @@ namespace Game.Base.Packets
             SendTCP(pkg);
             return pkg;
         }
+        public void SendExpBlessedData(int PlayerId)
+        {
+            GSPacketIn gSPacketIn = new GSPacketIn(155, PlayerId);
+            gSPacketIn.WriteByte(8);
+            gSPacketIn.WriteInt(0);
+            SendTCP(gSPacketIn);
+        }
+
 
         #endregion
 

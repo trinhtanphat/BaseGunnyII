@@ -120,6 +120,8 @@ namespace Game.Base.Packets
 
         GSPacketIn SendMarryProp(GamePlayer player, MarryProp info);
 
+        void SendExpBlessedData(int PlayerId);
+
         GSPacketIn SendRoomType(GamePlayer player, BaseRoom game);
     }
 }

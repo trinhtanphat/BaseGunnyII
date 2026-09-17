@@ -158,6 +158,7 @@
     <Compile Include="Packets\Client\CaddyClearAllHandler.cs" />
     <Compile Include="Packets\Client\CardDataHander.cs" />
     <Compile Include="Packets\Client\OpenVipHandler.cs" />
+    <Compile Include="Packets\Client\EverydayActivePointHandler.cs" />
     <Compile Include="Packets\Client\RequestAwardsHandler.cs" />
     <Compile Include="Packets\Client\EquipRetrieveHandler.cs" />
     <Compile Include="Packets\Client\ItemOpenFiveSixHoleHandler.cs" />
