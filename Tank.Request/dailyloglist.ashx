@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="dailyloglist.ashx.cs" Class="Tank.Request.dailyloglist" %>
+<%@ WebHandler Language="C#" Class="Tank.Request.Live.DailyLogListHandler" %>
