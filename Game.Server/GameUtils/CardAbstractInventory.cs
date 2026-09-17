@@ -26,10 +26,7 @@ public abstract class CardAbstractInventory
 
 	private int m_changeCount;
 
-	public int BeginSlot
-	{
-	    get { return m_beginSlot; }
-	}
+	public int BeginSlot => m_beginSlot;
 
 	public int Capalility
 	{

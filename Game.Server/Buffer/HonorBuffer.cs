@@ -13,8 +13,7 @@ public class HonorBuffer : AbstractBuffer
 
 	public override void Start(GamePlayer player)
 	{
-		HonorBuffer honorBuffer = player.BufferList.GetOfType(typeof(HonorBuffer)) as HonorBuffer;
-		if (honorBuffer != null)
+		if (player.BufferList.GetOfType(typeof(HonorBuffer)) is HonorBuffer honorBuffer)
 		{
 			honorBuffer.Info.ValidDate += base.Info.ValidDate;
 			player.BufferList.UpdateBuffer(honorBuffer);
