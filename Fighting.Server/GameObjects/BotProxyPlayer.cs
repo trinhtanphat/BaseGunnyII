@@ -182,7 +182,22 @@ namespace Fighting.Server.GameObjects
         private static bool IsTrajectoryViable(Player player, Player target,
             int force, int angle)
         {
-            return ProbeTrajectory(player, target, force, angle).Outcome == BotTrajectoryOutcome.Target;
+            BallInfo ball = BallMgr.FindBall(player.CurrentBall.ID);
+            if (ball == null || player.Game == null || player.Game.Map == null)
+                return false;
+
+            List<Rectangle> targetBounds = target.GetDirectBoudRect();
+            var map = player.Game.Map;
+            Point shootPoint = player.GetShootPoint();
+            return BotAimTrajectory.IsViable(shootPoint.X, shootPoint.Y, force, angle, ball.Mass,
+                map.airResistance * ball.DragIndex,
+                map.gravity * ball.Weight * ball.Mass, map.wind * ball.Wind,
+                targetBounds, ball.Radii, map.Bound.Width, map.Bound.Height,
+                delegate(Rectangle rect) { return map.IsRectangleEmpty(rect); },
+                delegate(int impactX, int impactY)
+                {
+                    return target.Distance(new Point(impactX, impactY));
+                });
         }
 
         private static bool TryFindAccurateShot(Player player, Player target,
