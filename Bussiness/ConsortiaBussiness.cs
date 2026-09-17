@@ -756,13 +756,19 @@ namespace Bussiness
                 para[0].Direction = ParameterDirection.Output;
                 para[1] = new SqlParameter("@Result", System.Data.SqlDbType.Int);
                 para[1].Direction = ParameterDirection.ReturnValue;
-                result = db.RunProcedure("SP_Consortia_Scan", para);
+                if (!db.RunProcedure("SP_Consortia_Scan", para))
+                {
+                    return false;
+                }
+                if (para[1].Value == null || para[1].Value == DBNull.Value)
+                {
+                    return false;
+                }
                 int returnValue = (int)para[1].Value;
                 result = returnValue == 0;
                 if (result)
                 {
-                    noticeID = para[0].Value.ToString();
-                    //noticeID = para[0].Value == null ? "" : para[0].Value.ToString();
+                    noticeID = para[0].Value == null || para[0].Value == DBNull.Value ? string.Empty : para[0].Value.ToString();
                 }
             }
             catch (Exception e)
