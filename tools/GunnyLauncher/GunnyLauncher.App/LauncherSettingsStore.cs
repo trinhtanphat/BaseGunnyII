@@ -5,26 +5,35 @@ namespace GunnyLauncher.App;
 public sealed class LauncherSettingsStore
 {
     private readonly string _path;
+    private readonly LauncherSettings _defaultSettings;
 
-    public LauncherSettingsStore(string? path = null)
+    public LauncherSettingsStore(string? path = null, string? profilePath = null)
     {
-        _path = path ?? Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "BaseGunnyII",
-            "launcher.json");
+        profilePath ??= Path.Combine(AppContext.BaseDirectory, "launcher.profile.json");
+        var profile = LauncherProfile.Load(profilePath);
+        _defaultSettings = new LauncherSettings(profile.DefaultServerUrl, string.Empty);
+
+        _path = !string.IsNullOrWhiteSpace(path)
+            ? path
+            : Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "BaseGunnyII",
+                "profiles",
+                profile.Profile,
+                "launcher.json");
     }
 
     public LauncherSettings Load()
     {
-        if (!File.Exists(_path)) return LauncherSettings.Default;
+        if (!File.Exists(_path)) return _defaultSettings;
         try
         {
             return JsonSerializer.Deserialize<LauncherSettings>(File.ReadAllText(_path))
-                ?? LauncherSettings.Default;
+                ?? _defaultSettings;
         }
         catch (JsonException)
         {
-            return LauncherSettings.Default;
+            return _defaultSettings;
         }
     }
 
