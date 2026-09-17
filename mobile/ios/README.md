@@ -6,7 +6,7 @@ The iOS client is a SwiftUI launcher with session-bound legacy Gunny login and r
 
 Only the server URL and username are persisted with `AppStorage`. Passwords, CAPTCHA values, cookies, signed launch keys, and game redirects remain in memory. `GunnySession` uses an ephemeral `URLSessionConfiguration` so ASP.NET session cookies survive CAPTCHA/login flows without being persisted to disk.
 
-The current game server is plain HTTP at `103.9.156.182`; `project.yml` scopes the ATS insecure-load exception to that IP only. The raw game TCP socket is never opened by WebKit. Ruffle is configured to proxy only `103.9.156.182:9200` through a required `wss://.../socket?route=game` endpoint.
+The current game server is plain HTTP at `103.9.156.181`; `project.yml` scopes the ATS insecure-load exception to that IP only. The raw game TCP socket is never opened by WebKit. Ruffle is configured to proxy only `103.9.156.181:9200` through a required `wss://.../socket?route=game` endpoint.
 
 ## Ruffle Web
 

@@ -34,7 +34,7 @@ final class ContractTests: XCTestCase {
         )
 
         let socket = try XCTUnwrap(fixture["gameSocket"] as? [String: Any])
-        XCTAssertEqual(socket["host"] as? String, "103.9.156.182")
+        XCTAssertEqual(socket["host"] as? String, "103.9.156.181")
         XCTAssertEqual(socket["port"] as? Int, 9200)
     }
 
@@ -50,7 +50,7 @@ final class ContractTests: XCTestCase {
         let proxyURL = try XCTUnwrap(URL(string: "wss://proxy.example.test/socket?route=game"))
         let script = try GamePageBuilder.makeBootstrapScript(proxyURL: proxyURL)
         XCTAssertTrue(script.contains("publicPath: \"gunny-ruffle://assets/\""))
-        XCTAssertTrue(script.contains("socketProxy: [{ host: \"103.9.156.182\", port: 9200, proxyUrl: \"wss://proxy.example.test/socket?route=game\" }]") )
+        XCTAssertTrue(script.contains("socketProxy: [{ host: \"103.9.156.181\", port: 9200, proxyUrl: \"wss://proxy.example.test/socket?route=game\" }]") )
         XCTAssertEqual(script.components(separatedBy: "proxyUrl:").count - 1, 1)
     }
 

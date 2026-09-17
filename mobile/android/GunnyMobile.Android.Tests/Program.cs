@@ -5,9 +5,9 @@ static void Require(bool condition, string message)
     if (!condition) throw new Exception(message);
 }
 
-var gameBase = new Uri("http://103.9.156.182/Gunny/");
+var gameBase = new Uri("http://103.9.156.181/Gunny/");
 var launch = GameLaunchInfo.ParseRedirect(
-    new Uri("http://103.9.156.182/Gunny/Default.aspx?user=test%20user&key=abc-123&editby=Trminhpc"));
+    new Uri("http://103.9.156.181/Gunny/Default.aspx?user=test%20user&key=abc-123&editby=Trminhpc"));
 
 Require(RuffleAndroidContract.PackageName == "rs.ruffle", "Ruffle package mismatch");
 var uri = RuffleAndroidContract.BuildGameUri(launch, gameBase);

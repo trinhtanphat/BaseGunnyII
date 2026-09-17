@@ -6,7 +6,7 @@ This folder contains the native Gunny account launcher and the pinned Ruffle And
 
 `GunnyMobile.Android` targets `net10.0-android` and references `GunnyLauncher.Core` (`net8.0`) for login and registration. The launcher does not duplicate the legacy account protocol.
 
-The default server remains `http://103.9.156.182/Gunny/` for compatibility with the current deployment. Passwords, CAPTCHA values, cookies, signed auth keys and launch redirects are never persisted by the Android app.
+The default server remains `http://103.9.156.181/Gunny/` for compatibility with the current deployment. Passwords, CAPTCHA values, cookies, signed auth keys and launch redirects are never persisted by the Android app.
 
 After login the app creates an explicit `ACTION_VIEW` intent for the signed `flash/Loading.swf` URL, MIME `application/x-shockwave-flash`, constrained to package `rs.ruffle`. It does not fall back to a browser.
 

@@ -5,8 +5,8 @@ var outputPath = args.Length > 0
     ? Path.GetFullPath(args[0])
     : Path.GetFullPath(Path.Combine("mobile", "contracts", "gunny-launch-contract.json"));
 
-var gameBase = new Uri("http://103.9.156.182/Gunny/");
-var redirect = new Uri("http://103.9.156.182/Gunny/Default.aspx?user=fixture&key=fixture-key&editby=Trminhpc");
+var gameBase = new Uri("http://103.9.156.181/Gunny/");
+var redirect = new Uri("http://103.9.156.181/Gunny/Default.aspx?user=fixture&key=fixture-key&editby=Trminhpc");
 var launch = GameLaunchInfo.ParseRedirect(redirect);
 var swf = launch.BuildSwfUri(gameBase);
 
@@ -43,7 +43,7 @@ var contract = new
     },
     gameSocket = new
     {
-        host = "103.9.156.182",
+        host = "103.9.156.181",
         port = 9200
     }
 };

@@ -1,7 +1,7 @@
 param(
     [string]$RequestRoot = 'C:\Gunny\GunnyFileExe\request',
     [string]$LocalBase = 'http://127.0.0.1/Request',
-    [string]$PublicBase = 'http://103.9.156.182/Request'
+    [string]$PublicBase = 'http://103.9.156.181/Request'
 )
 $ErrorActionPreference = 'Stop'
 $failures = New-Object System.Collections.Generic.List[string]
