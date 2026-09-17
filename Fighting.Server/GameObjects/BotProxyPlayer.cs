@@ -471,11 +471,13 @@ namespace Fighting.Server.GameObjects
             bool canClear = TryFindTerrainClearShot(game, player, target,
                 out clearForce, out clearAngle, out clearProgress);
 
-            int flyForce;
-            int flyAngle;
-            double flyImprovement;
-            bool canFly = m_flyUses < 2 && TryFindFlyShot(player, target,
-                out flyForce, out flyAngle, out flyImprovement);
+            int flyForce = 0;
+            int flyAngle = 0;
+            double flyImprovement = 0;
+            bool canFly = false;
+            if (m_flyUses < 2)
+                canFly = TryFindFlyShot(player, target,
+                    out flyForce, out flyAngle, out flyImprovement);
 
             if (canClear && (clearProgress >= 45 || !canFly))
             {
