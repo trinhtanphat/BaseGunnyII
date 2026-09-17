@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 $packetPath = Join-Path $root 'Game.Server\Packets\Server\AbstractPacketLib.cs'
 $packet = Get-Content $packetPath -Raw
@@ -19,12 +19,14 @@ $required = @(
     'pkg.WriteInt(info.Data.RepeatFinish)',
     'pkg.WriteInt(info.Data.RandDobule)',
     'pkg.WriteBoolean(info.Data.IsExist)',
-    'pkg.WriteInt(3)',
-    'pkg.WriteInt(0)'
+    'pkg.WriteInt(info.Data.QuestLevel)',
+    'pkg.WriteInt(extraProgress.Length)',
+    'pkg.WriteInt(k + 4)',
+    'pkg.WriteInt(extraProgress[k])'
 )
 foreach ($write in $required) {
     if (-not $text.Contains($write)) { throw "QUEST_UPDATE missing deployed 4.1 field: $write" }
 }
-if ($text -notmatch '(?s)pkg\.WriteBoolean\(info\.Data\.IsExist\);.*?pkg\.WriteInt\(3\);.*?pkg\.WriteInt\(0\);.*?for \(int i = 0; i < states\.Length; i\+\+\)') { throw 'QUEST_UPDATE tail must serialize IsExist, QuestLevel, progressCount, then quest-log bytes in client read order.' }
+if ($text -notmatch '(?s)pkg\.WriteBoolean\(info\.Data\.IsExist\);.*?pkg\.WriteInt\(info\.Data\.QuestLevel\);.*?pkg\.WriteInt\(extraProgress\.Length\);.*?pkg\.WriteInt\(k \+ 4\);.*?pkg\.WriteInt\(extraProgress\[k\]\);.*?for \(int i = 0; i < states\.Length; i\+\+\)') { throw 'QUEST_UPDATE tail must serialize persisted QuestLevel and Condition5-8 progress pairs before quest-log bytes.' }
 if ($text -notmatch 'pkg\.WriteInt\(length\);') { throw 'QUEST_UPDATE must advertise the serialized record count.' }
 Write-Output 'QUEST_UPDATE_PACKET_CARDINALITY_SMOKE=PASS'
