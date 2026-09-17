@@ -1168,49 +1168,48 @@ namespace Game.Server.GameObjects
         }
         public void UpdateVIPForUser()
         {
-            if (m_character.LastVIPPackTime >= DateTime.Now.AddDays(-7) && m_character.VIPExpireDay >= DateTime.Now)
-            {
-                m_character.CanTakeVipReward = true;
-            }
-            else { m_character.CanTakeVipReward = false; }
+            DateTime now = DateTime.Now;
+            bool activeVip = m_character.VIPExpireDay >= now;
 
-            if (m_character.VIPExpireDay >= DateTime.Now)
+            if (m_character.VIPLevel < 1)
+                m_character.VIPLevel = 1;
+            if (m_character.VIPLevel > PlayerInfo.MaxVipLevel)
+                m_character.VIPLevel = PlayerInfo.MaxVipLevel;
+
+            if (activeVip)
             {
-                if (m_character.VIPNextLevelDaysNeeded == 0)
-                {
-                    m_character.VIPNextLevelDaysNeeded = m_character.DaysNeeded(m_character.VIPLevel);
-                }
-                if (m_character.VIPLastDate.Date != DateTime.Now.Date)
-                {
-                    m_character.VIPExp += 10;
-                    m_character.VipUpdate();
-                }
-                m_character.VIPNextLevelDaysNeeded = m_character.DaysNeeded(m_character.VIPLevel) - m_character.VIPExp / 10;
-                    
+                if (m_character.typeVIP < 1)
+                    m_character.typeVIP = 1;
+                m_character.EnsureVipExpFloor();
             }
             else
             {
-                if (m_character.VIPExp >= 5)
-                {
-                    if (m_character.VIPLastDate.Date != DateTime.Now.Date)
-                    {
-                        m_character.VIPExp -= 5;
-                        m_character.VipUpdate();
-                    }
-                    if (m_character.VIPExp < 0)
-                    {
-                        m_character.VIPExp = 0;
-                    }
-                    m_character.VIPNextLevelDaysNeeded = m_character.DaysNeeded(m_character.VIPLevel) - m_character.VIPExp / 10;
-                    
-                }
-                
+                m_character.typeVIP = 0;
             }
+
+            m_character.CanTakeVipReward =
+                activeVip && m_character.LastVIPPackTime >= now.AddDays(-7);
+
+            if (m_character.VIPLastDate.Date != now.Date)
+            {
+                if (activeVip)
+                    m_character.VIPExp += 10;
+                else if (m_character.VIPExp > 0)
+                    m_character.VIPExp = Math.Max(0, m_character.VIPExp - 5);
+
+                m_character.VipUpdate();
+            }
+
+            m_character.VIPNextLevelDaysNeeded =
+                activeVip ? m_character.DaysNeeded(m_character.VIPLevel) : 0;
+            m_character.VIPLastDate = now;
+
             using (PlayerBussiness db = new PlayerBussiness())
             {
-                db.VIPLastdate(m_character.ID);
+                db.UpdateVIPInfo(m_character);
             }
         }
+
         /// <summary>
         /// Save the player into the database
         /// </summary>
