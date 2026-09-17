@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 $packet = Get-Content (Join-Path $root 'Game.Server\Packets\Server\AbstractPacketLib.cs') -Raw
 $playerInfo = Get-Content (Join-Path $root 'SqlDataProvider\Data\PlayerInfo.cs') -Raw
@@ -7,7 +7,7 @@ $login = Get-Content (Join-Path $root 'Game.Server\LoginServerConnector.cs') -Ra
 $handler = Get-Content (Join-Path $root 'Game.Server\Packets\Client\ConsortiaHandler.cs') -Raw
 $finish = Get-Content (Join-Path $root 'Game.Server\Packets\Client\QuestFinishHandler.cs') -Raw
 $quest = Get-Content (Join-Path $root 'Game.Server\Quests\BaseQuest.cs') -Raw
-if ($packet -notmatch '(?s)WriteBoolean\(info\.Data\.IsExist\).*?WriteInt\(3\).*?WriteInt\(0\)') { throw 'QUEST_UPDATE must include client-required QuestLevel and progress-count tail.' }
+if ($packet -notmatch '(?s)WriteBoolean\(info\.Data\.IsExist\).*?WriteInt\(info\.Data\.QuestLevel\).*?WriteInt\(extraProgress\.Length\)') { throw 'QUEST_UPDATE must include persisted QuestLevel and progress-count tail.' }
 if ($playerInfo -notmatch '(?s)void ClearConsortia\(\).*?IsConsortia\s*=\s*false') { throw 'ClearConsortia must clear the IsConsortia flag.' }
 if ($condition -notmatch 'GetConsortiaUsersByUserID\(player\.PlayerCharacter\.ID\)') { throw 'Guild quest authority must verify the membership row.' }
 if ($condition -notmatch 'membership\.ConsortiaID\s*!=\s*player\.PlayerCharacter\.ConsortiaID') { throw 'Guild quest authority must require membership to match the current guild id.' }
