@@ -3465,57 +3465,61 @@ namespace Bussiness
         }
         public bool UpdateVIPInfo(PlayerInfo p)
         {
-            bool flag = false;
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[] { 
-                    new SqlParameter("@UserID", p.ID), 
-                    new SqlParameter("@VIPLevel", p.VIPLevel), 
-                    new SqlParameter("@VIPExp", p.VIPExp), 
-                    new SqlParameter("@VIPOnlineDays", p.VIPOnlineDays), 
+                SqlParameter[] sqlParameters = new SqlParameter[] {
+                    new SqlParameter("@UserID", p.ID),
+                    new SqlParameter("@typeVIP", p.typeVIP),
+                    new SqlParameter("@VIPLevel", p.VIPLevel),
+                    new SqlParameter("@VIPExp", p.VIPExp),
+                    new SqlParameter("@VIPOnlineDays", p.VIPOnlineDays),
                     new SqlParameter("@VIPOfflineDays", p.VIPOfflineDays),
-                    new SqlParameter("@VIPExpireDay", p.VIPExpireDay.ToString()),
-                    new SqlParameter("@VIPLastDate", DateTime.Now),
+                    new SqlParameter("@VIPExpireDay", p.VIPExpireDay),
+                    new SqlParameter("@VIPLastDate", p.VIPLastDate),
                     new SqlParameter("@VIPNextLevelDaysNeeded", p.VIPNextLevelDaysNeeded),
                     new SqlParameter("@CanTakeVipReward", p.CanTakeVipReward),
-                    new SqlParameter("@Result", SqlDbType.Int) };
-                sqlParameters[9].Direction = ParameterDirection.ReturnValue;
+                    new SqlParameter("@Result", SqlDbType.Int)
+                };
+                sqlParameters[10].Direction = ParameterDirection.ReturnValue;
                 db.RunProcedure("SP_UpdateVIPInfo", sqlParameters);
-                //p.IsDirty = false;
-                flag = true;
+                return (int)sqlParameters[10].Value == 0;
             }
             catch (Exception exception)
             {
                 if (BaseBussiness.log.IsErrorEnabled)
-                {
                     BaseBussiness.log.Error("SP_UpdateVIPInfo", exception);
-                }
+                return false;
             }
-            return flag;
         }
-       
-        public int VIPRenewal(string nickName, int renewalDays)
+
+        public int VIPRenewal(int userId, int renewalDays, out DateTime expireDay)
         {
-            int num = 0;
+            expireDay = DateTime.MinValue;
             try
             {
-                SqlParameter[] sqlParameters = new SqlParameter[] { 
-                    new SqlParameter("@NickName", nickName), 
-                    new SqlParameter("@RenewalDays", renewalDays), 
-                    new SqlParameter("@Result", SqlDbType.Int) };
-                sqlParameters[2].Direction = ParameterDirection.ReturnValue;
+                SqlParameter expire = new SqlParameter("@ExpireDayOut", SqlDbType.DateTime);
+                expire.Direction = ParameterDirection.Output;
+                SqlParameter result = new SqlParameter("@Result", SqlDbType.Int);
+                result.Direction = ParameterDirection.ReturnValue;
+                SqlParameter[] sqlParameters = new SqlParameter[] {
+                    new SqlParameter("@UserID", userId),
+                    new SqlParameter("@RenewalDays", renewalDays),
+                    expire,
+                    result
+                };
                 db.RunProcedure("SP_VIPRenewal_Single", sqlParameters);
-                num = (int)sqlParameters[2].Value;
+                if (expire.Value != DBNull.Value)
+                    expireDay = Convert.ToDateTime(expire.Value);
+                return (int)result.Value;
             }
             catch (Exception exception)
             {
                 if (BaseBussiness.log.IsErrorEnabled)
-                {
                     BaseBussiness.log.Error("SP_VIPRenewal_Single", exception);
-                }
+                return 0;
             }
-            return num;
         }
+
         public int VIPLastdate(int ID)
         {
             int num = 0;
