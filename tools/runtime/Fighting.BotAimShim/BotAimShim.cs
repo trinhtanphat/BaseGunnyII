@@ -407,11 +407,13 @@ namespace Fighting.BotAimShim
             bool canClear = TryFindTerrainClearShot(game, player, target,
                 out clearForce, out clearAngle, out clearProgress);
 
-            int flyForce;
-            int flyAngle;
-            double flyImprovement;
-            bool canFly = state.FlyUses < 2 &&
-                TryFindFlyShot(player, target, out flyForce, out flyAngle, out flyImprovement);
+            int flyForce = 0;
+            int flyAngle = 0;
+            double flyImprovement = 0;
+            bool canFly = false;
+            if (state.FlyUses < 2)
+                canFly = TryFindFlyShot(player, target,
+                    out flyForce, out flyAngle, out flyImprovement);
 
             if (canClear && (clearProgress >= 45 || !canFly))
             {
