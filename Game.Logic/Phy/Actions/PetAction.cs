@@ -16,7 +16,10 @@ public class PetAction
 
 	public int blood;
 
-	public int TimeInt => (int)Math.Round(Time * 1000f);
+	public int TimeInt
+	{
+	    get { return (int)Math.Round(Time * 1000f); }
+	}
 
 	public PetAction(float time, PetActionType type, int _id, int _damage, int _dander, int _blood)
 	{
