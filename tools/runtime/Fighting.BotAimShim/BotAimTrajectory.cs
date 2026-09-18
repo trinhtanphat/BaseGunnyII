@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace Fighting.Server.GameObjects
+namespace Fighting.BotAimShim
 {
     internal enum BotTrajectoryOutcome
     {
@@ -80,6 +80,7 @@ namespace Fighting.Server.GameObjects
             float y = startY;
             int previousX = (int)x;
             int previousY = (int)y;
+
             for (float life = 0; life <= MaxLife; life += Step)
             {
                 float ax = (wind - airResistance * vx) / mass;
@@ -99,6 +100,7 @@ namespace Fighting.Server.GameObjects
                 previousX = px;
                 previousY = py;
             }
+
             return new BotTrajectoryProbe(BotTrajectoryOutcome.None, previousX, previousY);
         }
 
@@ -144,6 +146,7 @@ namespace Fighting.Server.GameObjects
                 if (px < 0 || px >= mapWidth || py >= mapHeight)
                     return new BotTrajectoryProbe(BotTrajectoryOutcome.OutOfMap, px, py);
             }
+
             return new BotTrajectoryProbe(BotTrajectoryOutcome.None, x2, y2);
         }
 

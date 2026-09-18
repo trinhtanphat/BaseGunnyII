@@ -51,6 +51,8 @@ jobs:
             'tests/pvp-bot-fill-smoke.ps1',
             'tests/pvp-bot-splash-distance-parity-smoke.ps1',
             'tests/pvp-bot-velocity-parity-smoke.ps1',
+            'tests/pvp-bot-terrain-clear-smoke.ps1',
+            'tests/pvp-bot-tactical-planner-smoke.ps1',
             'tests/pvp-winner-smoke.ps1',
             'tests/pvp-bot-quest-progress-smoke.ps1',
             'tests/pvp-gameover-wiring-smoke.ps1',

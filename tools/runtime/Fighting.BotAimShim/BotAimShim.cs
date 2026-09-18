@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Bussiness.Managers;
-using Game.Base.Packets;
 using Game.Logic;
+using Game.Logic.Phy.Maps;
 using Game.Logic.Phy.Object;
 using SqlDataProvider.Data;
 
-namespace Fighting.Server.GameObjects
+namespace Fighting.BotAimShim
 {
-    public class BotProxyPlayer : IGamePlayer, IBotGamePlayer
+    public static class BotAimShim
     {
         private const int SelfHealTemplateId = 10012;
         private const int TeamHealTemplateId = 10009;
@@ -17,118 +17,47 @@ namespace Fighting.Server.GameObjects
         private const int DamageBoostTemplateId = 10004;
         private const int MultiBallTemplateId = 10003;
 
-        private readonly PlayerInfo m_character;
-        private readonly ItemTemplateInfo m_weapon;
-        private readonly double m_baseAttack;
-        private readonly double m_baseDefence;
-        private readonly double m_baseBlood;
-        private int m_gamePlayerId;
-        private int m_serverId;
-        private bool m_canUseProp;
-        private List<int> m_equipEffect;
-        private int m_selfHealUses;
-        private int m_teamHealUses;
-        private int m_flyUses;
-        private int m_damageBoostUses;
-        private int m_multiBallUses;
-
-        public BotProxyPlayer(IGamePlayer source, int botId)
+        private sealed class BotState
         {
-            PlayerInfo src = source.PlayerCharacter;
-            m_character = new PlayerInfo();
-            m_character.ID = botId;
-            m_character.UserName = "bot_" + Math.Abs(botId);
-            m_character.NickName = "NPC " + src.NickName;
-            m_character.Sex = src.Sex;
-            m_character.Hide = src.Hide;
-            m_character.Style = src.Style;
-            m_character.Colors = src.Colors;
-            m_character.Skin = src.Skin;
-            m_character.GP = src.GP;
-            m_character.Grade = src.Grade;
-            m_character.Repute = src.Repute;
-            m_character.Attack = src.Attack;
-            m_character.Defence = src.Defence;
-            m_character.Agility = src.Agility;
-            m_character.Luck = src.Luck;
-            m_character.FightPower = src.FightPower;
-            m_character.Nimbus = src.Nimbus;
-            m_character.Win = 0;
-            m_character.Total = 0;
-            m_character.Offer = 0;
-            m_character.ConsortiaID = 0;
-            m_character.ConsortiaName = string.Empty;
-            CopyWeakGuildProgress(src, m_character);
-            m_weapon = source.MainWeapon;
-            m_baseAttack = source.GetBaseAttack();
-            m_baseDefence = source.GetBaseDefence();
-            m_baseBlood = source.GetBaseBlood();
-            m_equipEffect = new List<int>();
+            public int SelfHealUses;
+            public int TeamHealUses;
+            public int FlyUses;
+            public int DamageBoostUses;
+            public int MultiBallUses;
         }
 
-        private static void CopyWeakGuildProgress(PlayerInfo source, PlayerInfo target)
-        {
-            var property = typeof(PlayerInfo).GetProperty("weaklessGuildProgress");
-            if (property == null || property.PropertyType != typeof(byte[]) || !property.CanRead || !property.CanWrite)
-                return;
+        private static readonly object StateSync = new object();
+        private static readonly Dictionary<long, BotState> States = new Dictionary<long, BotState>();
 
-            byte[] progress = property.GetValue(source, null) as byte[];
-            int length = progress == null ? 2 : Math.Max(2, progress.Length);
-            byte[] clone = new byte[length];
-            if (progress != null)
-                Array.Copy(progress, clone, progress.Length);
-            property.SetValue(target, clone, null);
+        private static BotState GetState(PVPGame game, Player player)
+        {
+            long key = ((long)game.Id << 32) ^ (uint)player.Id;
+            lock (StateSync)
+            {
+                BotState state;
+                if (!States.TryGetValue(key, out state))
+                {
+                    if (States.Count > 4096)
+                        States.Clear();
+                    state = new BotState();
+                    States[key] = state;
+                }
+                return state;
+            }
         }
 
-        public bool IsBot { get { return true; } }
-        public PlayerInfo PlayerCharacter { get { return m_character; } }
-        public ItemTemplateInfo MainWeapon { get { return m_weapon; } }
-        public ItemInfo SecondWeapon { get { return null; } }
-        public bool CanUseProp { get { return m_canUseProp; } set { m_canUseProp = value; } }
-        public int GamePlayerId { get { return m_gamePlayerId; } set { m_gamePlayerId = value; } }
-        public int ServerID { get { return m_serverId; } set { m_serverId = value; } }
-        public List<int> EquipEffect { get { return m_equipEffect; } set { m_equipEffect = value ?? new List<int>(); } }
-
-        public double GetBaseBlood() { return m_baseBlood; }
-        public double GetGoldBlood() { return 0; }
-        public double GetBaseAttack() { return m_baseAttack; }
-        public double GetBaseDefence() { return m_baseDefence; }
-
-        public int AddGP(int value) { return 0; }
-        public int RemoveGP(int value) { return 0; }
-        public int AddGold(int value) { return 0; }
-        public int RemoveGold(int value) { return 0; }
-        public int AddMoney(int value) { return 0; }
-        public int RemoveMoney(int value) { return 0; }
-        public int AddGiftToken(int value) { return 0; }
-        public int RemoveGiftToken(int value) { return 0; }
-        public int AddMedal(int value) { return 0; }
-        public int RemoveMedal(int value) { return 0; }
-        public int AddOffer(int value) { return 0; }
-        public int RemoveOffer(int value) { return 0; }
-        public bool AddTemplate(ItemInfo cloneItem, eBageType bagType, int count) { return false; }
-        public bool ClearTempBag() { return true; }
-        public bool ClearFightBag() { return true; }
-        public bool UsePropItem(AbstractGame game, int bag, int place, int templateId, bool isLiving) { return false; }
-        public void OnKillingLiving(AbstractGame game, int type, int id, bool isLiving, int damage) { }
-        public void OnGameOver(AbstractGame game, bool isWin, int gainXp) { }
-        public void OnMissionOver(AbstractGame game, bool isWin, int missionId, int turnNum) { }
-        public int ConsortiaFight(int consortiaWin, int consortiaLose, Dictionary<int, Player> players,
-            eRoomType roomType, eGameType gameClass, int totalKillHealth, int count) { return 0; }
-        public void SendConsortiaFight(int consortiaID, int riches, string msg) { }
-        public bool SetPvePermission(int missionId, eHardLevel hardLevel) { return true; }
-        public bool IsPvePermission(int missionId, eHardLevel hardLevel) { return true; }
-        public void Disconnect() { }
-        public void SendInsufficientMoney(int type) { }
-        public void SendMessage(string msg) { }
-        public void SendTCP(GSPacketIn pkg) { }
-        public void LogAddMoney(AddMoneyType masterType, AddMoneyType sonType, int userId, int money, int spareMoney) { }
+        private static int EstimateMaxBlood(Player player)
+        {
+            double value = player.PlayerDetail == null ? player.Blood : player.PlayerDetail.GetBaseBlood();
+            return Math.Max(player.Blood, Math.Max(1, (int)Math.Round(value)));
+        }
 
         private static Player FindBestTarget(PVPGame game, Player player)
         {
             Player target = null;
             double bestScore = double.MaxValue;
             double bestDistance = double.MaxValue;
+
             foreach (Player candidate in game.GetAllFightPlayers())
             {
                 if (!candidate.IsLiving || candidate.Blood <= 0 || candidate.Team == player.Team)
@@ -144,17 +73,22 @@ namespace Fighting.Server.GameObjects
                     allyCount++;
                 }
 
-                double distance = allyCount == 0 ? candidate.Distance(player.X, player.Y) : teamDistance / allyCount;
+                double distance = allyCount == 0
+                    ? candidate.Distance(player.X, player.Y)
+                    : teamDistance / allyCount;
                 double score = distance + candidate.Blood * 0.35;
+
                 if (target == null || score < bestScore - 0.01 ||
                     (Math.Abs(score - bestScore) <= 0.01 && candidate.Blood < target.Blood) ||
-                    (Math.Abs(score - bestScore) <= 0.01 && candidate.Blood == target.Blood && distance < bestDistance))
+                    (Math.Abs(score - bestScore) <= 0.01 && candidate.Blood == target.Blood &&
+                     distance < bestDistance))
                 {
                     bestScore = score;
                     bestDistance = distance;
                     target = candidate;
                 }
             }
+
             return target;
         }
 
@@ -166,7 +100,7 @@ namespace Fighting.Server.GameObjects
                 return new BotTrajectoryProbe(BotTrajectoryOutcome.None, player.X, player.Y);
 
             List<Rectangle> targetBounds = target.GetDirectBoudRect();
-            var map = player.Game.Map;
+            Map map = player.Game.Map;
             Point shootPoint = player.GetShootPoint();
             return BotAimTrajectory.Probe(shootPoint.X, shootPoint.Y, force, angle, ball.Mass,
                 map.airResistance * ball.DragIndex,
@@ -179,15 +113,14 @@ namespace Fighting.Server.GameObjects
                 });
         }
 
-        private static bool IsTrajectoryViable(Player player, Player target,
-            int force, int angle)
+        private static bool IsTrajectoryViable(Player player, Player target, int force, int angle)
         {
             BallInfo ball = BallMgr.FindBall(player.CurrentBall.ID);
             if (ball == null || player.Game == null || player.Game.Map == null)
                 return false;
 
             List<Rectangle> targetBounds = target.GetDirectBoudRect();
-            var map = player.Game.Map;
+            Map map = player.Game.Map;
             Point shootPoint = player.GetShootPoint();
             return BotAimTrajectory.IsViable(shootPoint.X, shootPoint.Y, force, angle, ball.Mass,
                 map.airResistance * ball.DragIndex,
@@ -201,10 +134,11 @@ namespace Fighting.Server.GameObjects
         }
 
         private static bool TryFindAccurateShot(Player player, Player target,
-            out int aimX, out int aimY, out int force, out int angle)
+            out int force, out int angle)
         {
             float[] timeSeeds = { 0.6f, 0.7f, 0.8f, 0.9f, 1.0f, 1.1f };
             int[] yOffsets = { 0, -8, 8, -16, 16 };
+
             foreach (int yOffset in yOffsets)
             {
                 foreach (float timeSeed in timeSeeds)
@@ -215,11 +149,10 @@ namespace Fighting.Server.GameObjects
                     int candidateAngle = 0;
                     player.GetShootForceAndAngle(ref candidateX, ref candidateY, player.CurrentBall.ID,
                         1, 5, 1, timeSeed, ref candidateForce, ref candidateAngle);
-                    if (candidateForce > 0 && IsTrajectoryViable(player, target,
-                        candidateForce, candidateAngle))
+
+                    if (candidateForce > 0 &&
+                        IsTrajectoryViable(player, target, candidateForce, candidateAngle))
                     {
-                        aimX = candidateX;
-                        aimY = candidateY;
                         force = candidateForce;
                         angle = candidateAngle;
                         return true;
@@ -227,19 +160,19 @@ namespace Fighting.Server.GameObjects
                 }
             }
 
-            aimX = 0;
-            aimY = 0;
             force = 0;
             angle = 0;
             return false;
         }
 
-        private static bool IsTerrainImpactSafe(PVPGame game, Player player, Point impact, int blastRadius)
+        private static bool IsTerrainImpactSafe(PVPGame game, Player player,
+            Point impact, int blastRadius)
         {
             double safetyRadius = Math.Max(45, blastRadius * 1.15);
             foreach (Player ally in game.GetAllFightPlayers())
             {
-                if (!ally.IsLiving || ally.Blood <= 0 || ally.Team != player.Team || ally.Id == player.Id)
+                if (!ally.IsLiving || ally.Blood <= 0 || ally.Team != player.Team ||
+                    ally.Id == player.Id)
                     continue;
                 if (ally.Distance(impact) < safetyRadius)
                     return false;
@@ -280,7 +213,8 @@ namespace Fighting.Server.GameObjects
                     if (candidateForce <= 0)
                         continue;
 
-                    BotTrajectoryProbe probe = ProbeTrajectory(player, target, candidateForce, candidateAngle);
+                    BotTrajectoryProbe probe = ProbeTrajectory(player, target,
+                        candidateForce, candidateAngle);
                     if (probe.Outcome != BotTrajectoryOutcome.Terrain)
                         continue;
 
@@ -293,7 +227,8 @@ namespace Fighting.Server.GameObjects
                     if (candidateProgress < -25)
                         continue;
 
-                    double score = targetDistance - candidateProgress * 0.45 + Math.Abs(yOffset) * 0.15;
+                    double score = targetDistance - candidateProgress * 0.45 +
+                        Math.Abs(yOffset) * 0.15;
                     if (bestForce == 0 || score < bestScore)
                     {
                         bestScore = score;
@@ -332,7 +267,7 @@ namespace Fighting.Server.GameObjects
             };
             int[] yOffsets = { -80, -40, 0, 40 };
             float[] timeSeeds = { 0.7f, 0.9f, 1.1f, 1.3f };
-            var map = player.Game.Map;
+            Map map = player.Game.Map;
             Point shootPoint = player.GetShootPoint();
             double currentDistance = target.Distance(new Point(player.X, player.Y));
             double bestDistance = currentDistance;
@@ -366,7 +301,8 @@ namespace Fighting.Server.GameObjects
                         if (Math.Abs(probe.ImpactX - player.X) < 100 || probe.ImpactY <= 10)
                             continue;
 
-                        double landingDistance = target.Distance(new Point(probe.ImpactX, probe.ImpactY));
+                        double landingDistance =
+                            target.Distance(new Point(probe.ImpactX, probe.ImpactY));
                         if (landingDistance + 70 >= currentDistance)
                             continue;
 
@@ -392,58 +328,59 @@ namespace Fighting.Server.GameObjects
             return item != null && player.UseItem(item);
         }
 
-        private bool TryUseSupportSkill(PVPGame game, Player player)
+        private static void TryUseSupportSkill(PVPGame game, Player player, BotState state)
         {
-            int estimatedMaxBlood = Math.Max(1, (int)Math.Round(m_baseBlood));
-            if (m_selfHealUses < 2 && player.Blood * 100 <= estimatedMaxBlood * 40)
+            int maxBlood = EstimateMaxBlood(player);
+            if (state.SelfHealUses < 2 && player.Blood * 100 <= maxBlood * 40)
             {
                 if (TryUseTemplate(player, SelfHealTemplateId))
                 {
-                    m_selfHealUses++;
-                    return true;
-                }
-            }
-
-            if (m_teamHealUses < 1)
-            {
-                int woundedAllies = 0;
-                foreach (Player ally in game.GetAllFightPlayers())
-                {
-                    if (ally.IsLiving && ally.Blood > 0 && ally.Team == player.Team &&
-                        ally.Blood * 100 <= estimatedMaxBlood * 55)
-                        woundedAllies++;
-                }
-                if (woundedAllies >= 2 && TryUseTemplate(player, TeamHealTemplateId))
-                {
-                    m_teamHealUses++;
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private void TryUseOffensiveSkill(Player player, Player target)
-        {
-            double distance = target.Distance(new Point(player.X, player.Y));
-            if (m_damageBoostUses < 2 && target.Blood > Math.Max(250, m_baseBlood * 0.25))
-            {
-                if (TryUseTemplate(player, DamageBoostTemplateId))
-                {
-                    m_damageBoostUses++;
+                    state.SelfHealUses++;
                     return;
                 }
             }
 
-            if (m_multiBallUses < 1 && distance < 520)
+            if (state.TeamHealUses < 1)
             {
-                if (TryUseTemplate(player, MultiBallTemplateId))
-                    m_multiBallUses++;
+                int woundedAllies = 0;
+                foreach (Player ally in game.GetAllFightPlayers())
+                {
+                    if (!ally.IsLiving || ally.Blood <= 0 || ally.Team != player.Team)
+                        continue;
+                    int allyMaxBlood = EstimateMaxBlood(ally);
+                    if (ally.Blood * 100 <= allyMaxBlood * 55)
+                        woundedAllies++;
+                }
+
+                if (woundedAllies >= 2 && TryUseTemplate(player, TeamHealTemplateId))
+                    state.TeamHealUses++;
             }
         }
 
-        public void TakeTurn(PVPGame game, Player player)
+        private static void TryUseOffensiveSkill(Player player, Player target, BotState state)
         {
-            TryUseSupportSkill(game, player);
+            double distance = target.Distance(new Point(player.X, player.Y));
+            if (state.DamageBoostUses < 2 &&
+                target.Blood > Math.Max(250, EstimateMaxBlood(player) * 0.25))
+            {
+                if (TryUseTemplate(player, DamageBoostTemplateId))
+                {
+                    state.DamageBoostUses++;
+                    return;
+                }
+            }
+
+            if (state.MultiBallUses < 1 && distance < 520)
+            {
+                if (TryUseTemplate(player, MultiBallTemplateId))
+                    state.MultiBallUses++;
+            }
+        }
+
+        public static void TakeTurn(PVPGame game, Player player)
+        {
+            BotState state = GetState(game, player);
+            TryUseSupportSkill(game, player, state);
 
             Player target = FindBestTarget(game, player);
             if (target == null)
@@ -453,13 +390,12 @@ namespace Fighting.Server.GameObjects
             }
 
             player.Direction = target.X >= player.X ? 1 : -1;
-            int aimX;
-            int aimY;
+
             int force;
             int angle;
-            if (TryFindAccurateShot(player, target, out aimX, out aimY, out force, out angle))
+            if (TryFindAccurateShot(player, target, out force, out angle))
             {
-                TryUseOffensiveSkill(player, target);
+                TryUseOffensiveSkill(player, target, state);
                 Point shootPoint = player.GetShootPoint();
                 player.Shoot(shootPoint.X, shootPoint.Y, force, angle);
                 return;
@@ -475,7 +411,7 @@ namespace Fighting.Server.GameObjects
             int flyAngle = 0;
             double flyImprovement = 0;
             bool canFly = false;
-            if (m_flyUses < 2)
+            if (state.FlyUses < 2)
                 canFly = TryFindFlyShot(player, target,
                     out flyForce, out flyAngle, out flyImprovement);
 
@@ -488,7 +424,7 @@ namespace Fighting.Server.GameObjects
 
             if (canFly && TryUseTemplate(player, FlyTemplateId))
             {
-                m_flyUses++;
+                state.FlyUses++;
                 Point shootPoint = player.GetShootPoint();
                 player.Shoot(shootPoint.X, shootPoint.Y, flyForce, flyAngle);
                 return;
