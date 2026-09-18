@@ -67,6 +67,10 @@ Require(argLine.Contains("--graphics|gl", StringComparison.Ordinal), "OpenGL gra
 Require(argLine.Contains("--no-avm2-optimizer", StringComparison.Ordinal), "AVM2 optimizer must be disabled for legacy Alchemy module");
 Require(argLine.Contains("--tcp-connections|allow", StringComparison.Ordinal), "game TCP connections must be enabled for the Road server");
 Require(argLine.Contains("--base|http://103.9.156.181/Gunny/flash/", StringComparison.OrdinalIgnoreCase), "Ruffle base missing");
+var v389SaveIndex = ruffleArgs.ToList().FindIndex(x => x == "--save-directory");
+Require(v389SaveIndex >= 0 && v389SaveIndex + 1 < ruffleArgs.Count, "v389 Ruffle save-directory missing");
+var v389SaveDirectory = ruffleArgs[v389SaveIndex + 1];
+Require(v389SaveDirectory.EndsWith(Path.Combine("BaseGunnyII", "Ruffle", "v389", "SharedObjects"), StringComparison.OrdinalIgnoreCase), "v389 Ruffle storage must be profile isolated");
 Require(argLine.Contains("-Peditby=Trminhpc", StringComparison.Ordinal), "editby flashvar missing");
 Require(ruffleArgs[^1].Contains("Loading.swf?", StringComparison.Ordinal), "SWF URL must be final argument");
 
@@ -101,6 +105,11 @@ var v30Args = RuffleLaunchCommand.BuildArguments(v30Launch, v30Base);
 var v30ArgLine = string.Join("|", v30Args);
 Require(v30ArgLine.Contains("--socket-allow|103.9.156.181:9300", StringComparison.Ordinal), "Gunny 3.0 socket allowlist mismatch");
 Require(v30ArgLine.Contains("--base|http://103.9.156.181:8083/gunny/", StringComparison.OrdinalIgnoreCase), "Gunny 3.0 Ruffle base mismatch");
+var v30SaveIndex = v30Args.ToList().FindIndex(x => x == "--save-directory");
+Require(v30SaveIndex >= 0 && v30SaveIndex + 1 < v30Args.Count, "v30 Ruffle save-directory missing");
+var v30SaveDirectory = v30Args[v30SaveIndex + 1];
+Require(v30SaveDirectory.EndsWith(Path.Combine("BaseGunnyII", "Ruffle", "v30", "SharedObjects"), StringComparison.OrdinalIgnoreCase), "v30 Ruffle storage must be profile isolated");
+Require(!string.Equals(v389SaveDirectory, v30SaveDirectory, StringComparison.OrdinalIgnoreCase), "v389 and v30 must never share Ruffle save data");
 
 var v30LoginHandler = new V30LoginHandler();
 var v30Client = new GunnyLoginClient(v30Base, v30LoginHandler);
