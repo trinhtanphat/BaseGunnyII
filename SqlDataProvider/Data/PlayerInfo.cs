@@ -1513,142 +1513,69 @@ namespace SqlDataProvider.Data
                 _VIPOnlineDays = value;
             }
         }
+        public const int MaxVipLevel = 20;
+        private static readonly int[] VipExpFloors = new int[]
+        {
+            0, 200, 400, 800, 2000, 4000, 8000, 20000, 40000, 80000,
+            200000, 400000, 800000, 1200000, 1800000, 2600000, 3600000,
+            4800000, 6200000, 7800000
+        };
+
+        public static int GetVipExpFloor(int level)
+        {
+            if (level < 1)
+                level = 1;
+            if (level > MaxVipLevel)
+                level = MaxVipLevel;
+            return VipExpFloors[level - 1];
+        }
+
+        public void EnsureVipExpFloor()
+        {
+            if (VIPLevel < 1)
+                VIPLevel = 1;
+            if (VIPLevel > MaxVipLevel)
+                VIPLevel = MaxVipLevel;
+
+            int floor = GetVipExpFloor(VIPLevel);
+            if (VIPExp < floor)
+                VIPExp = floor;
+        }
+
         public bool VipUpdate()
         {
-            int day_needed = DaysNeeded(VIPLevel) * 10;
+            if (VIPLevel < 1)
+                VIPLevel = 1;
+            if (VIPLevel > MaxVipLevel)
+                VIPLevel = MaxVipLevel;
+
             if (VIPExpireDay >= DateTime.Now)
             {
-                if (VIPLevel <= 9)
-                {
-                    if (VIPExp >= day_needed && VIPLevel == 1)
-                    {
-                        VIPLevel++;
-                        VIPExp = 0;
-                    }
-                    if (VIPExp >= day_needed && VIPLevel == 2)
-                    {
-                        VIPLevel++;
-                        VIPExp = 0;
-                    }
-                    if (VIPExp >= day_needed && VIPLevel == 3)
-                    {
-                        VIPLevel++;
-                        VIPExp = 0;
-                    }
-                    if (VIPExp >= day_needed && VIPLevel == 4)
-                    {
-                        VIPLevel++;
-                        VIPExp = 0;
-                    }
-                    if (VIPExp >= day_needed && VIPLevel == 5)
-                    {
-                        VIPLevel++;
-                        VIPExp = 0;
-                    }
-                    if (VIPExp >= day_needed && VIPLevel == 6)
-                    {
-                        VIPLevel++;
-                        VIPExp = 0;
-                    }
-                    if (VIPExp >= day_needed && VIPLevel == 7)
-                    {
-                        VIPLevel++;
-                        VIPExp = 0;
-                    }
-                    if (VIPExp >= day_needed && VIPLevel == 8)
-                    {
-                        VIPLevel++;
-                        VIPExp = 0;
-                    }
-                }
+                EnsureVipExpFloor();
+                while (VIPLevel < MaxVipLevel && VIPExp >= GetVipExpFloor(VIPLevel + 1))
+                    VIPLevel++;
             }
-            if (VIPExpireDay < DateTime.Now)
+            else
             {
-                if (VIPLevel >= 2)
-                {
-                    if (VIPExp <= day_needed && VIPLevel == 2)
-                    {
-                        VIPLevel--;
-                        VIPExp = DaysNeeded(VIPLevel - 1) * 10;
-                    }
-                    if (VIPExp <= day_needed && VIPLevel == 3)
-                    {
-                        VIPLevel--;
-                        VIPExp = DaysNeeded(VIPLevel - 1) * 10;
-                    }
-                    if (VIPExp <= day_needed && VIPLevel == 4)
-                    {
-                        VIPLevel--;
-                        VIPExp = DaysNeeded(VIPLevel - 1) * 10;
-                    }
-                    if (VIPExp <= day_needed && VIPLevel == 5)
-                    {
-                        VIPLevel--;
-                        VIPExp = DaysNeeded(VIPLevel - 1) * 10;
-                    }
-                    if (VIPExp <= day_needed && VIPLevel == 6)
-                    {
-                        VIPLevel--;
-                        VIPExp = DaysNeeded(VIPLevel - 1) * 10;
-                    }
-                    if (VIPExp <= day_needed && VIPLevel == 7)
-                    {
-                        VIPLevel--;
-                        VIPExp = DaysNeeded(VIPLevel - 1) * 10;
-                    }
-                    if (VIPExp <= day_needed && VIPLevel == 8)
-                    {
-                        VIPLevel--;
-                        VIPExp = DaysNeeded(VIPLevel - 1) * 10;
-                    }
-                    if (VIPExp <= day_needed && VIPLevel == 9)
-                    {
-                        VIPLevel--;
-                        VIPExp = DaysNeeded(VIPLevel - 1) * 10;
-                    }
-                }
+                while (VIPLevel > 1 && VIPExp < GetVipExpFloor(VIPLevel))
+                    VIPLevel--;
             }
+
+            VIPNextLevelDaysNeeded = DaysNeeded(VIPLevel);
             return true;
         }
-        public int DaysNeeded(int lv)
+
+        public int DaysNeeded(int level)
         {
-            int LevelDaysNeeded = 0;
-            switch (lv)
-            {
-                case 1:
-                    //VIPNextLevelDaysNeeded = 15;
-                    LevelDaysNeeded = 15;
-                    break;
-                case 2:
-                    //VIPNextLevelDaysNeeded = 35;
-                    LevelDaysNeeded = 35;
-                    break;
-                case 3:
-                    //VIPNextLevelDaysNeeded = 70;
-                    LevelDaysNeeded = 70;
-                    break;
-                case 4:
-                    //VIPNextLevelDaysNeeded = 125;
-                    LevelDaysNeeded = 125;
-                    break;
-                case 5:
-                    //VIPNextLevelDaysNeeded = 205;
-                    LevelDaysNeeded = 205;
-                    break;
-                case 6:
-                    //VIPNextLevelDaysNeeded = 305;
-                    LevelDaysNeeded = 305;
-                    break;
-                case 7:
-                    //VIPNextLevelDaysNeeded = 425;
-                    LevelDaysNeeded = 425;
-                    break;
-                case 8:
-                    //VIPNextLevelDaysNeeded = 565;
-                    LevelDaysNeeded = 565;
-                    break;             
-            }
-            return LevelDaysNeeded;
+            if (level < 1)
+                level = 1;
+            if (level >= MaxVipLevel)
+                return 0;
+
+            int currentExp = Math.Max(VIPExp, GetVipExpFloor(level));
+            int nextExp = GetVipExpFloor(level + 1);
+            int remaining = nextExp - currentExp;
+            return remaining <= 0 ? 0 : (remaining + 9) / 10;
         }
         public int Win
         {

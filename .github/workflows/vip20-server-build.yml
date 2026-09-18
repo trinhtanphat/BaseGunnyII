@@ -1,0 +1,22 @@
+name: VIP20 server build
+
+on:
+  pull_request:
+    paths:
+      - 'SqlDataProvider/**'
+      - 'Bussiness/**'
+      - 'Game.Server/**'
+      - 'GameServer.sln'
+      - '.github/workflows/vip20-server-build.yml'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: microsoft/setup-msbuild@v2
+      - name: Build VIP server projects
+        shell: pwsh
+        run: |
+          msbuild Game.Server/Game.Server.csproj /m /t:Rebuild /p:Configuration=Release /v:minimal
+          msbuild GameServerScript/GameServerScript.csproj /m /t:Rebuild /p:Configuration=Release /v:minimal
