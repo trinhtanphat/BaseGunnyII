@@ -177,9 +177,19 @@ public partial class Form1 : Form
 
     private bool TryGetServer(out Uri gameBase)
     {
-        if (Uri.TryCreate(_server.Text.Trim(), UriKind.Absolute, out gameBase!)) return true;
-        _status.Text = "Địa chỉ máy chủ không hợp lệ.";
-        return false;
+        if (!Uri.TryCreate(_server.Text.Trim(), UriKind.Absolute, out gameBase!))
+        {
+            _status.Text = "Địa chỉ máy chủ không hợp lệ.";
+            return false;
+        }
+
+        if (!_settingsStore.IsServerCompatible(gameBase.AbsoluteUri))
+        {
+            _status.Text = "Máy chủ không đúng profile launcher hiện tại.";
+            return false;
+        }
+
+        return true;
     }
 
     private async void PlayAsync(object? sender, EventArgs e)

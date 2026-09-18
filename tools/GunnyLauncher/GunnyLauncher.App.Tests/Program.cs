@@ -33,6 +33,31 @@ Require(v30Store.Load().Username == "v30user", "v30 profile save mismatch");
 Require(v389Store.Load().Username == "v389user", "v389 profile save mismatch");
 Require(File.ReadAllText(v30Path) != File.ReadAllText(v389Path), "profile settings collided");
 
+File.WriteAllText(v389Path, "{\"ServerUrl\":\"http://103.9.156.181:8083/gunny/\",\"Username\":\"stale-v389-user\"}");
+var repairedV389 = v389Store.Load();
+Require(repairedV389.ServerUrl == "http://103.9.156.181/Gunny/", "v389 profile did not repair stale v30 server URL");
+Require(repairedV389.Username == "stale-v389-user", "v389 stale-server repair lost remembered username");
+Require(!v389Store.IsServerCompatible("http://103.9.156.181:8083/gunny/"), "v389 accepted a v30 server URL");
+Require(v389Store.IsServerCompatible("http://103.9.156.181/Gunny/"), "v389 rejected its own server URL");
+
+File.WriteAllText(v30Path, "{\"ServerUrl\":\"http://103.9.156.181/Gunny/\",\"Username\":\"stale-v30-user\"}");
+var repairedV30 = v30Store.Load();
+Require(repairedV30.ServerUrl == "http://103.9.156.181:8083/gunny/", "v30 profile did not repair stale v389 server URL");
+Require(repairedV30.Username == "stale-v30-user", "v30 stale-server repair lost remembered username");
+Require(!v30Store.IsServerCompatible("http://103.9.156.181/Gunny/"), "v30 accepted a v389 server URL");
+Require(v30Store.IsServerCompatible("http://103.9.156.181:8083/gunny/"), "v30 rejected its own server URL");
+
+var rejectedSave = false;
+try
+{
+    v389Store.Save(new LauncherSettings("http://103.9.156.181:8083/gunny/", "wrong-runtime"));
+}
+catch (InvalidOperationException)
+{
+    rejectedSave = true;
+}
+Require(rejectedSave, "v389 profile persisted a cross-profile server URL");
+
 ApplicationConfiguration.Initialize();
 using var form = new Form1();
 Require(form.Controls.Find("authTabs", true).Length == 1, "auth tabs missing");
