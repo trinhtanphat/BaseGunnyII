@@ -1,3 +1,4 @@
+using System.Text.Json;
 using GunnyLauncher.App;
 
 static void Require(bool condition, string message)
@@ -37,6 +38,10 @@ File.WriteAllText(v389Path, "{\"ServerUrl\":\"http://103.9.156.181:8083/gunny/\"
 var repairedV389 = v389Store.Load();
 Require(repairedV389.ServerUrl == "http://103.9.156.181/Gunny/", "v389 profile did not repair stale v30 server URL");
 Require(repairedV389.Username == "stale-v389-user", "v389 stale-server repair lost remembered username");
+var persistedV389Repair = JsonSerializer.Deserialize<LauncherSettings>(File.ReadAllText(v389Path))
+    ?? throw new InvalidOperationException("v389 repaired settings could not be read");
+Require(persistedV389Repair.ServerUrl == "http://103.9.156.181/Gunny/", "v389 repaired server URL was not persisted");
+Require(persistedV389Repair.Username == "stale-v389-user", "v389 persisted repair lost remembered username");
 Require(!v389Store.IsServerCompatible("http://103.9.156.181:8083/gunny/"), "v389 accepted a v30 server URL");
 Require(v389Store.IsServerCompatible("http://103.9.156.181/Gunny/"), "v389 rejected its own server URL");
 
@@ -44,6 +49,10 @@ File.WriteAllText(v30Path, "{\"ServerUrl\":\"http://103.9.156.181/Gunny/\",\"Use
 var repairedV30 = v30Store.Load();
 Require(repairedV30.ServerUrl == "http://103.9.156.181:8083/gunny/", "v30 profile did not repair stale v389 server URL");
 Require(repairedV30.Username == "stale-v30-user", "v30 stale-server repair lost remembered username");
+var persistedV30Repair = JsonSerializer.Deserialize<LauncherSettings>(File.ReadAllText(v30Path))
+    ?? throw new InvalidOperationException("v30 repaired settings could not be read");
+Require(persistedV30Repair.ServerUrl == "http://103.9.156.181:8083/gunny/", "v30 repaired server URL was not persisted");
+Require(persistedV30Repair.Username == "stale-v30-user", "v30 persisted repair lost remembered username");
 Require(!v30Store.IsServerCompatible("http://103.9.156.181/Gunny/"), "v30 accepted a v389 server URL");
 Require(v30Store.IsServerCompatible("http://103.9.156.181:8083/gunny/"), "v30 rejected its own server URL");
 

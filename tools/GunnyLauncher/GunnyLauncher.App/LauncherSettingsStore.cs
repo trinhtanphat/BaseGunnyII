@@ -35,7 +35,11 @@ public sealed class LauncherSettingsStore
             if (saved is null) return _defaultSettings;
 
             if (!IsServerCompatible(saved.ServerUrl))
-                return new LauncherSettings(_defaultSettings.ServerUrl, saved.Username ?? string.Empty);
+            {
+                var repaired = new LauncherSettings(_defaultSettings.ServerUrl, saved.Username ?? string.Empty);
+                Persist(repaired);
+                return repaired;
+            }
 
             return saved;
         }
@@ -57,6 +61,11 @@ public sealed class LauncherSettingsStore
         if (!IsServerCompatible(settings.ServerUrl))
             throw new InvalidOperationException("Server URL does not match the active launcher profile.");
 
+        Persist(settings);
+    }
+
+    private void Persist(LauncherSettings settings)
+    {
         var directory = Path.GetDirectoryName(_path);
         if (!string.IsNullOrEmpty(directory)) Directory.CreateDirectory(directory);
         File.WriteAllText(_path, JsonSerializer.Serialize(settings));
