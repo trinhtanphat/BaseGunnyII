@@ -1,0 +1,31 @@
+name: VIP20 server gate
+
+on:
+  pull_request:
+    paths:
+      - 'SqlDataProvider/Data/PlayerInfo.cs'
+      - 'Game.Server/GameObjects/GamePlayer.cs'
+      - 'Game.Server/Packets/Client/OpenVipHandler.cs'
+      - 'Bussiness/PlayerBussiness.cs'
+      - 'database/20260918_vip20.sql'
+      - 'tests/vip20-server-smoke.ps1'
+      - '.github/workflows/vip20-server-gate.yml'
+  push:
+    branches:
+      - master
+    paths:
+      - 'SqlDataProvider/Data/PlayerInfo.cs'
+      - 'Game.Server/GameObjects/GamePlayer.cs'
+      - 'Game.Server/Packets/Client/OpenVipHandler.cs'
+      - 'Bussiness/PlayerBussiness.cs'
+      - 'database/20260918_vip20.sql'
+      - 'tests/vip20-server-smoke.ps1'
+
+jobs:
+  smoke:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate VIP20 server invariants
+        shell: pwsh
+        run: ./tests/vip20-server-smoke.ps1
