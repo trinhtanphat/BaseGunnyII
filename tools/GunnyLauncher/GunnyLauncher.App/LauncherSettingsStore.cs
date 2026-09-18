@@ -1,4 +1,5 @@
 using System.Text.Json;
+using GunnyLauncher.Core;
 
 namespace GunnyLauncher.App;
 
