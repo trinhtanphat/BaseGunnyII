@@ -3,6 +3,12 @@
     <ProjectReference Include="..\GunnyLauncher.Core\GunnyLauncher.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Assets\*.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>

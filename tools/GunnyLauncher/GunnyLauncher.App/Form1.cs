@@ -39,7 +39,7 @@ public partial class Form1 : Form
         MinimumSize = new Size(680, 560);
         Font = new Font("Segoe UI", 10F);
         BackColor = Color.FromArgb(245, 247, 251);
-        BuildLayout();
+        BuildGunny92Layout();
         LoadSettings();
         WireEvents();
         AcceptButton = _play;
